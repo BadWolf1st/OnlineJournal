@@ -1,23 +1,31 @@
 package com.example.ediary.controllers;
 
+import com.example.ediary.models.Homework;
 import com.example.ediary.models.Score;
 import com.example.ediary.models.User;
+import com.example.ediary.services.HomeworkService;
 import com.example.ediary.services.ScoreService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class ScoreController {
     private final ScoreService scoreService;
+    private final HomeworkService homeworkService;
     @GetMapping("/")
     public String scores(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
         model.addAttribute("subjects", scoreService.listSubjects(null));
@@ -79,5 +87,25 @@ public class ScoreController {
         model.addAttribute("user", scoreService.getUserByPrincipal(principal));
         model.addAttribute("selectedTerm", id);
         return "final-scores";
+    }
+    @GetMapping("/homeworks")
+    public String redirectToHomeworks(){
+        LocalDate currentDate = LocalDate.now();
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return "redirect:/homeworks/" + formattedDate;
+    }
+    @RequestMapping(value = "/homeworks/{dueDate}", method = RequestMethod.GET)
+    public ModelAndView homeworks(@PathVariable("dueDate") @DateTimeFormat(pattern="dd-MM-yyyy") LocalDate dueDate) {
+        ModelAndView modelAndView = new ModelAndView("homework-student");
+        List<Homework> homeworkList = homeworkService.getAllHomework();
+        List<Homework> filteredList = homeworkList.stream()
+                .filter(homework -> homework.getDueDate().equals(dueDate))
+                .collect(Collectors.toList());
+        modelAndView.addObject("homeworkList", filteredList);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/homeworks", method = RequestMethod.POST)
+    public String redirectToHomeworksWithDate(@RequestParam("dueDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate dueDate){
+        return "redirect:/homeworks/" + dueDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 }
