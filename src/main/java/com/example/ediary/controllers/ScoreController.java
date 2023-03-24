@@ -83,7 +83,6 @@ public class ScoreController {
     public String finalScore(@PathVariable Long id, Principal principal, Model model){
         model.addAttribute("subjects", scoreService.listSubjects(null));
         model.addAttribute("scores", scoreService.listScores(null));
-        model.addAttribute("finalscores", scoreService.getScoresByTypes());
         model.addAttribute("user", scoreService.getUserByPrincipal(principal));
         model.addAttribute("selectedTerm", id);
         return "final-scores";

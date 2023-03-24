@@ -20,6 +20,7 @@ public class Subject {
     private String groupName;
     private String type;
     private Integer term;
+    private Integer count;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;

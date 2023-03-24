@@ -305,7 +305,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">Ср.знач.</div>
-                                    <div class="col-6">4</div>
+                                    <#assign middleCount = 0>
+                                    <#assign middleCountCounter = 0>
+                                    <#list scores as score>
+                                        <#if (score.getStudentId() == user.getId()) && (score.getTitle() == subject.getTitle())>
+                                            <#assign middleCount = middleCount + score.getCount()>
+                                            <#assign middleCountCounter = middleCountCounter + 1>
+                                        </#if>
+                                    </#list>
+                                    <div class="col-6">${middleCount / middleCountCounter}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">Преп.:</div>
@@ -316,10 +324,16 @@
                                         </#if>
                                     </#list>
                                 </div>
-                                <div class="row">Дифф. зач.</div>
+                                <div class="row">${subject.getType()}</div>
                                 <div class="row">
                                     <div class="col-6">Итоговая</div>
-                                    <div class="col-6 evaluation NR">НА</div>
+                                    <div class="row evaluation NR" style="margin-left: 1px">
+                                        <#if subject.getCount() != 0>
+                                            <div class="">${subject.getCount()}</div>
+                                        <#else>
+                                            <div class="">НА</div>
+                                        </#if>
+                                    </div>
                                 </div>
                             </div>
                         </#if>

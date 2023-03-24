@@ -60,8 +60,7 @@ public class ScoreService {
         } else {
             log.error("Score with id = {} is not found", id);
         }    }
-    public List<Score> getScoresByTypes() {
-        List<String> types = Arrays.asList("Зачёт", "Дифференцированный зачёт", "Экзамен");
+    public List<Score> getScoresByTypes(List<String> types) {
         return scoreRepository.findByTypeIn(types);
     }
     public Score getScoreById(Long id) {

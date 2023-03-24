@@ -278,25 +278,14 @@
                                     </#list>
                                 </div>
                                 <div class="row">
-                                    <#list finalscores as finalscore>
-                                        <#if (finalscore.getStudentId() == user.getId()) && (finalscore.getTitle() == subject.getTitle())>
-                                            <div class="">${finalscore.getType()}</div>
-                                            <#break>
-                                        </#if>
-                                    </#list>
+                                    <div class="">${subject.getType()}</div>
                                 </div>
                                 <div class="row evaluation NR" style="margin-left: 1px">
-                                    <#assign hasFinalScore = false>
-                                    <#list finalscores as finalscore>
-                                        <#if (finalscore.getStudentId() == user.getId()) && (finalscore.getTitle() == subject.getTitle())>
-                                            <#assign hasFinalScore = true>
-                                            <div class="">${finalscore.getCount()}</div>
-                                            <#break>
+                                        <#if subject.getCount() != 0>
+                                           ${subject.getCount()}
+                                         <#else>
+                                             НА
                                         </#if>
-                                    </#list>
-                                    <#if hasFinalScore = false>
-                                        <div class="">НА</div>
-                                    </#if>
                                 </div>
                             </div>
                         </#if>
