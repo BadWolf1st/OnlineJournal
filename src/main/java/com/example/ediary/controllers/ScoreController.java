@@ -3,8 +3,10 @@ package com.example.ediary.controllers;
 import com.example.ediary.models.Homework;
 import com.example.ediary.models.Score;
 import com.example.ediary.models.User;
+import com.example.ediary.services.GroupService;
 import com.example.ediary.services.HomeworkService;
 import com.example.ediary.services.ScoreService;
+import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ import java.util.stream.Collectors;
 public class ScoreController {
     private final ScoreService scoreService;
     private final HomeworkService homeworkService;
+    private final GroupService groupService;
+    private final UserService userService;
     @GetMapping("/")
     public String scores(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
         model.addAttribute("subjects", scoreService.listSubjects(null));
@@ -106,5 +110,26 @@ public class ScoreController {
     @RequestMapping(value = "/homeworks", method = RequestMethod.POST)
     public String redirectToHomeworksWithDate(@RequestParam("dueDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate dueDate){
         return "redirect:/homeworks/" + dueDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+    @GetMapping("/admin/groups")
+    public String viewGroups(@RequestParam(name = "idname", required = false) String name, Model model, Principal principal){
+        model.addAttribute("groups", groupService.listGroups(name));
+        return "groups-admin";
+    }
+    @GetMapping("/admin/groups/{id}")
+    public String editGroup(@RequestParam(name = "idname", required = false) String lastName, @PathVariable Long id, Model model, Principal principal){
+        List<User> users = groupService.getUsersByGroup(groupService.getGroupById(id).getName());
+        List<User> sortedUsers;
+        if (lastName == null) {
+            // Выводим весь список
+            sortedUsers = users;
+        } else {
+            // Выводим только тех пользователей, у которых lastName равно заданному значению
+            sortedUsers = users.stream()
+                    .filter(user -> user.getLastName() != null && user.getLastName().equals(lastName))
+                    .collect(Collectors.toList());
+        }
+        model.addAttribute("users", sortedUsers);
+        return "add-student-to-group";
     }
 }

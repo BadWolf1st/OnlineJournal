@@ -1,6 +1,7 @@
 package com.example.ediary.controllers;
 
 import com.example.ediary.models.User;
+import com.example.ediary.services.GroupService;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

@@ -4,6 +4,7 @@ import com.example.ediary.models.User;
 import com.example.ediary.models.enums.Role;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
