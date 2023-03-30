@@ -68,7 +68,23 @@
             </div>
             <div class="form-floating  mb-3">
                 <input type="text" class="form-control" name="type_of_lesson" placeholder="Type_of_lesson"><br>
-                <label for="floatingPassword">type_of_lesson</label>
+                <label for="floatingInput">type_of_lesson</label>
+            </div>
+            <div class="form-floating  mb-3">
+                <input type="text" class="form-control" name="user_id" placeholder="user_id"><br>
+                <label for="floatingInput">user_id</label>
+            </div>
+            <div class="form-floating  mb-3">
+                <input type="text" class="form-control" name="group_name" placeholder="group_name"><br>
+                <label for="floatingInput">group_name</label>
+            </div>
+            <div class="form-floating  mb-3">
+                <input type="text" class="form-control" name="weekday" placeholder="weekday"><br>
+                <label for="floatingInput">weekday</label>
+            </div>
+            <div class="form-floating  mb-3">
+                <input type="text" class="form-control" name="week_number" placeholder="week_number"><br>
+                <label for="floatingInput">week_number</label>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
