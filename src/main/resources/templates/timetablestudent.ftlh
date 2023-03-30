@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Bootstrap testing</title>
@@ -9,40 +9,6 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <style>
-        .menuBar {
-            color: white; /* Цвет текста */
-            padding: 10px; /* Поля вокруг текста */
-            border-radius: 20px; /* Уголки */
-            background-color: #29292C;
-            margin: 10px;
-        }
-        .button {
-            padding: 4px;
-            border-radius: 10px;
-            background-color: #9F9F9F;
-            width: fit-content;
-            margin-top: 5px;
-        }
-
-        .item {
-            padding: 20px; /* Поля вокруг текста */
-            border-radius: 15px; /* Уголки */
-            background-color: #29292C;
-            margin: 10px;
-        }
-        @media (prefers-color-scheme: light) {
-            .menuBar {
-                background-color: #cbcbcb;
-            }
-
-            .item {
-                background-color: #cbcbcb;
-            }
-
-            .button {
-                background-color: #6e6e6e;
-            }
-        }
         .circleIcon {
             width: 40px;
             height: 40px;
@@ -56,13 +22,7 @@
             height: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #161719;
-            }
+            justify-content: center
         }
 
         .invert {
@@ -72,6 +32,12 @@
         @media (prefers-color-scheme: light) {
             .invert {
                 filter: invert(1);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #161719;
             }
         }
 
@@ -127,51 +93,72 @@
             }
         }
 
+        .menuBar {
+            color: white; /* Цвет текста */
+            padding: 10px; /* Поля вокруг текста */
+            border-radius: 20px; /* Уголки */
+            background-color: #29292C;
+            margin: 10px;
+            display: flex;
+        }
+
+        .timetable {
+            color: black; /* Цвет текста */
+            padding: 10px; /* Поля вокруг текста */
+            border-radius: 10px; /* Уголки */
+            background-color: #29292C;
+            margin: 10px;
+            display: flex;
+
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .timetable {
+                color: white;
+            }
+        }
+
+        .rightThis {
+            /* Выровнять по правому краю */
+            margin-left: 0;
+        }
+
+        .row > * {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        @media (prefers-color-scheme: light) {
+            .menuBar {
+                background-color: #cbcbcb;
+            }
+
+            .timetable {
+                background-color: #cbcbcb;
+            }
+        }
+
+        .form-select {
+            width: 150px;
+        }
+
+        .selectWidth {
+            max-height: 50px;
+            max-width: 300px;
+        }
+
+        .CenterDownThis {
+            /* Выровнять по вертикали по центу */
+            position: sticky;
+            top: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         /* Dark text mode =v
         class="text-black text-dark-emphasis"
         */
-
-        .evaluation {
-            bottom: 60px;
-            max-width: 53px;
-            height: 30px;
-            background: #9F9F9F;
-            border-radius: 10px;
-            color: black;
-            text-align: center;
-            font-size: 20px;
-            line-height: 30px;
-            align-items: center;
-
-        }
-
-        .evaluation.A {
-            background-color: #2DE300;
-        }
-
-        .evaluation.B {
-            background-color: #FFA800;
-        }
-
-        .evaluation.C {
-            background-color: #23BEEF;
-        }
-
-        .evaluation.D {
-            background-color: #E10000;
-        }
-
-        .evaluation.NP {
-            background-color: #E10000;
-        }
-
-        .evaluation.P {
-            background-color: #2DE300;
-        }
-
-        .evaluation.NR {
-            background: #9F9F9F;
-        }
     </style>
 </head>
 <body>
@@ -207,17 +194,18 @@
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                        <div class="buttonVisual active">
+                            <a href="#" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi-clock"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Расписание</span></a>
+                                        class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
+
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText this">
+                        <div class="buttonVisual">
+                            <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-star"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Итоговые оценки</span></a>
+                                        class="ms-1 d-none d-sm-inline">Итоговые оценки</span></a>
                         </div>
                     </li>
                 </ul>
@@ -240,62 +228,59 @@
                 </div>
             </div>
         </div>
+
         <div class="col">
-            <div class="menuBar">
-                <select class="form-select selectWidth" aria-label="Default select example" onchange="redirectToPage(this)">
-                    <option value="1" <#if selectedTerm == 1>selected</#if>>Семестр 1</option>
-                    <option value="2" <#if selectedTerm == 2>selected</#if>>Семестр 2</option>
-                    <option value="3" <#if selectedTerm == 3>selected</#if>>Семестр 3</option>
-                    <option value="4" <#if selectedTerm == 4>selected</#if>>Семестр 4</option>
-                    <option value="5" <#if selectedTerm == 5>selected</#if>>Семестр 5</option>
-                    <option value="6" <#if selectedTerm == 6>selected</#if>>Семестр 6</option>
-                    <option value="7" <#if selectedTerm == 7>selected</#if>>Семестр 7</option>
-                    <option value="8" <#if selectedTerm == 8>selected</#if>>Семестр 8</option>
+            <div class="menuBar align-items-md-start flex-column">
+
+                <select aria-label="Default select example" class="form-select selectWidth flex-row" onchange="redirectToPage(this)">
+                    <option value="Понедельник" <#if selectedWeekday == "Понедельник">selected</#if>>Понедельник</option> <!-- Если будет не айс с русскими названиями в поисковой строке, то надо будет подумать здесь ! -->
+                    <option value="Вторник" <#if selectedWeekday == "Вторник">selected</#if>>Вторник</option>
+                    <option value="Среда" <#if selectedWeekday == "Среда">selected</#if>>Среда</option>
+                    <option value="Четверг" <#if selectedWeekday == "Четверг">selected</#if>>Четверг</option>
+                    <option value="Пятница" <#if selectedWeekday == "Пятница">selected</#if>>Пятница</option>
+                    <option value="Суббота" <#if selectedWeekday == "Суббота">selected</#if>>Суббота</option>
+                    <option value="Воскресенье" <#if selectedWeekday == "Воскресенье">selected</#if>>Воскресенье</option>
+                </select>
+                <select aria-label="Default select example" class="form-select selectWidth flex-row" onchange="redirectToPage(this)">
+                    <option value="1" <#if selectedWeek == 1>selected</#if>>1 неделя</option>
+                    <option value="2" <#if selectedWeek == 2>selected</#if>>2 неделя</option>
                 </select>
             </div>
 
             <script>
                 function redirectToPage(selectElement) {
-                    var selectedValue = selectElement.value;
-                    window.location.href = "/finalscore/" + selectedValue;
+                    var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
+                    var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
+                    window.location.href = "/timet/" + selectedWeekday + "/" + selectedWeek;
                 }
             </script>
-            <div class="row-12" style="overflow-y: auto; height: 90vh; white-space: nowrap">
 
-                <div class="col texts item">
-                    <#list subjects as subject>
-                        <#if user.groupName == subject.groupName && subject.term == selectedTerm>
-                            <div class="col texts item">
-                                <div class="row">
-                                    <div class="h4">${subject.getTitle()}</div>
-                                </div>
-                                <div class="row">
-                                    <#list scores as score>
-                                        <#if (score.getStudentId() == user.getId()) && (score.getTitle() == subject.getTitle())>
-                                            <div class="">${score.getAuthor()}</div>
-                                            <#break>
-                                        </#if>
-                                    </#list>
-                                </div>
-                                <div class="row">
-                                    <div class="">${subject.getType()}</div>
-                                </div>
-                                <div class="row evaluation NR" style="margin-left: 1px">
-                                        <#if subject.getCount() != 0>
-                                           ${subject.getCount()}
-                                         <#else>
-                                             НА
-                                        </#if>
-                                </div>
+
+            <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
+                <#assign hasScore = false>
+                <#list timetables?sort_by('lesson_number') as timetable>
+                    <#if user.groupName == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
+                        <#assign hasScore = true>
+                        <div class="timetable fw-bold">
+                            <div class="row" style="margin: 10px;">
+                                <div class="col-md-8">${timetable.getLesson_number()}</div>
+                                <div class="col-md-8">${timetable.getType_of_lesson()}</div>
+                                <div class="col-md-8">${timetable.getClassroom_number()}</div>
                             </div>
-                        </#if>
-                    <#else>
-                        <h1 style="text-align: center">Нет оценок</h1>
-                    </#list>
-
-
+                            <div class="row" style="margin: 10px">
+                                <div class="col-md-8">${timetable.getTime()}</div>
+                                <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
+                                <div class="col-md-8">${timetable.getName_teacher()}</div>
+                            </div>
+                        </div>
+                    </#if>
+                </#list>
+                <#if hasScore = false>
+                    <h1 style="text-align: center">Нет занятий</h1>
+                </#if>
             </div>
         </div>
+
     </div>
 </div>
 </body>
