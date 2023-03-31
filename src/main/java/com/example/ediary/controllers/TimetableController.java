@@ -32,7 +32,7 @@ public class TimetableController {
         model.addAttribute("timetables", timetableService.listTimetable(null));
         model.addAttribute("user", userService.getUserByPrincipal(principal));
 
-        return "redirect:/timet/Monday/1";
+        return "redirect:/timet/Понедельник/1";
     }
     @GetMapping("/timet/{id}/{id2}")
     public String timetableWithWeeks(@PathVariable String id,@PathVariable Long id2, Principal principal, Model model) {
