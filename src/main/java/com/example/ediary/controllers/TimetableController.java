@@ -48,4 +48,5 @@ public class TimetableController {
         timetableRepository.save(timetable);
         return "redirect:/login";
     }
+
 }
