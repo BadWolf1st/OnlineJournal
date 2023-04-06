@@ -34,6 +34,14 @@ public class TimetableController {
 
         return "redirect:/timet/Monday/1";
     }
+
+    @GetMapping("/timetabletutor")
+    public String timetableTutor(Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+
+        return "redirect:/timetut/Monday/1";
+    }
     @GetMapping("/timet/{id}/{id2}")
     public String timetableWithWeeks(@PathVariable String id,@PathVariable Long id2, Principal principal, Model model) {
         model.addAttribute("timetables", timetableService.listTimetable(null));
@@ -41,6 +49,15 @@ public class TimetableController {
         model.addAttribute("selectedWeekday", id);
         model.addAttribute("selectedWeek", id2);
         return "timetablestudent";
+    }
+
+    @GetMapping("/timetut/{id}/{id2}")
+    public String timetableWithWeeksTutor(@PathVariable String id,@PathVariable Long id2, Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("selectedWeekday", id);
+        model.addAttribute("selectedWeek", id2);
+        return "homeTutor";
     }
     @PostMapping("/regtimetablestudent")
     public String regtimetablePost(Principal principal, Timetable timetable) {

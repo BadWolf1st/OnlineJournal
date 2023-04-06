@@ -71,10 +71,6 @@
                 <label for="floatingInput">type_of_lesson</label>
             </div>
             <div class="form-floating  mb-3">
-                <input type="text" class="form-control" name="user_id" placeholder="user_id"><br>
-                <label for="floatingInput">user_id</label>
-            </div>
-            <div class="form-floating  mb-3">
                 <input type="text" class="form-control" name="group_name" placeholder="group_name"><br>
                 <label for="floatingInput">group_name</label>
             </div>

@@ -18,7 +18,6 @@ public class TimetableService {
     private final UserRepository userRepository;
     private final TimetableRepository timetableRepository;
     public void saveTimeTable (Principal principal, Timetable timetable){
-        timetable.setUser(getUserByPrincipal(principal));
         timetableRepository.save(timetable);
     }
     public List<Timetable> listTimetable(String name_lesson) {

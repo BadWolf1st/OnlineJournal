@@ -235,16 +235,21 @@
         <div class="col">
             <div class="menuBar align-items-md-start flex-column">
 
-                <select aria-label="Default select example" class="form-select selectWidth flex-row" onchange="redirectToPage(this)">
-                    <option value="Понедельник" <#if selectedWeekday == "Понедельник">selected</#if>>Понедельник</option> <!-- Если будет не айс с русскими названиями в поисковой строке, то надо будет подумать здесь ! -->
+                <select aria-label="Default select example" class="form-select selectWidth flex-row"
+                        onchange="redirectToPage(this)">
+                    <option value="Понедельник" <#if selectedWeekday == "Понедельник">selected</#if>>Понедельник
+                    </option>
+                    <!-- Если будет не айс с русскими названиями в поисковой строке, то надо будет подумать здесь ! -->
                     <option value="Вторник" <#if selectedWeekday == "Вторник">selected</#if>>Вторник</option>
                     <option value="Среда" <#if selectedWeekday == "Среда">selected</#if>>Среда</option>
                     <option value="Четверг" <#if selectedWeekday == "Четверг">selected</#if>>Четверг</option>
                     <option value="Пятница" <#if selectedWeekday == "Пятница">selected</#if>>Пятница</option>
                     <option value="Суббота" <#if selectedWeekday == "Суббота">selected</#if>>Суббота</option>
-                    <option value="Воскресенье" <#if selectedWeekday == "Воскресенье">selected</#if>>Воскресенье</option>
+                    <option value="Воскресенье" <#if selectedWeekday == "Воскресенье">selected</#if>>Воскресенье
+                    </option>
                 </select>
-                <select aria-label="Default select example" class="form-select selectWidth flex-row" onchange="redirectToPage(this)">
+                <select aria-label="Default select example" class="form-select selectWidth flex-row"
+                        onchange="redirectToPage(this)">
                     <option value="1" <#if selectedWeek == 1>selected</#if>>1 неделя</option>
                     <option value="2" <#if selectedWeek == 2>selected</#if>>2 неделя</option>
                 </select>

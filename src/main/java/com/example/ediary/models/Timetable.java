@@ -23,9 +23,6 @@ public class Timetable {
     private String group_name;
     private String weekday;
     private Integer week_number;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn
-    private User user;
 
 
 
@@ -113,13 +110,6 @@ public class Timetable {
         this.name_teacher = name_teacher;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getGroup_name() {
         return group_name;
