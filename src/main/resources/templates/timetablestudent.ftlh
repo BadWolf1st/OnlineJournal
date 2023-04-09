@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Bootstrap testing</title>
@@ -103,17 +103,24 @@
         }
 
         .timetable {
-            color: white; /* Цвет текста */
+            color: black; /* Цвет текста */
             padding: 10px; /* Поля вокруг текста */
             border-radius: 10px; /* Уголки */
             background-color: #29292C;
             margin: 10px;
             display: flex;
+
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .timetable {
+                color: white;
+            }
         }
 
         .rightThis {
             /* Выровнять по правому краю */
-            margin-left: auto;
+            margin-left: 0;
         }
 
         .row > * {
@@ -155,32 +162,50 @@
     </style>
 </head>
 <body>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-<script async src="../static/js/DarkChanger.js"></script>
-<script src="../static/js/activeButtonMenuChanger.js"></script>
+<script async src="../../static/js/DarkChanger.js"></script>
+<script src="../../static/js/activeButtonMenuChanger.js"></script>
+
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/static"
+                <a href="homeStudent"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline"><img src="../../static/logo/LabelLabel.svg"
-                                                               class="img-fluid invert"></span>
+                                                               class="img-fluid invert" alt="Мои оценки"></span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="#" class="nav-link align-middle px-0 buttonText this">
+                        <div class="buttonVisual" id="Home">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual">
+                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-pencil-square"></i> <span class="ms-1 d-none d-sm-inline">Домашние задания</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buttonVisual active">
+                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                                <i class="fs-4 bi-clock"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Расписание</span></a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="buttonVisual">
                             <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Группы</span> </a>
+                                <i class="fs-4 bi-star"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Итоговые оценки</span></a>
                         </div>
                     </li>
                 </ul>
@@ -206,7 +231,7 @@
                 </div>
             </div>
         </div>
-        <div class="vr" style="padding-right: 0; padding-left: 0"></div>
+
         <div class="col">
             <div class="menuBar align-items-md-start flex-column">
 
@@ -234,7 +259,7 @@
                 function redirectToPage(selectElement) {
                     var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
                     var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
-                    window.location.href = "/timetut/" + selectedWeekday + "/" + selectedWeek;
+                    window.location.href = "/timet/" + selectedWeekday + "/" + selectedWeek;
                 }
             </script>
 
@@ -242,8 +267,7 @@
             <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
                 <#assign hasScore = false>
                 <#list timetables?sort_by('lesson_number') as timetable>
-                    <#assign teacherLastname = timetable.getName_teacher()?split(' ')?first>  <!-- Находим фамилию преподавателя и сейвим её  ! -->
-                    <#if user.lastName == teacherLastname  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
+                    <#if user.groupName == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
                         <#assign hasScore = true>
                         <div class="timetable fw-bold">
                             <div class="row" style="margin: 10px;">
@@ -254,7 +278,7 @@
                             <div class="row" style="margin: 10px">
                                 <div class="col-md-8">${timetable.getTime()}</div>
                                 <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
-                                <div class="col-md-8">${timetable.getGroup_name()}</div>
+                                <div class="col-md-8">${timetable.getName_teacher()}</div>
                             </div>
                         </div>
                     </#if>
@@ -264,6 +288,7 @@
                 </#if>
             </div>
         </div>
+
     </div>
 </div>
 </body>

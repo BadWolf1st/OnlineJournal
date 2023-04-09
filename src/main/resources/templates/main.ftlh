@@ -225,7 +225,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                            <a href="/timetablestudent" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-clock"></i>
                                 <span class="ms-1 d-none d-sm-inline">Расписание</span>
                             </a>
@@ -282,6 +282,8 @@
                     window.location.href = "/term/" + selectedValue;
                 }
             </script>
+
+
             <div class="col-">
                 <div class="row row-cols-auto" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <#assign hasScore = false>
