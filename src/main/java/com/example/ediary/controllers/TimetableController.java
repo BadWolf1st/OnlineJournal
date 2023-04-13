@@ -65,5 +65,19 @@ public class TimetableController {
         timetableRepository.save(timetable);
         return "redirect:/login";
     }
-
+    @GetMapping("/admintimetable")
+    public String admintimetable(Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "redirect:/admintime/Monday/1/non";
+    }
+    @GetMapping("/admintime/{id}/{id2}/{id3}")
+    public String timetableAdmin(@PathVariable String id,@PathVariable Long id2,@PathVariable String id3, Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("selectedWeekday", id);
+        model.addAttribute("selectedWeek", id2);
+        model.addAttribute("selectedGroup", id3);
+        return "admintimetable";
+    }
 }
