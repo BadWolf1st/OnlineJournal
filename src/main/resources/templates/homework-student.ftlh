@@ -204,7 +204,7 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="homeStudent"
+                <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
                                 <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
@@ -213,7 +213,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div class="buttonVisual" id="Home">
-                            <a href="homeStudent" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -221,7 +221,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual active">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText this">
+                            <a href="/homeworks"  class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi-pencil-square"></i>
                                 <span class="ms-1 d-none d-sm-inline">Домашние задания</span>
                             </a>
@@ -229,7 +229,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                            <a href="/timetablestudent" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-clock"></i>
                                 <span class="ms-1 d-none d-sm-inline">Расписание</span>
                             </a>
@@ -237,7 +237,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/finalscore/1"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-star"></i>
                                 <span class="ms-1 d-none d-sm-inline">Итоговые оценки</span>
                             </a>
@@ -248,18 +248,19 @@
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
                         <div class="circleIcon text-white userColor">
-                            <div class="container6">РС</div>
+                            <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
                         </div>
-                        <span class="d-none d-sm-inline mx-1 ">Раскутин</span>
+                        <span class="d-none d-sm-inline mx-1 ">${user.getLastName()}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
+                        <li><a class="dropdown-item" href="/profile">Профиль</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" style="color: #d62929">Выйти из аккаунта</a>
+                            <a class="dropdown-item" href="/logout" style="color: #d62929">Выйти из аккаунта</a>
                         </li>
                     </ul>
                 </div>

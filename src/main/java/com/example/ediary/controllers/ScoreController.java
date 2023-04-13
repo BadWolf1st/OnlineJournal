@@ -98,7 +98,8 @@ public class ScoreController {
         return "redirect:/homeworks/" + formattedDate;
     }
     @RequestMapping(value = "/homeworks/{dueDate}", method = RequestMethod.GET)
-    public ModelAndView homeworks(@PathVariable("dueDate") @DateTimeFormat(pattern="dd-MM-yyyy") LocalDate dueDate) {
+    public ModelAndView homeworks(@PathVariable("dueDate") @DateTimeFormat(pattern="dd-MM-yyyy") LocalDate dueDate, Principal principal, Model model) {
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
         ModelAndView modelAndView = new ModelAndView("homework-student");
         List<Homework> homeworkList = homeworkService.getAllHomework();
         List<Homework> filteredList = homeworkList.stream()

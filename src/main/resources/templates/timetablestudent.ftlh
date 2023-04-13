@@ -173,7 +173,7 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="homeStudent"
+                <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline"><img src="../../static/logo/LabelLabel.svg"
                                                                class="img-fluid invert" alt="Мои оценки"></span>
@@ -188,14 +188,14 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/homeworks"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-pencil-square"></i> <span class="ms-1 d-none d-sm-inline">Домашние задания</span>
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                            <a href="/timetablestudent" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi-clock"></i> <span
                                         class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
@@ -203,7 +203,7 @@
 
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/finalscore/1"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-star"></i> <span
                                         class="ms-1 d-none d-sm-inline">Итоговые оценки</span></a>
                         </div>

@@ -179,7 +179,7 @@
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
       <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <a href="homeStudent" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <span class="fs-5 d-none d-sm-inline"><img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки"></span>
+          <span class="fs-5 d-none d-sm-inline"><img src="../../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки"></span>
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li>
@@ -192,7 +192,7 @@
           <li>
             <div  class="buttonVisual">
               <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
-                <i class="fs-4 bi-pencil-square"></i> <span class="ms-1 d-none d-sm-inline">Пользователи</span> </a>
+                <i class="fs-4 bi-pencil-square"></i> <span class="ms-1 d-none d-sm-inline">Домашние задания</span> </a>
             </div>
           </li>
           <li>
@@ -204,7 +204,7 @@
           <li>
             <div  class="buttonVisual">
               <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
-                <i class="fs-4 bi-star"></i> <span class="ms-1 d-none d-sm-inline">Группы</span></a>
+                <i class="fs-4 bi-star"></i> <span class="ms-1 d-none d-sm-inline">Итоговые оценки</span></a>
             </div>
           </li>
         </ul>
@@ -230,86 +230,53 @@
     <div class="col">
       <div class="menuBar align-items-md-start flex-column">
       <div class="row">
-
-
-        <select aria-label="Default select example" class="form-select selectWidth flex-row"
-                >
-          <option value="Понедельник" <#if selectedWeekday == "Понедельник">selected</#if>>Понедельник
-          </option>
-          <!-- Если будет не айс с русскими названиями в поисковой строке, то надо будет подумать здесь ! -->
-          <option value="Вторник" <#if selectedWeekday == "Вторник">selected</#if>>Вторник</option>
-          <option value="Среда" <#if selectedWeekday == "Среда">selected</#if>>Среда</option>
-          <option value="Четверг" <#if selectedWeekday == "Четверг">selected</#if>>Четверг</option>
-          <option value="Пятница" <#if selectedWeekday == "Пятница">selected</#if>>Пятница</option>
-          <option value="Суббота" <#if selectedWeekday == "Суббота">selected</#if>>Суббота</option>
-          <option value="Воскресенье" <#if selectedWeekday == "Воскресенье">selected</#if>>Воскресенье
-          </option>
+        <select aria-label="Default select example" class="form-select selectWidth flex-row" style="margin-left:10px">
+          <option selected value="1">Понедельник</option>
+          <option value="2">Вторник</option>
+          <option value="3">Среда</option>
+          <option value="4">Четверг</option>
+          <option value="5">Пятница</option>
+          <option value="6">Суббота</option>
+          <option value="7">Воскресенье</option>
         </select>
-        <select aria-label="Default select example" class="form-select selectWidth flex-row"
-                >
-          <option value="1" <#if selectedWeek == 1>selected</#if>>1 неделя</option>
-          <option value="2" <#if selectedWeek == 2>selected</#if>>2 неделя</option>
+        <select aria-label="Default select example" class="form-select selectWidth flex-row" style="margin-left:10px">
+          <option selected value="1">1 неделя</option>
+          <option value="2">2 неделя</option>
         </select>
-      </div>
-
-        <script>
-          function redirectToPage(selectElement) {
-            var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
-            var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
-            var selectedGroup = document.getElementById('groupInput').value;
-            window.location.href = "/admintime/" + selectedWeekday + "/" + selectedWeek+"/"+selectedGroup;
-          }
-        </script>
-
-
-
-
-        <div class="col-3" style="margin-left:10px"><input type="text" class="form-control" placeholder="Группа" id="groupInput"></div>
+        <div class="col-3" style="margin-left:10px"><input type="text" class="form-control" placeholder="Группа"></div>
         <div class="row">
           <button type="submit" class="btn fw-bold text-black button text-center"
-               style="justify-content: left;background-color: red; width: 130px; margin-left:20px" onclick="window.location.href='#'">Удалить
+               style="justify-content: left;background-color: red; width: 130px; margin-left:20px">Удалить
           </button>
           <button type="submit" class="btn fw-bold text-black button text-center"
-               style="justify-content: left;background-color: greenyellow; width: 130px; margin-left:20px" onclick="window.location.href='/regtimetablestudent'">Добавить
+               style="justify-content: left;background-color: greenyellow; width: 130px; margin-left:20px">Добавить
           </button>
           <button type="submit" class="btn fw-bold text-black button text-center"
-               style="justify-content: left;background-color: grey; width: 130px; margin-left:20px" onclick="redirectToPage()">Показать
+               style="justify-content: left;background-color: grey; width: 130px; margin-left:20px">Изменить
           </button>
+        </div>
+        </div>
+      </div>
+      <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
+
+        <div class="timetable fw-bold">
+          <div class="row" style="margin: 10px;">
+            <div class="col-md-8">5 пара</div>
+            <div class="col-md-8">Лекция</div>
+            <div class="col-md-8">Аудитория 1326</div>
+          </div>
+          <div class="row" style="margin: 10px">
+            <div class="col-md-8">15:20 - 16:40</div>
+            <div class="col-md-8 text-wrap">Основы сетевых технологий</div>
+            <div class="col-md-8">Вадимов А.С.</div>
+          </div>
         </div>
 
-        </div>
 
       </div>
-
-
-
-    <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
-      <#assign hasScore = false>
-      <#list timetables?sort_by('lesson_number') as timetable>
-        <#if id3 == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
-          <#assign hasScore = true>
-          <div class="timetable fw-bold">
-            <div class="row" style="margin: 10px;">
-              <div class="col-md-8">${timetable.getLesson_number()}</div>
-              <div class="col-md-8">${timetable.getType_of_lesson()}</div>
-              <div class="col-md-8">${timetable.getClassroom_number()}</div>
-            </div>
-            <div class="row" style="margin: 10px">
-              <div class="col-md-8">${timetable.getTime()}</div>
-              <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
-              <div class="col-md-8">${timetable.getName_teacher()}</div>
-            </div>
-          </div>
-        </#if>
-      </#list>
-      <#if hasScore = false>
-        <h1 style="text-align: center">Нет занятий</h1>
-      </#if>
-    </div>
     </div>
 
   </div>
-
 </div>
 </body>
 </html>
