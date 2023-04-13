@@ -80,4 +80,9 @@ public class TimetableController {
         model.addAttribute("selectedGroup", id3);
         return "admintimetable";
     }
+    @GetMapping("/scorecreate")
+    public String regtimetable123(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "scorecreate";
+    }
 }

@@ -51,40 +51,65 @@
         <form action="/regtimetablestudent" method="post">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="classroom_number" placeholder="Classroom_number"><br>
-                <label for="floatingInput">classroom_number</label>
+                <label for="floatingInput">Номер аудитории</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="lesson_number" placeholder="Lesson_number"><br>
-                <label for="floatingInput">lesson_number</label>
+                <label for="floatingInput">Номер занятия</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="name_lesson" placeholder="Name_lesson"><br>
-                <label for="floatingInput">name_lesson</label>
+                <label for="floatingInput">Название предмета</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="name_teacher" placeholder="Name_teacher"><br>
-                <label for="floatingInput">name_teacher</label>
+                <label for="floatingInput">Имя преподавателя</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="time" placeholder="Time"><br>
-                <label for="floatingInput">time</label>
+                <label for="floatingInput">Время занятия</label>
 
             </div>
             <div class="form-floating  mb-3">
-                <input type="text" class="form-control" name="type_of_lesson" placeholder="Type_of_lesson"><br>
-                <label for="floatingInput">type_of_lesson</label>
+
+                <label for="type_of_lesson" style="margin-top: -15px">Тип занятия</label>
+                <select id="type_of_lesson" required name="type_of_lesson" class="form-control">
+                    <option value="">Тип не выбран</option>
+
+                    <option value="Лекция">Лекция</option>
+                    <option value="Лабораторная работа">Лабораторная работа</option>
+                    <option value="Практическое занятие">Практическое занятие</option>
+                    <option value="Консультация">Консультация</option>
+                    <option value="Экзамен">Экзамен</option>
+
+                </select>
             </div>
             <div class="form-floating  mb-3">
                 <input type="text" class="form-control" name="group_name" placeholder="group_name"><br>
-                <label for="floatingInput">group_name</label>
+                <label for="floatingInput">Название группы</label>
             </div>
             <div class="form-floating  mb-3">
-                <input type="text" class="form-control" name="weekday" placeholder="weekday"><br>
-                <label for="floatingInput">weekday</label>
+                <label for="weekday" style="margin-top: -15px">Тип занятия</label>
+                <select id="weekday" required name="weekday" class="form-control">
+                    <option value="">Тип не выбран</option>
+
+                    <option value="Понедельник">Понедельник</option>
+                    <option value="Вторник">Вторник</option>
+                    <option value="Среда">Среда</option>
+                    <option value="Четверг">Четверг</option>
+                    <option value="Пятница">Пятница</option>
+                    <option value="Суббота">Суббота</option>
+                    <option value="Воскресенье">Воскресенье</option>
+                </select>
             </div>
             <div class="form-floating  mb-3">
-                <input type="text" class="form-control" name="week_number" placeholder="week_number"><br>
-                <label for="floatingInput">week_number</label>
+                <label for="week_number" style="margin-top: -15px">Тип занятия</label>
+                <select id="week_number" required name="week_number" class="form-control">
+                    <option value="">Тип не выбран</option>
+
+                    <option value="1">I Неделя</option>
+                    <option value="2">II Неделя</option>
+                </select>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" class="btn btn-primary">Сохранить</button>
