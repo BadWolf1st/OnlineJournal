@@ -68,4 +68,11 @@ public class UserService {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
+    public User getUserById(Long id) {
+        if (id == null) return new User();
+        return userRepository.findUserById(id);
+    }
+    public void updateUser(User user){
+        userRepository.save(user);
+    }
 }

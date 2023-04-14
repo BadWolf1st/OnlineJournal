@@ -256,11 +256,11 @@
               </div>
             </div>
             <button type="submit" class="btn fw-bold text-black button text-center"
-                    style="justify-content: right; width: 30px; height: 30px; margin-top: 12px; margin-right: 5px">
+                 style="justify-content: right; width: 30px; height: 30px; margin-top: 12px; margin-right: 5px">
               <i class="bi bi-search"></i>
             </button>
             <button type="submit" class="btn fw-bold text-black button text-center"
-                    style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
+                 style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
               <i class="bi bi-people-fill">+</i>
             </button>
           </div>
@@ -271,25 +271,25 @@
           <div class="col " style="height: min-content">
             <#list groups as group>
 
-              <div class="row item texts" style="display: flex; align-items: center">
-                <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}
-                </div>
-                <div class="col text-wrap"
-                     style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}
-                </div>
-                <div class="col text-wrap"
-                     style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:${group.getCount()}
-                </div>
-                <div class="col" style="display: flex; justify-content: flex-end">
-                  <div class="row" style="width: max-content">
-                    <div class="col">
-                      <a href="/admin/groups/${group.id}" class="fw-bold text-black button text-center" type="button"
+            <div class="row item texts" style="display: flex; align-items: center">
+              <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}
+              </div>
+              <div class="col text-wrap"
+                   style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}
+              </div>
+              <div class="col text-wrap"
+                   style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:${group.getCount()}
+              </div>
+              <div class="col" style="display: flex; justify-content: flex-end">
+                <div class="row" style="width: max-content">
+                  <div class="col">
+                    <a href="/admin/groups/${group.id}" class="fw-bold text-black button text-center" type="button"
                          style="justify-content: right; width: 30px">...
-                      </a>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
+            </div>
             </#list>
           </div>
         </div>

@@ -199,8 +199,8 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual" id="Home">
-                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                        <div class="buttonVisual active" id="Home">
+                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText this">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -215,8 +215,8 @@
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                        <div class="buttonVisual">
+                            <a href="#" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -246,82 +246,35 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <form>
-                    <div class="row" style="">
-                        <div class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
-                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
-                        </div>
-                        <div class="col" style="">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="id" name="idname"
-                                       placeholder="ФИО \ Т.н.">
-                                <label for="id" class="">Фамилия</label>
-                            </div>
-                        </div>
-                        <div class="fw-bold text-black button text-center bi bi-search" type="button"
-                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
-                        </div>
-                    </div>
-                </form>
+                <div class="text-center">Заявки</div>
             </div>
             <div class="col-">
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
-                        <#list users as user>
-                            <div class="row item texts">
-                                <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
-                                </div>
-                                <div class="col text-wrap"
-                                     style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.getPhoneNumber()}
-                                </div>
-                                <div class="col" style="display: flex; justify-content: flex-end">
-                                    <div class="row" style="width: max-content">
-                                        <div class="col">
-                                            <div class="fw-bold text-black button text-center bi bi-person-fill-add" type="button"
-                                                 style="justify-content: right; height: 30px; width: 30px; background-color: greenyellow">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="fw-bold text-black button text-center" type="button"
-                                                 style="justify-content: right; height: 30px; width: 30px">...
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col " style="height: min-content">
-                                <div class="row item texts" style="display: flex; align-items: center">
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">
-                                        <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
-                                        ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
+                        <div class="row item">
+                            <div class="col text-wrap">Селов Дмитрий Михайлович</div>
+                            <div class="col" style="display: flex; justify-content: flex-end">
+                                <div class="row" style="width: max-content">
+                                    <div class="col">
+                                        <button type="submit" class="btn fw-bold text-black button text-center"
+                                             style="justify-content: right; background-color: greenyellow; width: 30px">
+                                            ✓
+                                        </button>
                                     </div>
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.getPhoneNumber()}
+                                    <div class="col">
+                                        <button type="reset" class="btn fw-bold text-black button text-center"
+                                             style="justify-content: right;background-color: red; width: 30px">✕
+                                        </button>
                                     </div>
-                                    <div class="col" style="display: flex; justify-content: flex-end">
-                                        <div class="row" style="width: max-content">
-                                            <div class="col">
-                                                <a href="${.vars.request?if_exists.requestURL}/headman/${user.id}" class="btn fw-bold text-black button text-center bi bi-star" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="${.vars.request?if_exists.requestURL}/deleteGroup/${user.id}" class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
-                                                </a>
-                                            </div>
-                                        </div>
+                                    <div class="col">
+                                        <a href="#" class="btn fw-bold text-black button text-center"
+                                             style="justify-content: right; width: 30px">...
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </#list>
+                        </div>
 
                     </div>
                 </div>
