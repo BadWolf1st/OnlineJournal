@@ -208,7 +208,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/hi" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -247,83 +247,90 @@
         <div class="col">
             <div class="menuBar">
                 <form>
-                    <div class="row" style="">
-                        <div class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
-                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                    <div class="row" style="display: flex; align-items: center; margin: 0 2px;">
+                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
+                             style="justify-content: right; width: 30px; height: 30px">
+                        </a>
+                        <button type="reset" class="btn fw-bold text-black button text-center bi bi-trash3-fill"
+                             style="justify-content: right; width: 30px; height: 30px; background-color: red; margin: 0 5px">
+                        </button>
+                        <div class="col text-center top-100" style="">
+                            УВП-213
                         </div>
-                        <div class="col" style="">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="id" name="idname"
-                                       placeholder="ФИО \ Т.н.">
-                                <label for="id" class="">Фамилия</label>
-                            </div>
-                        </div>
-                        <div class="fw-bold text-black button text-center bi bi-search" type="button"
-                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
-                        </div>
+                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-person-fill-add"
+                             style="justify-content: right; width: 30px; height: 30px; background-color: greenyellow">
+                        </button>
                     </div>
                 </form>
             </div>
             <div class="col-">
-                <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
+                <div class="col" style="overflow-y: auto; height: 90vh; white-space: nowrap">
+
                     <div class="col " style="height: min-content">
-                        <#list users as user>
-                            <div class="row item texts">
-                                <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
-                                </div>
-                                <div class="col text-wrap"
-                                     style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.getPhoneNumber()}
-                                </div>
-                                <div class="col" style="display: flex; justify-content: flex-end">
-                                    <div class="row" style="width: max-content">
-                                        <div class="col">
-                                            <div class="fw-bold text-black button text-center bi bi-person-fill-add" type="button"
-                                                 style="justify-content: right; height: 30px; width: 30px; background-color: greenyellow">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="fw-bold text-black button text-center" type="button"
-                                                 style="justify-content: right; height: 30px; width: 30px">...
-                                            </div>
-                                        </div>
+                        <div class="row item texts" style="display: flex; align-items: center">
+                            <div class="col text-wrap"
+                                 style="display: flex; justify-content: flex-start; margin-top: 4px">
+                                <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
+                                Дубровский Арсений Александрович
+                            </div>
+                            <div class="col text-wrap"
+                                 style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:33225577
+                            </div>
+                            <div class="col" style="display: flex; justify-content: flex-end">
+                                <div class="row" style="width: max-content">
+                                    <div class="col">
+                                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-star"
+                                             style="justify-content: right; width: 30px; height: 30px; background-color: red">
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-x-lg"
+                                             style="justify-content: right; width: 30px; height: 30px; background-color: red">
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="fw-bold text-black button text-center" type="button"
+                                             style="justify-content: right; width: 30px; height: 30px">...
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col " style="height: min-content">
-                                <div class="row item texts" style="display: flex; align-items: center">
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">
-                                        <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
-                                        ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
-                                    </div>
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.getPhoneNumber()}
-                                    </div>
-                                    <div class="col" style="display: flex; justify-content: flex-end">
-                                        <div class="row" style="width: max-content">
-                                            <div class="col">
-                                                <a href="${.vars.request?if_exists.requestURL}/headman/${user.id}" class="btn fw-bold text-black button text-center bi bi-star" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="${.vars.request?if_exists.requestURL}/deleteGroup/${user.id}" class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </#list>
-
+                        </div>
                     </div>
+
+                    <div class="col " style="height: min-content">
+                        <div class="row item texts" style="display: flex; align-items: center">
+
+                            <div class="col text-wrap"
+                                 style="display: flex; justify-content: flex-start; margin-top: 4px">Раскутин Сергей
+                                Александрович
+                            </div>
+                            <div class="col text-wrap"
+                                 style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:1133059
+                            </div>
+                            <div class="col" style="display: flex; justify-content: flex-end">
+                                <div class="row" style="width: max-content">
+                                    <div class="col">
+                                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-star"
+                                             style="justify-content: right; width: 30px; height: 30px; background-color: yellow">
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-x-lg"
+                                             style="justify-content: right; width: 30px; height: 30px; background-color: red">
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="fw-bold text-black button text-center" type="button"
+                                             style="justify-content: right; width: 30px; height: 30px">...
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

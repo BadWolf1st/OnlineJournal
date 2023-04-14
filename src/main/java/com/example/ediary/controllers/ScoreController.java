@@ -133,4 +133,11 @@ public class ScoreController {
         model.addAttribute("users", sortedUsers);
         return "add-student-to-group";
     }
+    @GetMapping("/admin/groups/{id}/deleteGroup/{user}")
+    public String deleteUserFromGroup(@PathVariable Long id, Model model, Principal principal){
+        User user = userService.getUserById(id);
+        user.setGroupName(null);
+        userService.updateUser(user);
+        return "redirect:/admin/groups/" + id;
+    }
 }

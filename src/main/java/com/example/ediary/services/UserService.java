@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.Arrays;
@@ -15,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.example.ediary.models.enums.Role.ROLE_USER;
 
 @Service
 @Slf4j
@@ -71,7 +68,13 @@ public class UserService {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
-
+    public User getUserById(Long id) {
+        if (id == null) return new User();
+        return userRepository.findUserById(id);
+    }
+    public void updateUser(User user){
+        userRepository.save(user);
+    }
     public void useredit(Long id){
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found with ID " + id));
         user.getRoles().clear();
