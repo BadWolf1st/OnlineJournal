@@ -1,5 +1,6 @@
 package com.example.ediary.services;
 
+import com.example.ediary.models.Product;
 import com.example.ediary.models.Timetable;
 import com.example.ediary.models.User;
 import com.example.ediary.repositories.TimetableRepository;
@@ -20,6 +21,8 @@ public class TimetableService {
     public void saveTimeTable (Principal principal, Timetable timetable){
         timetableRepository.save(timetable);
     }
+
+
     public List<Timetable> listTimetable(String name_lesson) {
         //if (name_lesson != null) return timetableRepository.findByTitle(name_lesson); поч крашит?
         return timetableRepository.findAll();

@@ -48,4 +48,10 @@ public class AdminController {
         userService.changeUserRoles(user, form);
         return "redirect:/admin";
     }
+    @GetMapping("/admin/home")
+    public String adminhome(User user, Model model, Principal principal) {
+        model.addAttribute("users", userService.list());
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "homeadmin";
+    }
 }
