@@ -1,6 +1,7 @@
 package com.example.ediary.services;
 
 import com.example.ediary.models.Product;
+import com.example.ediary.models.Score;
 import com.example.ediary.models.Timetable;
 import com.example.ediary.models.User;
 import com.example.ediary.repositories.TimetableRepository;
@@ -31,4 +32,7 @@ public class TimetableService {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
-}
+
+    public void deleteTimetable(List<Long> id) {
+        timetableRepository.deleteAllById(id);
+}}

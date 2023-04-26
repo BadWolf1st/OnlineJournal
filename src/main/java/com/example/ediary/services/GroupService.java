@@ -1,6 +1,6 @@
 package com.example.ediary.services;
 
-import com.example.ediary.models.Group;
+import com.example.ediary.models.Group1;
 import com.example.ediary.models.User;
 import com.example.ediary.repositories.GroupRepository;
 import com.example.ediary.repositories.UserRepository;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -21,22 +20,22 @@ public class GroupService {
     private final GroupRepository groupRepository;
 
     public List<User> getUsersByGroup(String groupName) {
-        List<Group> groups = groupRepository.findByName(groupName);
+        List<Group1> groups = groupRepository.findByName(groupName);
         if (groups.isEmpty()) {
             throw new IllegalArgumentException("Group not found: " + groupName);
         }
         return userRepository.findByGroupName(groups.get(0).getName());
     }
 
-    public List<Group> listGroups(String title) {
+    public List<Group1> listGroups(String title) {
         if (title != null) return groupRepository.findByName(title);
         return groupRepository.findAll();
     }
-    public List<Group> listGroupsByHeadman(String name) {
+    public List<Group1> listGroupsByHeadman(String name) {
         if (name != null) return groupRepository.findByName(name);
         return groupRepository.findAll();
     }
-    public void saveGroup(Principal principal, Group group) throws IOException {
+    public void saveGroup(Principal principal, Group1 group) throws IOException {
         group.setUser(getUserByPrincipal(principal));
         log.info("Saving new group. Name: {}; Author email: {}", group.getName(), group.getUser().getEmail());
         groupRepository.save(group);
@@ -48,7 +47,7 @@ public class GroupService {
 
 
     public void deleteGroup(User user, Long id) {
-        Group group = groupRepository.findById(id)
+        Group1 group = groupRepository.findById(id)
                 .orElse(null);
         if (group != null) {
             if (group.getUser().getId().equals(user.getId())) {
@@ -60,7 +59,7 @@ public class GroupService {
         } else {
             log.error("Group with id = {} is not found", id);
         }    }
-    public Group getGroupById(Long id) {
+    public Group1 getGroupById(Long id) {
         return groupRepository.findById(id).orElse(null);
     }
 }

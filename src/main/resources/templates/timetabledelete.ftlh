@@ -204,67 +204,7 @@
 <script async src="../static/js/DarkChanger.js"></script>
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="homeAdmin"
-                   class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
-                            </span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li>
-                        <div class="buttonVisual" id="Home">
-                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
-                                <i class="fs-4 bi-house"></i>
-                                <span class="ms-1 d-none d-sm-inline">Главная</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi bi-person-circle"></i>
-                                <span class="ms-1 d-none d-sm-inline">Пользователи</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div  class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
-                                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi bi-people-fill"></i>
-                                <span class="ms-1 d-none d-sm-inline">Группы</span>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <hr>
-                <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
-                       id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="circleIcon text-white userColor">
-                            <div class="container6">РС</div>
-                        </div>
-                        <span class="d-none d-sm-inline mx-1 ">Раскутин</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#" style="color: #d62929">Выйти из аккаунта</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <form action="/deleteTimetable" method="post">
         <div class="col">
             <#assign hasScore = false>
             <#list timetables?sort_by('lesson_number') as timetable>
@@ -273,7 +213,7 @@
                   <ul id="list">
                   <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
                       <div class="timetable fw-bold">
-                              <input type="checkbox" class="input-checkbox">
+                          <input type="checkbox" class="input-checkbox" name="timetableId" value="${timetable.getId()}">
                                   <div class="row" style="margin: 10px;">
                                       <div class="col-md-8">${timetable.getLesson_number()}</div>
                                       <div class="col-md-8">${timetable.getType_of_lesson()}</div>
@@ -294,29 +234,11 @@
             <#if hasScore = false>
                 <h1 style="text-align: center">Нет занятий</h1>
             </#if>
-        <div class="d-flex justify-content-center">
-            <button id="delete-button" class="btn fw-bold text-black button text-center float-end"
-                    style="justify-content: left; background-color: red; height: 40px; width: 130px; margin: 5px"onclick="window.location.href='/admintimetable'">Удалить
-            </button>
         </div>
-            <script>
-                const deleteButton = document.getElementById("delete-button");
-                const checkboxes = document.querySelectorAll(".input-checkbox");
-
-                deleteButton.addEventListener("click", function() {
-                checkboxes.forEach(function(checkbox) {
-                if (checkbox.checked) {
-                checkbox.closest(".timetable").remove();
-                }
-                });
-                });
-
-            </script>
-            </div>
-            </div>
-            </div>
-        </div>
-    </div>
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <button type="submit" class="btn btn-primary">Удалить</button>
+    </form>
+</div>
 </div>
 </body>
 </html>

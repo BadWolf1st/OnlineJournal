@@ -2,6 +2,7 @@ package com.example.ediary.controllers;
 
 
 import com.example.ediary.models.Timetable;
+import com.example.ediary.models.User;
 import com.example.ediary.repositories.TimetableRepository;
 import com.example.ediary.services.TimetableService;
 import com.example.ediary.services.UserService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -84,5 +86,19 @@ public class TimetableController {
     public String regtimetable123(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "scorecreate";
+    }
+    @GetMapping("/admintimedel/{id}/{id2}/{id3}")
+    public String timetableAdminDelete(@PathVariable String id,@PathVariable Long id2,@PathVariable String id3, Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("selectedWeekday", id);
+        model.addAttribute("selectedWeek", id2);
+        model.addAttribute("selectedGroup", id3);
+        return "timetabledelete";
+    }
+    @PostMapping("/deleteTimetable")
+    public String deleteTimetable(@RequestParam("timetableId") List<Long> id){
+        timetableService.deleteTimetable(id);
+        return "admintimetable";
     }
 }
