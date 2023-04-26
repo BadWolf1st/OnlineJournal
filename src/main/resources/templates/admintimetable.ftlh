@@ -260,14 +260,21 @@
             window.location.href = "/admintime/" + selectedWeekday + "/" + selectedWeek+"/"+selectedGroup;
           }
         </script>
-
+        <script>
+          function redirectToPage2(selectElement) {
+            var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
+            var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
+            var selectedGroup = document.getElementById('groupInput').value;
+            window.location.href = "/admintimedel/" + selectedWeekday + "/" + selectedWeek+"/"+selectedGroup;
+          }
+        </script>
 
 
 
         <div class="col-3" style="margin-left:10px"><input type="text" class="form-control" placeholder="Группа" id="groupInput"></div>
         <div class="row">
           <button type="submit" class="btn fw-bold text-black button text-center"
-               style="justify-content: left;background-color: red; width: 130px; margin-left:20px" onclick="window.location.href='#'">Удалить
+               style="justify-content: left;background-color: red; width: 130px; margin-left:20px" onclick="redirectToPage2()">Удалить
           </button>
           <button type="submit" class="btn fw-bold text-black button text-center"
                style="justify-content: left;background-color: greenyellow; width: 130px; margin-left:20px" onclick="window.location.href='/regtimetablestudent'">Добавить
