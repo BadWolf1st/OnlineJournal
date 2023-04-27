@@ -237,4 +237,6 @@ public class User implements UserDetails {
         return active;
     }
 
+    public void setRole(String roleUser) {
+    }
 }
