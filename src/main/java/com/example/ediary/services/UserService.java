@@ -68,6 +68,12 @@ public class UserService {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
+    public void useredit(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found with ID " + id));
+        user.getRoles().clear();
+        user.getRoles().add(Role.ROLE_USER);
+        userRepository.save(user);
+    }
     public User getUserById(Long id) {
         if (id == null) return new User();
         return userRepository.findUserById(id);

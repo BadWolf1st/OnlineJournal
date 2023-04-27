@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -54,4 +55,10 @@ public class AdminController {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "homeadmin";
     }
+    @PostMapping("/admin/home")
+    public String adminuseredit(@RequestParam("userId") Long id){
+        userService.useredit(id);
+        return "redirect:/admin/home";
+    }
+
 }

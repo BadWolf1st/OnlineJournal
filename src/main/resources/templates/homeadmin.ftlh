@@ -253,18 +253,24 @@
                     <div class="col " style="height: min-content">
 
                         <div class="row item">
+                            <#assign hasScore = false>
                             <#list users as user>
+                            <#list user.getRoles() as role>
+                            <#if role == 'ROLE_GUEST'>
+                                <#assign hasScore = true>
                             <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
                             <div class="col" style="display: flex; justify-content: flex-end">
                                 <div class="row" style="width: max-content">
-                                    <div class="col"><form action="/regtimetablestudent" method="get"><input type="hidden" name="_csrf" value="${_csrf.token}">
-                                        <div class="fw-bold text-black button text-center" type="button"
-                                             style="justify-content: right; background-color: greenyellow; width: 30px" ВОТ ОТ ВАН КЛИК ОН РАБОТАЕТ)(onclick="window.location.href='/auth'">
-                                            ✓
+                                    <form action="/admin/home" method="POST">
+                                        <div class="col">
+                                            <input type="hidden" name="userId" value="${user.getId()}" />
+                                            <button type="submit" class="fw-bold text-black button text-center"
+                                                    style="justify-content: right; background-color: greenyellow; width: 30px">
+                                                ✓
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="${_csrf.token}">
                                         </div>
-
-                                        </form>
-                                    </div>
+                                    </form>
                                     <div class="col">
                                         <div class="fw-bold text-black button text-center" type="button"
                                              style="justify-content: right;background-color: red; width: 30px">✕
@@ -277,8 +283,14 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                        </#if>
                         </#list>
+                        </#list>
+                        <#if hasScore = false>
+                            <h1 style="text-align: center">Новых пользователей нет</h1>
+                        </#if>
                     </div>
                 </div>
             </div>
