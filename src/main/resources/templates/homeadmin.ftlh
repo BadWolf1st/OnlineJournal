@@ -261,7 +261,7 @@
                             <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
                             <div class="col" style="display: flex; justify-content: flex-end">
                                 <div class="row" style="width: max-content">
-                                    <form action="/admin/home" method="POST">
+                                    <form action="/admin/home/accept" method="POST">
                                         <div class="col">
                                             <input type="hidden" name="userId" value="${user.getId()}" />
                                             <button type="submit" class="fw-bold text-black button text-center"
@@ -271,16 +271,24 @@
                                             <input type="hidden" name="_csrf" value="${_csrf.token}">
                                         </div>
                                     </form>
-                                    <div class="col">
-                                        <div class="fw-bold text-black button text-center" type="button"
-                                             style="justify-content: right;background-color: red; width: 30px">✕
+                                    <form action="/admin/home/decline" method="POST">
+                                        <div class="col">
+                                            <input type="hidden" name="userId" value="${user.getId()}" />
+                                            <button type="submit" class="fw-bold text-black button text-center"
+                                                    style="justify-content: right;background-color: red; width: 30px">
+                                                ✕
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="${_csrf.token}">
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="fw-bold text-black button text-center" type="button"
-                                             style="justify-content: right; width: 30px">...
+                                    </form>
+                                    <form action="/user/${user.getId()}" method="GET">
+                                        <div class="col">
+                                            <button type="submit" class="fw-bold text-black button text-center"
+                                                    style="justify-content: right; width: 30px">
+                                                ...
+                                            </button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
 

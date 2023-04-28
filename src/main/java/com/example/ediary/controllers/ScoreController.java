@@ -39,7 +39,7 @@ public class ScoreController {
         if(scoreService.getUserByPrincipal(principal).getEmail() == null){
             return "redirect:/login";
         }
-        if(scoreService.getUserByPrincipal(principal).isGuest()){
+        if(scoreService.getUserByPrincipal(principal).isGuest() || scoreService.getUserByPrincipal(principal).isCancel()){
             return "redirect:/waitroom";
         }
         if(scoreService.getUserByPrincipal(principal).getEmail() != null){

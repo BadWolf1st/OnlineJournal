@@ -40,6 +40,9 @@ public class User implements UserDetails {
     joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
+    public Role getRole(){
+        return roles.stream().findFirst().get();
+    }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
     mappedBy = "user")
@@ -58,6 +61,9 @@ public class User implements UserDetails {
     }
     public boolean isGuest() {
         return roles.contains(Role.ROLE_GUEST);
+    }
+    public boolean isCancel() {
+        return roles.contains(Role.ROLE_CANCEL);
     }
 
     public Image getAvatar() {

@@ -266,7 +266,7 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <div class="text-center"> Мой профиль </div>
+                <div class="text-center"> Профиль пользователя ${user.getName()} </div>
             </div>
             <div class="col">
                 <div style="height: 200px;margin: 20px">
