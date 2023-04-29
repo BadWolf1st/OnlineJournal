@@ -1,5 +1,6 @@
 package com.example.ediary.controllers;
 
+import com.example.ediary.models.Group1;
 import com.example.ediary.models.Homework;
 import com.example.ediary.models.Score;
 import com.example.ediary.models.User;
@@ -133,11 +134,19 @@ public class ScoreController {
         model.addAttribute("users", sortedUsers);
         return "add-student-to-group";
     }
-    @GetMapping("/admin/groups/{id}/deleteGroup/{user}")
-    public String deleteUserFromGroup(@PathVariable Long id, Model model, Principal principal){
-        User user = userService.getUserById(id);
+    @GetMapping("/admin/groups/{id}/delete/{userId}")
+    public String deleteUserFromGroup(@PathVariable Long id, @PathVariable Long userId, Model model, Principal principal){
+        User user = userService.getUserById(userId);
         user.setGroupName(null);
+        user.setGroup(null);
         userService.updateUser(user);
+        return "redirect:/admin/groups/" + id;
+    }
+    @GetMapping("/admin/groups/{id}/headman/{userId}")
+    public String headmanUserFromGroup(@PathVariable Long id, @PathVariable Long userId, Model model, Principal principal){
+        Group1 group = groupService.getGroupById(id);
+        group.setHeadman(userService.getUserById(userId));
+        groupService.updateGroup(group);
         return "redirect:/admin/groups/" + id;
     }
 }

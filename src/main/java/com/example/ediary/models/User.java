@@ -47,6 +47,16 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
     mappedBy = "user")
     private List<Product> products = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private Group1 group;
+
+    public void setGroup(Group1 group1) {
+        this.group = group1;
+    }
+    public Group1 getGroup(){
+        return this.group;
+    }
 
     public void addProductToUser(Product product) {
         product.setUser(this);
