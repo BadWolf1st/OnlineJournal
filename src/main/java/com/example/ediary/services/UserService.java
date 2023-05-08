@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final GroupService groupService;
     private final PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user) {
@@ -28,6 +29,7 @@ public class UserService {
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(Role.ROLE_GUEST);
+        user.setGroup(groupService.getGroupByName(user.getGroupName()));
         log.info("Saving new User with email: {}", email);
         userRepository.save(user);
         return true;
@@ -68,17 +70,23 @@ public class UserService {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
+    public void editRoleToUser(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found with ID " + id));
+        user.getRoles().clear();
+        user.getRoles().add(Role.ROLE_USER);
+        userRepository.save(user);
+    }
+    public void cancelGuest(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found with ID " + id));
+        user.getRoles().clear();
+        user.getRoles().add(Role.ROLE_CANCEL);
+        userRepository.save(user);
+    }
     public User getUserById(Long id) {
         if (id == null) return new User();
         return userRepository.findUserById(id);
     }
     public void updateUser(User user){
-        userRepository.save(user);
-    }
-    public void useredit(Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found with ID " + id));
-        user.getRoles().clear();
-        user.getRoles().add(Role.ROLE_USER);
         userRepository.save(user);
     }
 }

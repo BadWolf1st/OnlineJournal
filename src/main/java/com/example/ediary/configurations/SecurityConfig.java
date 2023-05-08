@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/registration", "/static/**", "/logout").permitAll()
-                .antMatchers("/waitroom").access("hasRole('ROLE_GUEST')")
+                .antMatchers("/waitroom").access("hasAnyRole('ROLE_GUEST', 'ROLE_CANCEL')")
                 .antMatchers("/product/**", "/images/**", "/user/**", "/my/**", "/score/**", "/homeworks","/homeworks/**","/timetablestudent","/regtimetablestudent", "/timet/**","/timetabletutor", "/timetut/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_TEACHER')")
                 .anyRequest().authenticated()
                 .and()

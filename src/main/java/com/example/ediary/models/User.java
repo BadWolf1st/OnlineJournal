@@ -40,10 +40,23 @@ public class User implements UserDetails {
     joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
+    public Role getRole(){
+        return roles.stream().findFirst().get();
+    }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
     mappedBy = "user")
     private List<Product> products = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private Group1 group;
+
+    public void setGroup(Group1 group1) {
+        this.group = group1;
+    }
+    public Group1 getGroup(){
+        return this.group;
+    }
 
     public void addProductToUser(Product product) {
         product.setUser(this);
@@ -58,6 +71,9 @@ public class User implements UserDetails {
     }
     public boolean isGuest() {
         return roles.contains(Role.ROLE_GUEST);
+    }
+    public boolean isCancel() {
+        return roles.contains(Role.ROLE_CANCEL);
     }
 
     public Image getAvatar() {

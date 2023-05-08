@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface GroupRepository extends JpaRepository<Group1, Long> {
     List<Group1> findByName(String name);
+    Group1 findGroup1ByName(String name);
 
 }
+

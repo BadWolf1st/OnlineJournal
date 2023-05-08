@@ -156,7 +156,11 @@
       <div class="text-dark-emphasis CenterThis">
         <ul class="noDots2">
           <li class="noDots CenterThis"><h1>Добро пожаловать!</h1></li>
-          <li class="noDots"><h4>Аккаунт ещё не ативирован. Пожалуйста подождите!</h4></li>
+          <#if user.getRole() == 'ROLE_GUEST'>
+            <li class="noDots"><h4>Аккаунт ещё не активирован. Пожалуйста, подождите.</h4></li>
+          <#elseif user.getRole() == 'ROLE_CANCEL'>
+            <li class="noDots"><h4>К сожалению, администратор отклонил вашу заявку.</h4></li>
+          </#if>
         </ul>
       </div>
 

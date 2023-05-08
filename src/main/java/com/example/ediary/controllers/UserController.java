@@ -64,6 +64,6 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
         model.addAttribute("products", user.getProducts());
-        return "user-info";
+        return "profile-student";
     }
 }

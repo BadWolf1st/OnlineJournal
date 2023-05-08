@@ -62,4 +62,8 @@ public class GroupService {
     public Group1 getGroupById(Long id) {
         return groupRepository.findById(id).orElse(null);
     }
+    public Group1 getGroupByName(String name) {return groupRepository.findGroup1ByName(name);}
+    public void updateGroup(Group1 group1){
+        groupRepository.save(group1);
+    }
 }
