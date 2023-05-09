@@ -72,6 +72,9 @@ public class User implements UserDetails {
     public boolean isGuest() {
         return roles.contains(Role.ROLE_GUEST);
     }
+    public boolean isTeacher() {
+        return roles.contains(Role.ROLE_TEACHER);
+    }
     public boolean isCancel() {
         return roles.contains(Role.ROLE_CANCEL);
     }

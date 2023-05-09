@@ -37,7 +37,7 @@ public class TimetableController {
         return "redirect:/timet/Monday/1";
     }
 
-    @GetMapping("/timetabletutor")
+    @GetMapping("/tutor/home")
     public String timetableTutor(Principal principal, Model model) {
         model.addAttribute("timetables", timetableService.listTimetable(null));
         model.addAttribute("user", userService.getUserByPrincipal(principal));

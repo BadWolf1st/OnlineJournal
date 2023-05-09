@@ -20,14 +20,18 @@
             margin: 10px;
         }
 
+        .button {
+            padding: 4px;
+            border-radius: 10px;
+            background-color: #9F9F9F;
+            alignment: right;
+        }
+
         .item {
             padding: 20px; /* Поля вокруг текста */
             border-radius: 15px; /* Уголки */
             background-color: #29292C;
             margin: 10px;
-            max-width: 289px;
-            max-height: 200px;
-            width: 289px;
         }
 
         @media (prefers-color-scheme: light) {
@@ -90,11 +94,6 @@
 
         .evaluation.NR {
             background: #9F9F9F;
-        }
-
-        .row > * {
-            padding-right: auto;
-            padding-left: auto;
         }
 
         .circleIcon {
@@ -167,6 +166,7 @@
             border-radius: 10px;
             padding: 10px;
         }
+
         .profileButton.active {
             color: black;
             background: rgb(215, 167, 0);
@@ -178,26 +178,6 @@
                 color: black;
                 background-color: #cbcbcb;
             }
-        }
-
-        .CenterThis {
-            position: sticky;
-            top: 50%;
-            left: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        /* Rectangle 58 */
-        .Profile {
-            position: absolute;
-            width: 290px;
-            height: 345px;
-            left: 20px;
-            top: 137px;
-
-            background: url(image.png);
-            border-radius: 365px;
         }
 
     </style>
@@ -227,8 +207,8 @@
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual">
-                            <a href="/profile/users"  class="nav-link px-0 align-middle buttonText">
+                        <div class="buttonVisual active">
+                            <a href="/profile/users" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -245,8 +225,9 @@
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton active"
+                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
                         <div class="circleIcon text-white userColor">
                             <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
                         </div>
@@ -266,37 +247,37 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <div class="text-center"> Профиль пользователя ${user.getName()} </div>
+                <div class="text-center">Пользователи</div>
             </div>
-            <div class="col">
-                <div style="height: 200px;margin: 20px">
-                    <img alt="profile" src="../static/logo/Profile.svg" style="height: 100%; object-fit: cover;">
-                </div>
-            </div>
-                <div class="col">
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">ФИО</div>
-                <div class="col-md-3">${user.getLastName()} ${user.getName()} ${user.getMiddleName()}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Табельный номер</div>
-                <div class="col-md-3">${user.tableNumber}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Пол</div>
-                <div class="col-md-3">${user.gender}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Дата рождения</div>
-                <div class="col-md-3">${user.getDate()}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Возраст</div>
-                <div class="col-md-3">${user.age}</div>
-            </div>
+            <div class="col-">
+                <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
+                    <div class="col " style="height: min-content">
+
+                        <div class="row item">
+                            <#list users as user>
+                            <#list user.getRoles() as role>
+                            <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
+                            <div class="col" style="display: flex; justify-content: flex-end">
+                                <div class="row" style="width: max-content">
+                                    <form action="/user/${user.getId()}" method="GET">
+                                        <div class="col">
+                                            <button type="submit" class="fw-bold text-black button text-center"
+                                                    style="justify-content: right; width: 30px">
+                                                ...
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        </#list>
+                        </#list>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+</div>
 </body>
 </html>

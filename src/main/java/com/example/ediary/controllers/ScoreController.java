@@ -43,6 +43,12 @@ public class ScoreController {
         if(scoreService.getUserByPrincipal(principal).isGuest() || scoreService.getUserByPrincipal(principal).isCancel()){
             return "redirect:/waitroom";
         }
+        if(scoreService.getUserByPrincipal(principal).isTeacher()){
+            return "redirect:/tutor/home";
+        }
+        if(scoreService.getUserByPrincipal(principal).isAdmin()){
+            return "redirect:/admin/home";
+        }
         if(scoreService.getUserByPrincipal(principal).getEmail() != null){
             return "redirect:/term/1";
         }
