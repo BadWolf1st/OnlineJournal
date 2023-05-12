@@ -10,3 +10,4 @@ public interface GroupRepository extends JpaRepository<Group1, Long> {
     Group1 findGroup1ByName(String name);
 
 }
+

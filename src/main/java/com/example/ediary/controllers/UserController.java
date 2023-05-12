@@ -66,4 +66,19 @@ public class UserController {
         model.addAttribute("products", user.getProducts());
         return "profile-student";
     }
+
+    @GetMapping("/profile/users")
+    public String allUsers(User user, Model model, Principal principal) {
+        model.addAttribute("users", userService.list());
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "users";
+    }
+
+    @GetMapping("/profile/groups")
+    public String GroupsUsers(User user, Model model, Principal principal) {
+        model.addAttribute("users", userService.list());
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "users";
+    }
+
 }
