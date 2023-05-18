@@ -1,14 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Bootstrap testing</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <style>
+    .texts {
+      font-weight: bold;
+    }
+
+    .menuBar {
+      color: white; /* Цвет текста */
+      padding: 10px; /* Поля вокруг текста */
+      border-radius: 20px; /* Уголки */
+      background-color: #29292C;
+      margin: 10px;
+    }
+
+    .button {
+      padding: 4px;
+      border-radius: 10px;
+      background-color: #9F9F9F;
+      alignment: right;
+    }
+
+    .item {
+      padding: 20px; /* Поля вокруг текста */
+      border-radius: 15px; /* Уголки */
+      background-color: #29292C;
+      margin: 10px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .menuBar {
+        background-color: #cbcbcb;
+      }
+
+      .item {
+        background-color: #cbcbcb;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #161719;
+      }
+    }
+
+    .selectWidth {
+      max-width: 140px;
+    }
+
+    .evaluation {
+      bottom: 60px;
+      max-width: 53px;
+      height: 30px;
+      background: #9F9F9F;
+      border-radius: 10px;
+      color: black;
+      text-align: center;
+      font-size: 20px;
+      line-height: 30px;
+      align-items: center;
+
+    }
+
+    .evaluation.A {
+      background-color: #2DE300;
+    }
+
+    .evaluation.B {
+      background-color: #FFA800;
+    }
+
+    .evaluation.C {
+      background-color: #23BEEF;
+    }
+
+    .evaluation.D {
+      background-color: #E10000;
+    }
+
+    .evaluation.NP {
+      background-color: #E10000;
+    }
+
+    .evaluation.P {
+      background-color: #2DE300;
+    }
+
+    .evaluation.NR {
+      background: #9F9F9F;
+    }
+
     .circleIcon {
       width: 40px;
       height: 40px;
@@ -22,29 +109,22 @@
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: center
+      justify-content: center;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #161719;
+      }
     }
 
     .invert {
       filter: invert(0);
     }
 
-    .button {
-     padding: 4px;
-     border-radius: 10px;
-     background-color: #9F9F9F;
-     alignment: right;
-     }
-
     @media (prefers-color-scheme: light) {
       .invert {
         filter: invert(1);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #161719;
       }
     }
 
@@ -100,138 +180,79 @@
       }
     }
 
-    .menuBar {
-      color: white; /* Цвет текста */
-      padding: 10px; /* Поля вокруг текста */
-      border-radius: 20px; /* Уголки */
-      background-color: #29292C;
-      margin: 10px;
-      display: flex;
-    }
-
-    .timetable {
-      color: black; /* Цвет текста */
-      padding: 10px; /* Поля вокруг текста */
-      border-radius: 10px; /* Уголки */
-      background-color: #29292C;
-      margin: 10px;
-      display: flex;
-
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .timetable {
-        color: white;
-      }
-    }
-
-    .rightThis {
-      /* Выровнять по правому краю */
-      margin-left: 0;
-    }
-
-    .row > * {
-      padding-right: 0;
-      padding-left: 0;
-    }
-
-    @media (prefers-color-scheme: light) {
-      .menuBar {
-        background-color: #cbcbcb;
-      }
-
-      .timetable {
-        background-color: #cbcbcb;
-      }
-    }
-
-    .form-select {
-      width: 150px;
-    }
-
-    .selectWidth {
-      max-height: 50px;
-      max-width: 300px;
-    }
-
-    .CenterDownThis {
-      /* Выровнять по вертикали по центу */
-      position: sticky;
-      top: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Dark text mode =v
-    class="text-black text-dark-emphasis"
-    */
   </style>
 </head>
 <body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<script async src="../../static/js/DarkChanger.js"></script>
-<script src="../../static/js/activeButtonMenuChanger.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+<script async src="../static/js/DarkChanger.js"></script>
 <div class="container-fluid">
   <div class="row flex-nowrap">
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
       <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-        <a href="homeStudent" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <span class="fs-5 d-none d-sm-inline"><img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки"></span>
+        <a href="/"
+           class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">
+                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
+                            </span>
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li>
             <div  class="buttonVisual" id="Home">
-              <a href="homeStudent" id="HomeText" class="nav-link align-middle px-0 buttonText">
+              <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
               </a>
             </div>
           </li>
           <li>
             <div  class="buttonVisual">
-              <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
-                <i class="fs-4 bi-pencil-square"></i> <span class="ms-1 d-none d-sm-inline">Пользователи</span> </a>
+              <a href="/hi"  class="nav-link px-0 align-middle buttonText">
+                <i class="fs-4 bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Пользователи</span> </a>
             </div>
           </li>
           <li>
             <div  class="buttonVisual active">
-              <a href="#" class="nav-link px-0 align-middle buttonText this">
+              <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText this">
                 <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
             </div>
           </li>
           <li>
             <div  class="buttonVisual">
-              <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+              <a href="#"  class="nav-link px-0 align-middle buttonText">
                 <i class="fs-4 bi-star"></i> <span class="ms-1 d-none d-sm-inline">Группы</span></a>
             </div>
           </li>
         </ul>
         <hr>
         <div class="dropdown pb-4">
-          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
+             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
             <div class="circleIcon text-white userColor">
-              <div class="container6">РС</div>
+              <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
             </div>
-            <span class="d-none d-sm-inline mx-1 ">Раскутин</span>
+            <span class="d-none d-sm-inline mx-1 ">${user.getLastName()}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="#">Профиль</a></li>
+            <li><a class="dropdown-item" href="/profile">Профиль</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#" style="color: #d62929">Выйти из аккаунта</a></li>
+            <li>
+              <a class="dropdown-item" href="/logout" style="color: #d62929">Выйти из аккаунта</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="col">
-      <div class="menuBar align-items-md-start flex-column">
+      <div class="menuBar align-items-md-start flex-row">
+        <div class="col">
         <div class="row">
 
-          <select aria-label="Default select example" class="form-select selectWidth flex-row" style="margin-left:10px">
+          <select aria-label="Default select example" class="form-select selectWidth flex-row" style="margin-left:25px">
             <option selected value="Понедельник"<#if selectedWeekday == "Понедельник">selected</#if>>Понедельник</option>
             <option value="Вторник"<#if selectedWeekday == "Вторник">selected</#if>>Вторник</option>
             <option value="Среда"<#if selectedWeekday == "Среда">selected</#if>>Среда</option>
@@ -243,15 +264,15 @@
           <select aria-label="Default select example" class="form-select selectWidth flex-row" style="margin-left:10px">
             <option selected value="1"<#if selectedWeek == 1>selected</#if>>1 неделя</option>
             <option value="2"<#if selectedWeek == 2>selected</#if>>2 неделя</option>
-          </select>      </div>
-          <script>
-            function redirectToPage(selectElement) {
-              var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
-              var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
-              var selectedGroup = document.getElementById('groupInput').value;
-              window.location.href = "/admintime/" + selectedWeekday + "/" + selectedWeek+"/"+selectedGroup;
-            }
-          </script>
+          </select></div>
+<script>
+          function redirectToPage(selectElement) {
+            var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
+            var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
+            var selectedGroup = document.getElementById('groupInput').value;
+            window.location.href = "/admintime/" + selectedWeekday + "/" + selectedWeek+"/"+selectedGroup;
+          }
+        </script>
           <script>
             function redirectToPage2(selectElement) {
               var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
@@ -262,24 +283,22 @@
           </script>
 
 
+<div class="row" style="justify-content: right;">
+<div class="col-2" style="margin-right:10px"><input type="text" class="form-control" placeholder="Группа" id="groupInput"></div>
+  <button type="submit" class="btn fw-bold text-black button text-center"
+          style="justify-content: left;background-color: red; width: 130px; margin-right:10px" onclick="redirectToPage2()">Удалить
+  </button>
+  <button type="submit" class="btn fw-bold text-black button text-center"
+          style="justify-content: left;background-color: greenyellow; width: 130px; margin-right:10px" onclick="window.location.href='/regtimetablestudent'">Добавить
+  </button>
+  <button type="submit" class="btn fw-bold text-black button text-center"
+          style="justify-content: left;background-color: grey; width: 130px; margin-right:10px" onclick="redirectToPage()">Показать
+  </button>
+</div>
 
+</div>
 
-          <div class="col-3" style="margin-left:10px"><input type="text" class="form-control" placeholder="Группа" id="groupInput"></div>
-          <div class="row">
-            <button type="submit" class="btn fw-bold text-black button text-center"
-                    style="justify-content: left;background-color: red; width: 130px; margin-left:20px" onclick="window.location.href='/admintimedel/{id}/{id2}/{id3}'">Удалить
-            </button>
-            <button type="submit" class="btn fw-bold text-black button text-center"
-                    style="justify-content: left;background-color: greenyellow; width: 130px; margin-left:20px" onclick="window.location.href='/regtimetablestudent'">Добавить
-            </button>
-            <button type="submit" class="btn fw-bold text-black button text-center"
-                    style="justify-content: left;background-color: grey; width: 130px; margin-left:20px" onclick="redirectToPage()">Показать
-            </button>
-          </div>
-
-        </div>
-
-      </div>
+</div>
 
 
 <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
@@ -307,7 +326,7 @@
   </#if>
 </div>
 </div>
-  </div>
+</div>
 </div>
 </body>
 </html>

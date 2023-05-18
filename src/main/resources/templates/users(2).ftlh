@@ -252,33 +252,24 @@
             <div class="col-">
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
-
+                        <#list users as user>
+                        <#list user.getRoles() as role>
                         <div class="row item">
-                            <#list users as user>
-                            <#list user.getRoles() as role>
                             <div class="row">
                             <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
-                            </div>
-                            <div class="col-sm-8 text-end">
-                                <div class="row">
                                     <div class="col-sm-6">
                                         <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.getGroupName()}</span>
                                     </div>
                                     <div class="col-sm-6">
                                         <span class="fw-bold">Роль: </span><span class="badge bg-secondary">${user.getId()}</span>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col" style="display: flex; justify-content: flex-end">
-                                <div class="row" style="width: max-content">
-                                        <div class="col">
-                                            <form action="/user/${user.getId()}" method="GET">
-                                            <button type="submit" class="fw-bold text-black button text-center"
-                                                    style="justify-content: right; width: 30px">
-                                                ...
-                                            </button>
-                                            </form>
-                                        </div>
+                                <div class="col" style="display: flex; justify-content: flex-end">
+                                    <form action="/user/${user.getId()}" method="GET">
+                                        <button type="submit" class="fw-bold text-black button text-center"
+                                                style="justify-content: right; width: 30px">
+                                            ...
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
 

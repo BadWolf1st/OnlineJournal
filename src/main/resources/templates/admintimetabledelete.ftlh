@@ -252,18 +252,19 @@
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
                         <div class="circleIcon text-white userColor">
-                            <div class="container6">РС</div>
+                            <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
                         </div>
-                        <span class="d-none d-sm-inline mx-1 ">Раскутин</span>
+                        <span class="d-none d-sm-inline mx-1 ">${user.getLastName()}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
+                        <li><a class="dropdown-item" href="/profile">Профиль</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" style="color: #d62929">Выйти из аккаунта</a>
+                            <a class="dropdown-item" href="/logout" style="color: #d62929">Выйти из аккаунта</a>
                         </li>
                     </ul>
                 </div>
