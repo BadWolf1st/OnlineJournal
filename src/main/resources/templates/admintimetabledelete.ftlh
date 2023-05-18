@@ -19,6 +19,24 @@
             background-color: #29292C;
             margin: 10px;
         }
+        .timetable {
+            color: white; /* Цвет текста */
+            padding: 10px; /* Поля вокруг текста */
+            border-radius: 10px; /* Уголки */
+            background-color: #29292C;
+            margin: 10px;
+            display: flex;
+        }
+        .form {
+            padding: 0px;
+            margin: 0px;
+        }
+        @media (prefers-color-scheme: light) {
+            .timetable {
+            color: black;
+            background-color: #cbcbcb;
+            }
+        }
 
         .button {
             padding: 4px;
@@ -180,6 +198,7 @@
             }
         }
 
+
     </style>
 </head>
 <body>
@@ -194,24 +213,30 @@
                 <a href="homeAdmin"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div class="buttonVisual" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="/profile/users" class="nav-link px-0 align-middle buttonText this">
+                        <div class="buttonVisual">
+                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual active">
+                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
                     <li>
@@ -227,66 +252,64 @@
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-
                         <div class="circleIcon text-white userColor">
-                            <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
+                            <div class="container6">РС</div>
                         </div>
-                        <span class="d-none d-sm-inline mx-1 ">${user.getLastName()}</span>
+                        <span class="d-none d-sm-inline mx-1 ">Раскутин</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="/profile">Профиль</a></li>
+                        <li><a class="dropdown-item" href="#">Профиль</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/logout" style="color: #d62929">Выйти из аккаунта</a>
+                            <a class="dropdown-item" href="#" style="color: #d62929">Выйти из аккаунта</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="menuBar">
-                <div class="text-center">Пользователи</div>
-            </div>
-            <div class="col-">
-                <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
-                    <div class="col " style="height: min-content">
-
-                        <div class="row item">
-                            <#list users as user>
-                            <#list user.getRoles() as role>
-                            <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
-                            <div class="col-sm-8 text-end">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.getGroupName()}</span>
+            <form action="/deleteTimetable" method="post">
+                <#assign hasTimetable = false>
+                <#list timetables?sort_by('lesson_number') as timetable>
+                    <#if id3 == timetable.group_name && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
+                        <#assign hasTimetable = true>
+                        <ul id="list">
+                            <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
+                                <div class="timetable fw-bold">
+                                    <input type="checkbox" class="input-checkbox" name="timetableId" value="${timetable.getId()}">
+                                    <div class="row" style="margin: 10px;">
+                                        <div class="col-md-8">${timetable.getLesson_number()}</div>
+                                        <div class="col-md-8">${timetable.getType_of_lesson()}</div>
+                                        <div class="col-md-8">${timetable.getClassroom_number()}</div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <span class="fw-bold">Роль: </span><span class="badge bg-secondary">${user.getId()}</span>
+                                    <div class="row" style="margin: 10px">
+                                        <div class="col-md-8">${timetable.getTime()}</div>
+                                        <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
+                                        <div class="col-md-8">${timetable.getName_teacher()}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col" style="display: flex; justify-content: flex-end">
-                                <div class="row" style="width: max-content">
-                                        <div class="col">
-                                            <form action="/user/${user.getId()}" method="GET">
-                                            <button type="submit" class="fw-bold text-black button text-center"
-                                                    style="justify-content: right; width: 30px">
-                                                ...
-                                            </button>
-                                            </form>
-                                        </div>
-                                </div>
-                            </div>
+                        </ul>
+                    </#if>
+                </#list>
+                <#if hasTimetable = false>
+                    <h1 style="text-align: center">Нет занятий</h1>
+                </#if>
 
-                        </div>
-                        </#list>
-                        </#list>
-                    </div>
-
-</div>
-            </div>
+                <div class="d-flex justify-content-center">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <#if hasTimetable = false>
+                        <button type="submit" class="btn fw-bold text-black button text-center float-end"
+                                style="justify-content: left; background-color: red; height: 40px; width: 130px; margin: 5px">Вернуться</button>
+                    </#if>
+                    <#if hasTimetable = true>
+                        <button type="submit" class="btn fw-bold text-black button text-center float-end"
+                                style="justify-content: left; background-color: red; height: 40px; width: 130px; margin: 5px">Удалить</button>
+                    </#if>
+                </div>
+            </form>
         </div>
     </div>
 </div>

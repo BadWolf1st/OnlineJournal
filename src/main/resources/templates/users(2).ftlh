@@ -256,13 +256,15 @@
                         <div class="row item">
                             <#list users as user>
                             <#list user.getRoles() as role>
+                            <div class="row">
                             <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
+                            </div>
                             <div class="col-sm-8 text-end">
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.getGroupName()}</span>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <span class="fw-bold">Роль: </span><span class="badge bg-secondary">${user.getId()}</span>
                                     </div>
                                 </div>

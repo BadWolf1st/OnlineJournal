@@ -191,7 +191,7 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="home"
+                <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
                                 <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
@@ -200,7 +200,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div class="buttonVisual active" id="Home">
-                            <a href="home" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -208,10 +208,16 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/hi"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
                     <li>
@@ -262,34 +268,34 @@
                             <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
                             <div class="col" style="display: flex; justify-content: flex-end">
                                 <div class="row" style="width: max-content">
-                                    <form action="/admin/home/accept" method="POST">
                                         <div class="col">
+                                            <form action="/admin/home/accept" method="POST">
                                             <input type="hidden" name="userId" value="${user.getId()}" />
                                             <button type="submit" class="fw-bold text-black button text-center"
                                                     style="justify-content: right; background-color: greenyellow; width: 30px">
                                                 ✓
                                             </button>
                                             <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                            </form>
                                         </div>
-                                    </form>
-                                    <form action="/admin/home/decline" method="POST">
                                         <div class="col">
+                                            <form action="/admin/home/decline" method="POST">
                                             <input type="hidden" name="userId" value="${user.getId()}" />
                                             <button type="submit" class="fw-bold text-black button text-center"
                                                     style="justify-content: right;background-color: red; width: 30px">
                                                 ✕
                                             </button>
                                             <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                            </form>
                                         </div>
-                                    </form>
-                                    <form action="/user/${user.getId()}" method="GET">
                                         <div class="col">
+                                            <form action="/user/${user.getId()}" method="GET">
                                             <button type="submit" class="fw-bold text-black button text-center"
                                                     style="justify-content: right; width: 30px">
                                                 ...
                                             </button>
+                                            </form>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
 
