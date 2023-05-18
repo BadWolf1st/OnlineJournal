@@ -67,7 +67,7 @@ public class TimetableController {
         timetableRepository.save(timetable);
         return "redirect:/login";
     }
-    @GetMapping("/admintimetable")
+    @GetMapping("/admin/timetable")
     public String admintimetable(Principal principal, Model model) {
         model.addAttribute("timetables", timetableService.listTimetable(null));
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -94,11 +94,12 @@ public class TimetableController {
         model.addAttribute("selectedWeekday", id);
         model.addAttribute("selectedWeek", id2);
         model.addAttribute("selectedGroup", id3);
-        return "timetabledelete";
+        return "admintimetabledelete";
     }
     @PostMapping("/deleteTimetable")
-    public String deleteTimetable(@RequestParam("timetableId") List<Long> id){
-        timetableService.deleteTimetable(id);
-        return "admintimetable";
+    public String deleteTimetable(@RequestParam(name = "timetableId", required = false) List<Long> id){
+        if(id != null){
+        timetableService.deleteTimetable(id);}
+        return "redirect:/admin/timetable";
     }
 }
