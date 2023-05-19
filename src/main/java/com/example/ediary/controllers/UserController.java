@@ -71,7 +71,7 @@ public class UserController {
     public String allUsers(User user, Model model, Principal principal) {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "users";
+        return "users(2)";
     }
 
     @GetMapping("/profile/groups")

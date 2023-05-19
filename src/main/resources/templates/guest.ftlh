@@ -137,9 +137,9 @@
         <div class="dropdown pb-4">
           <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="circleIcon text-white userColor">
-              <div class="container6">РС</div>
+              <div class="container6">Г</div>
             </div>
-            <span class="d-none d-sm-inline mx-1 ">Раскутин</span>
+            <span class="d-none d-sm-inline mx-1 ">Гость</span>
           </a>
           <ul class="dropdown-menu dropdown-menu text-small shadow">
             <li><a class="dropdown-item" href="#">Профиль</a></li>

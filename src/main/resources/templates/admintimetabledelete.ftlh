@@ -19,6 +19,24 @@
             background-color: #29292C;
             margin: 10px;
         }
+        .timetable {
+            color: white; /* Цвет текста */
+            padding: 10px; /* Поля вокруг текста */
+            border-radius: 10px; /* Уголки */
+            background-color: #29292C;
+            margin: 10px;
+            display: flex;
+        }
+        .form {
+            padding: 0px;
+            margin: 0px;
+        }
+        @media (prefers-color-scheme: light) {
+            .timetable {
+            color: black;
+            background-color: #cbcbcb;
+            }
+        }
 
         .button {
             padding: 4px;
@@ -180,6 +198,7 @@
             }
         }
 
+
     </style>
 </head>
 <body>
@@ -191,7 +210,7 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="home"
+                <a href="homeAdmin"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
                                 <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
@@ -199,8 +218,8 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual active" id="Home">
-                            <a href="home" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                        <div class="buttonVisual" id="Home">
+                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -215,8 +234,8 @@
                         </div>
                     </li>
                     <li>
-                        <div  class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                        <div  class="buttonVisual active">
+                            <a href="#" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
@@ -252,61 +271,46 @@
             </div>
         </div>
         <div class="col">
-            <div class="menuBar">
-                <div class="text-center">Заявки</div>
-            </div>
-            <div class="col-">
-                <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
-                    <div class="col " style="height: min-content">
-                            <#assign hasScore = false>
-                            <#list users as user>
-                            <#list user.getRoles() as role>
-                            <#if role == 'ROLE_GUEST'>
-                            <#assign hasScore = true>
-                                <div class="row item">
-                            <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
-                            <div class="col" style="display: flex; justify-content: flex-end">
-                                <div class="row" style="width: max-content">
-                                    <div class="col">
-                                        <form action="/admin/home/accept" method="POST">
-                                            <input type="hidden" name="userId" value="${user.getId()}" />
-                                            <button type="submit" class="fw-bold text-black button text-center"
-                                                    style="justify-content: right; background-color: greenyellow; width: 30px">
-                                                ✓
-                                            </button>
-                                            <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                        </form>
+            <form action="/deleteTimetable" method="post">
+                <#assign hasTimetable = false>
+                <#list timetables?sort_by('lesson_number') as timetable>
+                    <#if id3 == timetable.group_name && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
+                        <#assign hasTimetable = true>
+                        <ul id="list">
+                            <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
+                                <div class="timetable fw-bold">
+                                    <input type="checkbox" class="input-checkbox" name="timetableId" value="${timetable.getId()}">
+                                    <div class="row" style="margin: 10px;">
+                                        <div class="col-md-8">${timetable.getLesson_number()}</div>
+                                        <div class="col-md-8">${timetable.getType_of_lesson()}</div>
+                                        <div class="col-md-8">${timetable.getClassroom_number()}</div>
                                     </div>
-                                    <div class="col">
-                                        <form action="/admin/home/decline" method="POST">
-                                            <input type="hidden" name="userId" value="${user.getId()}" />
-                                            <button type="submit" class="fw-bold text-black button text-center"
-                                                    style="justify-content: right;background-color: red; width: 30px">
-                                                ✕
-                                            </button>
-                                            <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                        </form>
-                                    </div>
-                                    <div class="col">
-                                        <form action="/user/${user.getId()}" method="GET">
-                                            <button type="submit" class="fw-bold text-black button text-center"
-                                                    style="justify-content: right; width: 30px">
-                                                ...
-                                            </button>
-                                        </form>
+                                    <div class="row" style="margin: 10px">
+                                        <div class="col-md-8">${timetable.getTime()}</div>
+                                        <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
+                                        <div class="col-md-8">${timetable.getName_teacher()}</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                            </#if>
-                            </#list>
-                            </#list>
-                            <#if hasScore = false>
-                                <h1 style="text-align: center">Новых пользователей нет</h1>
-                            </#if>
-                    </div>
+                        </ul>
+                    </#if>
+                </#list>
+                <#if hasTimetable = false>
+                    <h1 style="text-align: center">Нет занятий</h1>
+                </#if>
+
+                <div class="d-flex justify-content-center">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <#if hasTimetable = false>
+                        <button type="submit" class="btn fw-bold text-black button text-center float-end"
+                                style="justify-content: left; background-color: red; height: 40px; width: 130px; margin: 5px">Вернуться</button>
+                    </#if>
+                    <#if hasTimetable = true>
+                        <button type="submit" class="btn fw-bold text-black button text-center float-end"
+                                style="justify-content: left; background-color: red; height: 40px; width: 130px; margin: 5px">Удалить</button>
+                    </#if>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
