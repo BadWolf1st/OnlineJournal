@@ -200,7 +200,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div class="buttonVisual active" id="Home">
-                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText this">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -222,7 +222,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                            <a href="#" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -252,55 +252,57 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <form>
-                    <div class="row" style="">
-                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
-                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
-                        </a>
-                        <div class="col" style="">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="id" name="idname"
-                                       placeholder="ФИО \ Т.н.">
-                                <label for="id" class="">ФИО \ Т.н.</label>
-                            </div>
-                        </div>
-                        <a href="AdminAddStudent.html" type="button" class="btn fw-bold text-black button text-center"
-                                style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
-                            <i class="bi bi-people-fill">+</i>
-                        </a>
-                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-search"
-                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
-                        </button>
-                    </div>
-                </form>
+                <div class="text-center">Заявки</div>
             </div>
             <div class="col-">
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
-
-                        <div class="row item texts">
-                            <div class="col text-wrap" style="width: min-content; margin-top: 4px">Бэбра Алексей
-                                Андреевич
-                            </div>
-                            <div class="col text-wrap"
-                                 style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:7777777
-                            </div>
-                            <div class="col" style="display: flex; justify-content: flex-end">
-                                <div class="row" style="width: max-content">
-                                    <div class="col">
-                                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-person-fill-x"
-                                             style="justify-content: right; height: 30px; width: 30px; background-color: red">
-                                        </button>
+                        <#assign hasScore = false>
+                        <#list users as user>
+                            <#list user.getRoles() as role>
+                                <#if role == 'ROLE_GUEST'>
+                                    <#assign hasScore = true>
+                                    <div class="row item">
+                                        <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
+                                        <div class="col" style="display: flex; justify-content: flex-end">
+                                            <div class="row" style="width: max-content">
+                                                <div class="col">
+                                                    <form action="/admin/home/accept" method="POST">
+                                                        <input type="hidden" name="userId" value="${user.getId()}" />
+                                                        <button type="submit" class="fw-bold text-black button text-center"
+                                                                style="justify-content: right; background-color: greenyellow; width: 30px">
+                                                            ✓
+                                                        </button>
+                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                    </form>
+                                                </div>
+                                                <div class="col">
+                                                    <form action="/admin/home/decline" method="POST">
+                                                        <input type="hidden" name="userId" value="${user.getId()}" />
+                                                        <button type="submit" class="fw-bold text-black button text-center"
+                                                                style="justify-content: right;background-color: red; width: 30px">
+                                                            ✕
+                                                        </button>
+                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                    </form>
+                                                </div>
+                                                <div class="col">
+                                                    <form action="/user/${user.getId()}" method="GET">
+                                                        <button type="submit" class="fw-bold text-black button text-center"
+                                                                style="justify-content: right; width: 30px">
+                                                            ...
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <a href="#" class="fw-bold text-black button text-center" type="button"
-                                             style="justify-content: right; height: 30px; width: 30px">...
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                                </#if>
+                            </#list>
+                        </#list>
+                        <#if hasScore = false>
+                            <h1 style="text-align: center">Новых пользователей нет</h1>
+                        </#if>
                     </div>
                 </div>
             </div>
