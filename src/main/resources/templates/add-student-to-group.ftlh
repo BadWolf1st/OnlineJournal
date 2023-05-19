@@ -325,12 +325,12 @@
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">
                                             <div class="col">
-                                                <a href="${.vars.request?if_exists.requestURL}/headman/${user.id}" class="btn fw-bold text-black button text-center bi bi-star" type="button"
+                                                <a href="admin/groups/${user.getGroup().id}/headman/${user.id}" class="btn fw-bold text-black button text-center bi bi-star" type="button"
                                                    style="justify-content: right; width: 30px; height: 30px">...
                                                 </a>
                                             </div>
                                             <div class="col">
-                                                <a href="${.vars.request?if_exists.requestURL}/deleteGroup/${user.id}" class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
+                                                <a href="admin/groups/${user.getGroup().id}/deleteGroup/${user.id}" class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
                                                    style="justify-content: right; width: 30px; height: 30px">...
                                                 </a>
                                             </div>
