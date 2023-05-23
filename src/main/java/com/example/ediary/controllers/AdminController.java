@@ -35,18 +35,11 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/user/edit/{user}")
-    public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
+    @GetMapping("/admin/user/edit/{id}")
+    public String userEdit(@PathVariable("id") Long id, Model model, Principal principal) {
+        User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
-        model.addAttribute("roles", Role.values());
-        return "user-edit";
-    }
-
-    @PostMapping("/admin/user/edit")
-    public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
-        userService.changeUserRoles(user, form);
-        return "redirect:/admin";
+        return "admin-edit-student";
     }
     @GetMapping("/admin/home")
     public String adminhome(User user, Model model, Principal principal) {
@@ -64,5 +57,47 @@ public class AdminController {
         userService.cancelGuest(id);
         return "redirect:/admin/home";
     }
-
+    @GetMapping("/admin/userlist")
+    public String userList(Model model, Principal principal){
+        model.addAttribute("users", userService.list());
+        return "admin-student-list";
+    }
+    @PostMapping("/admin/user/edit/{id}/name")
+    public String postName(@PathVariable("id") Long id, @RequestParam("fullNameInput") String fullName, Model model){
+        String[] name = fullName.split(" ");
+        User user = userService.getUserById(id);
+        user.setLastName(name[0]);
+        user.setName(name[1]);
+        user.setMiddleName(name[2]);
+        userService.updateUser(user);
+        return "redirect:/admin/user/edit/{id}";
+    }
+    @PostMapping("/admin/user/edit/{id}/tableNumber")
+    public String postTableNumber(@PathVariable("id") Long id, @RequestParam("NumberInput") Long tableNumber, Model model){
+        User user = userService.getUserById(id);
+        user.setTableNumber(tableNumber);
+        userService.updateUser(user);
+        return "redirect:/admin/user/edit/{id}";
+    }
+    @PostMapping("/admin/user/edit/{id}/gender")
+    public String postGender(@PathVariable("id") Long id, @RequestParam("GenderInput") String gender, Model model){
+        User user = userService.getUserById(id);
+        user.setGender(gender);
+        userService.updateUser(user);
+        return "redirect:/admin/user/edit/{id}";
+    }
+    @PostMapping("/admin/user/edit/{id}/date")
+    public String postDate(@PathVariable("id") Long id, @RequestParam("DateInput") String date, Model model){
+        User user = userService.getUserById(id);
+        user.setDate(date);
+        userService.updateUser(user);
+        return "redirect:/admin/user/edit/{id}";
+    }
+    @PostMapping("/admin/user/edit/{id}/age")
+    public String postDate(@PathVariable("id") Long id, @RequestParam("AgeInput") Long age, Model model){
+        User user = userService.getUserById(id);
+        user.setAge(age);
+        userService.updateUser(user);
+        return "redirect:/admin/user/edit/{id}";
+    }
 }
