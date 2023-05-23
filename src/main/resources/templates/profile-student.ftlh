@@ -236,7 +236,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                            <a href="/profile/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -270,7 +270,7 @@
             </div>
             <div class="col">
                 <div style="height: 200px;margin: 20px">
-                    <img alt="profile" src="../static/logo/Profile.svg" style="height: 100%; object-fit: cover;">
+                    <img alt="profile" src="../static/logo/Profile.png" style="height: 100%; object-fit: cover;">
                 </div>
             </div>
                 <div class="col">
@@ -294,6 +294,22 @@
                 <div class="col-md-3">Возраст</div>
                 <div class="col-md-3">${user.age}</div>
             </div>
+                    <div style="margin: 10px" class="row">
+                        <div class="col-md-3">Группа</div>
+                        <div class="col-md-3">${user.getGroupName()}</div>
+                    </div>
+                    <div style="margin: 10px" class="row">
+                        <div class="col-md-3">Роль</div>
+                        <#if user.getRole() == 'ROLE_ADMIN'>
+                            <div class="col-md-3">Администратор</div>
+                        <#elseif user.getRole() == 'ROLE_CANCEL'>
+                            <div class="col-md-3">Отменённый пользователь</div>
+                        <#elseif user.getRole() == 'ROLE_USER'>
+                            <div class="col-md-3">Студент</div>
+                        <#elseif user.getRole() == 'ROLE_TEACHER'>
+                            <div class="col-md-3">Преподаватель</div>
+                        </#if>
+                    </div>
                 </div>
             </div>
         </div>

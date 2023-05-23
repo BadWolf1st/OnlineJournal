@@ -191,7 +191,7 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="homeAdmin"
+                <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
                                 <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
@@ -216,7 +216,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                            <a href="/profile/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -253,32 +253,36 @@
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
                         <#list users as user>
-                        <#list user.getRoles() as role>
-                        <div class="row item">
-                            <div class="row">
-                            <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
+                            <div class="row item">
+                                <div class="row">
+                                    <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
                                     <div class="col-sm-6">
                                         <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.getGroupName()}</span>
                                     </div>
                                     <div class="col-sm-6">
-                                        <span class="fw-bold">Роль: </span><span class="badge bg-secondary">${user.getId()}</span>
+                                        <#if user.getRole() == 'ROLE_ADMIN'>
+                                            <span class="fw-bold">Роль: </span><span class="badge bg-secondary">Администратор</span>
+                                        <#elseif user.getRole() == 'ROLE_CANCEL'>
+                                            <span class="fw-bold">Роль: </span><span class="badge bg-secondary">Отменённый пользователь</span>
+                                        <#elseif user.getRole() == 'ROLE_USER'>
+                                            <span class="fw-bold">Роль: </span><span class="badge bg-secondary">Студент</span>
+                                        <#elseif user.getRole() == 'ROLE_TEACHER'>
+                                            <span class="fw-bold">Роль: </span><span class="badge bg-secondary">Преподаватель</span>
+                                        </#if>
                                     </div>
-                                <div class="col" style="display: flex; justify-content: flex-end">
-                                    <form action="/user/${user.getId()}" method="GET">
-                                        <button type="submit" class="fw-bold text-black button text-center"
-                                                style="justify-content: right; width: 30px">
-                                            ...
-                                        </button>
-                                    </form>
+                                    <div class="col" style="display: flex; justify-content: flex-end">
+                                        <form action="/user/${user.getId()}" method="GET">
+                                            <button type="submit" class="fw-bold text-black button text-center"
+                                                    style="justify-content: right; width: 30px">
+                                                ...
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-                        </#list>
                         </#list>
                     </div>
-
-</div>
+                </div>
             </div>
         </div>
     </div>

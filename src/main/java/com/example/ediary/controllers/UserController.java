@@ -71,14 +71,14 @@ public class UserController {
     public String allUsers(User user, Model model, Principal principal) {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "users(2)";
+        return "users(2)";//доделал фулл чтобы роли отображались
     }
 
     @GetMapping("/profile/groups")
     public String GroupsUsers(User user, Model model, Principal principal) {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "users";
+        return "groupsProfile";
     }
 
 }
