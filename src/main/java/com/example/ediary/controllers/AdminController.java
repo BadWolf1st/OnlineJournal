@@ -60,6 +60,7 @@ public class AdminController {
     @GetMapping("/admin/userlist")
     public String userList(Model model, Principal principal){
         model.addAttribute("users", userService.list());
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "admin-student-list";
     }
     @PostMapping("/admin/user/edit/{id}/name")

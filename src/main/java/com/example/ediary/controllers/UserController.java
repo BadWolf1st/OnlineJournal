@@ -21,7 +21,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-
+    private final GroupService groupService;
     @GetMapping("/login")
     public String login(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -75,10 +75,17 @@ public class UserController {
     }
 
     @GetMapping("/profile/groups")
-    public String GroupsUsers(User user, Model model, Principal principal) {
+    public String GroupsUsers(Model model, Principal principal, String name) {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
-        return "groupsProfile";
+        model.addAttribute("groups", groupService.listGroups(name));
+        return "groupsProfile";//доделать парашу, чтобы норм отображались 2 группы и более
     }
-
+    @GetMapping("/profile/groups/{id}")
+    public String GroupsUsersInfo(@PathVariable("id") Long id, Model model, Principal principal) {
+        model.addAttribute("users", userService.list());
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("group",groupService.getGroupById(id));
+        return "profileGropsInfo";
+    }
 }

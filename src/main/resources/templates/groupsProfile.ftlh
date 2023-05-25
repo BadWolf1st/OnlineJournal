@@ -196,16 +196,16 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="homeAdmin"
+                <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div class="buttonVisual" id="Home">
-                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -213,7 +213,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/profile/users"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -221,7 +221,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                            <a href="/profile/groups" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -232,18 +232,19 @@
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
                         <div class="circleIcon text-white userColor">
-                            <div class="container6">РС</div>
+                            <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
                         </div>
-                        <span class="d-none d-sm-inline mx-1 ">Раскутин</span>
+                        <span class="d-none d-sm-inline mx-1 ">${user.getLastName()}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
+                        <li><a class="dropdown-item" href="/profile">Профиль</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" style="color: #d62929">Выйти из аккаунта</a>
+                            <a class="dropdown-item" href="/logout" style="color: #d62929">Выйти из аккаунта</a>
                         </li>
                     </ul>
                 </div>
@@ -253,7 +254,7 @@
             <div class="menuBar">
                 <form>
                     <div class="row" style="display: flex; align-items: center; margin: 0 2px;">
-                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
+                        <a href="/" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
                            style="justify-content: right; width: 30px; height: 30px">
                         </a>
                         <div class="col text-center top-100" style="">
@@ -262,52 +263,24 @@
                     </div>
                 </form>
             </div>
-            <div class="col-">
-                <div class="col" style="overflow-y: auto; height: 90vh; white-space: nowrap">
-
-                    <div class="col " style="height: min-content">
-                        <div class="row item texts" style="display: flex; align-items: center">
-                            <div class="col text-wrap"
-                                 style="display: flex; justify-content: flex-start; margin-top: 4px">
-                                УВП-213
-                            </div>
-                            <div class="col text-wrap"
-                                 style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: Дубровский Арсений Александрович
-                            </div>
-                            <div class="col" style="display: flex; justify-content: flex-end">
-                                <div class="row" style="width: max-content">
-                                    <div class="col">
-                                        <a href="../../../../../../Downloads/groupeditadmin.html" class="fw-bold text-black button text-center bi bi-chevron-right" type="button"
-                                           style="justify-content: right; width: 30px; height: 30px">
-                                        </a>
+            <div class="col">
+                <div style="overflow-y: auto; height: 90vh; white-space: nowrap">
+                    <#list groups as group>
+                        <div class="col-" style="height: min-content">
+                            <div class="row item texts" style="display: flex; align-items: center">
+                                <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}</div>
+                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}</div>
+                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:${group.getCount()}</div>
+                                <div class="col" style="display: flex; justify-content: flex-end">
+                                    <div class="row" style="width: max-content">
+                                        <div class="col">
+                                            <a href="/profile/groups/${group.id}" class="fw-bold text-black button text-center" type="button" style="justify-content: right; width: 30px">...</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col " style="height: min-content">
-                        <div class="row item texts" style="display: flex; align-items: center">
-                            <div class="col text-wrap"
-                                 style="display: flex; justify-content: flex-start; margin-top: 4px">
-                                УВП-211
-                            </div>
-                            <div class="col text-wrap"
-                                 style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: Саид Ахмад Надим Ибрагимович
-                            </div>
-                            <div class="col" style="display: flex; justify-content: flex-end">
-                                <div class="row" style="width: max-content">
-                                    <div class="col">
-                                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-right" type="button"
-                                           style="justify-content: right; width: 30px; height: 30px">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
+                    </#list>
                 </div>
             </div>
         </div>

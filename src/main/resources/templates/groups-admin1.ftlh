@@ -195,33 +195,37 @@
            class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
                                 <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
-
                             </span>
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li>
-            <div  class="buttonVisual" id="Home">
+            <div class="buttonVisual" id="Home">
               <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
-                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline">Главная</span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="buttonVisual">
+              <a href="/admin/userlist" class="nav-link px-0 align-middle buttonText">
+                <i class="fs-4 bi bi-person-circle"></i>
+                <span class="ms-1 d-none d-sm-inline">Пользователи</span>
               </a>
             </div>
           </li>
           <li>
             <div  class="buttonVisual">
-              <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
-                <i class="fs-4 bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Пользователи</span> </a>
-            </div>
-          </li>
-          <li>
-            <div  class="buttonVisual active">
-              <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText this">
+              <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
                 <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
             </div>
           </li>
           <li>
-            <div  class="buttonVisual">
-              <a href="/admin/groups"  class="nav-link px-0 align-middle buttonText">
-                <i class="fs-4 bi-star"></i> <span class="ms-1 d-none d-sm-inline">Группы</span></a>
+            <div class="buttonVisual active">
+              <a href="/admin/groups" class="nav-link px-0 align-middle buttonText this">
+                <i class="fs-4 bi bi-people-fill"></i>
+                <span class="ms-1 d-none d-sm-inline">Группы</span>
+              </a>
             </div>
           </li>
         </ul>
@@ -247,87 +251,58 @@
         </div>
       </div>
     </div>
-
     <div class="col">
-      <div class="menuBar align-items-md-start flex-row">
-        <div class="col">
-        <div class="row">
+      <div class="menuBar">
+        <form>
+          <div class="row" style="margin: 0 2px;">
+            <div class="col">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="id" name="idname"
+                       placeholder="Группа">
+                <label for="id" class="text-black text-dark-emphasis">Группа</label>
+              </div>
+            </div>
+            <button type="submit" class="btn fw-bold text-black button text-center"
+                    style="justify-content: right; width: 30px; height: 30px; margin-top: 12px; margin-right: 5px">
+              <i class="bi bi-search"></i>
+            </button>
+            <button type="submit" class="btn fw-bold text-black button text-center"
+                    style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
+              <i class="bi bi-people-fill">+</i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-">
+        <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
+          <div class="col " style="height: min-content">
+            <#list groups as group>
 
-          <select aria-label="Default select example" class="form-select selectWidth flex-row" style="margin-left:25px">
-            <option selected value="Понедельник"<#if selectedWeekday == "Понедельник">selected</#if>>Понедельник</option>
-            <option value="Вторник"<#if selectedWeekday == "Вторник">selected</#if>>Вторник</option>
-            <option value="Среда"<#if selectedWeekday == "Среда">selected</#if>>Среда</option>
-            <option value="Четверг"<#if selectedWeekday == "Четверг">selected</#if>>Четверг</option>
-            <option value="Пятница"<#if selectedWeekday == "Пятница">selected</#if>>Пятница</option>
-            <option value="Суббота"<#if selectedWeekday == "Суббота">selected</#if>>Суббота</option>
-            <option value="Воскресенье"<#if selectedWeekday == "Воскресенье">selected</#if>>Воскресенье</option>
-          </select>
-          <select aria-label="Default select example" class="form-select selectWidth flex-row" style="margin-left:10px">
-            <option selected value="1"<#if selectedWeek == 1>selected</#if>>1 неделя</option>
-            <option value="2"<#if selectedWeek == 2>selected</#if>>2 неделя</option>
-          </select></div>
-<script>
-          function redirectToPage(selectElement) {
-            var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
-            var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
-            var selectedGroup = document.getElementById('groupInput').value;
-            window.location.href = "/admintime/" + selectedWeekday + "/" + selectedWeek+"/"+selectedGroup;
-          }
-        </script>
-          <script>
-            function redirectToPage2(selectElement) {
-              var selectedWeekday = document.querySelector('.form-select.selectWidth.flex-row:first-child').value;
-              var selectedWeek = document.querySelector('.form-select.selectWidth.flex-row:last-child').value;
-              var selectedGroup = document.getElementById('groupInput').value;
-              window.location.href = "/admintimedel/" + selectedWeekday + "/" + selectedWeek+"/"+selectedGroup;
-            }
-          </script>
-
-
-<div class="row" style="justify-content: right;">
-<div class="col-2" style="margin-right:10px"><input type="text" class="form-control" placeholder="Группа" id="groupInput"></div>
-  <button type="submit" class="btn fw-bold text-black button text-center"
-          style="justify-content: left;background-color: red; width: 130px; margin-right:10px" onclick="redirectToPage2()">Удалить
-  </button>
-  <button type="submit" class="btn fw-bold text-black button text-center"
-          style="justify-content: left;background-color: greenyellow; width: 130px; margin-right:10px" onclick="window.location.href='/regtimetablestudent'">Добавить
-  </button>
-  <button type="submit" class="btn fw-bold text-black button text-center"
-          style="justify-content: left;background-color: grey; width: 130px; margin-right:10px" onclick="redirectToPage()">Показать
-  </button>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
-  <#assign hasScore = false>
-  <#list timetables?sort_by('lesson_number') as timetable>
-  <#if id3 == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
-<br>
-  <#assign hasScore = true>
-  <div class="timetable fw-bold">
-    <div class="row" style="margin: 10px;">
-      <div class="col-md-8">${timetable.getLesson_number()}</div>
-      <div class="col-md-8">${timetable.getType_of_lesson()}</div>
-      <div class="col-md-8">${timetable.getClassroom_number()}</div>
-    </div>
-    <div class="row" style="margin: 10px">
-      <div class="col-md-8">${timetable.getTime()}</div>
-      <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
-      <div class="col-md-8">${timetable.getName_teacher()}</div>
+              <div class="row item texts" style="display: flex; align-items: center">
+                <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}
+                </div>
+                <div class="col text-wrap"
+                     style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}
+                </div>
+                <div class="col text-wrap"
+                     style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:${group.getCount()}
+                </div>
+                <div class="col" style="display: flex; justify-content: flex-end">
+                  <div class="row" style="width: max-content">
+                    <div class="col">
+                      <a href="/admin/groups/${group.id}" class="fw-bold text-black button text-center" type="button"
+                         style="justify-content: right; width: 30px">...
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </#list>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</#if>
-    </#list>
-    <#if hasScore = false>
-<h1 style="text-align: center">Нет занятий</h1>
-  </#if>
-</div>
-</div>
-</div>
 </div>
 </body>
 </html>

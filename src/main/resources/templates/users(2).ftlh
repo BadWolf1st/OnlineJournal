@@ -257,7 +257,11 @@
                                 <div class="row">
                                     <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
                                     <div class="col-sm-6">
-                                        <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.getGroupName()}</span>
+                                        <#if user.getGroupName()?has_content >
+                                            <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.getGroupName()}</span>
+                                        <#else>
+                                            <span class="fw-bold">Группа: </span><span class="badge bg-secondary">Без группы</span>
+                                        </#if>
                                     </div>
                                     <div class="col-sm-6">
                                         <#if user.getRole() == 'ROLE_ADMIN'>
@@ -268,6 +272,8 @@
                                             <span class="fw-bold">Роль: </span><span class="badge bg-secondary">Студент</span>
                                         <#elseif user.getRole() == 'ROLE_TEACHER'>
                                             <span class="fw-bold">Роль: </span><span class="badge bg-secondary">Преподаватель</span>
+                                        <#else>
+                                            <span class="fw-bold">Роль: </span><span class="badge bg-secondary">Роль не выдана</span>
                                         </#if>
                                     </div>
                                     <div class="col" style="display: flex; justify-content: flex-end">

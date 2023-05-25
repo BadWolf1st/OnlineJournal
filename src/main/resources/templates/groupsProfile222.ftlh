@@ -10,6 +10,7 @@
     <style>
         .texts {
             font-weight: bold;
+            color: white;
         }
 
         .menuBar {
@@ -35,6 +36,9 @@
         }
 
         @media (prefers-color-scheme: light) {
+            .texts{
+                color: black;
+            }
             .menuBar {
                 background-color: #cbcbcb;
             }
@@ -187,6 +191,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 <script async src="../static/js/DarkChanger.js"></script>
+
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
@@ -208,21 +213,15 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
+                            <a href="/profile/users"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
                         </div>
                     </li>
                     <li>
-                        <div  class="buttonVisual">
-                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
-                        </div>
-                    </li>
-                    <li>
                         <div class="buttonVisual active">
-                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText this">
+                            <a href="/profile/groups" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -254,69 +253,34 @@
         <div class="col">
             <div class="menuBar">
                 <form>
-                    <div class="row" style="">
-                        <a href="/admin/groups" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
-                           style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                    <div class="row" style="display: flex; align-items: center; margin: 0 2px;">
+                        <a href="/" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
+                           style="justify-content: right; width: 30px; height: 30px">
                         </a>
-                        <div class="col" style="">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="id" name="idname"
-                                       placeholder="ФИО \ Т.н.">
-                                <label for="id" class="">ФИО \ Т.н.</label>
-                            </div>
+                        <div class="col text-center top-100" style="">
+                            Список групп
                         </div>
-                        <a href="/" type="button" class="btn fw-bold text-black button text-center"
-                           style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
-                            <i class="bi bi-people-fill">+</i>
-                        </a>
-                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-search"
-                                style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
-                        </button>
                     </div>
                 </form>
             </div>
-            <div class="col-">
-                <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
-                    <div class="col " style="height: min-content">
-                        <#list users as user>
-                            <div class="col " style="height: min-content">
-                                <div class="row item texts" style="display: flex; align-items: center">
-                                    <div class="col text-wrap"
-                                         style="width: min-content; margin-top: 4px">
-                                        <#if user.id == user.getGroup().getHeadman().id>
-                                            <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
-                                        </#if>
-                                        ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
-                                    </div>
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
-                                    </div>
-                                    <div class="col" style="display: flex; justify-content: flex-end">
-                                        <div class="row" style="width: max-content">
-                                            <div class="col">
-                                                <a href="/admin/groups/${user.getGroup().id}/headman/${user.id}" class="btn fw-bold text-black button text-center bi bi-star" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/admin/groups/${user.getGroup().id}/delete/${user.id}" class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
-                                                </a>
-                                            </div>
+            <div class="col">
+                <div style="overflow-y: auto; height: 90vh; white-space: nowrap">
+                    <#list groups as group>
+                        <div class="col-" style="height: min-content">
+                            <div class="row item texts" style="display: flex; align-items: center">
+                                <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}</div>
+                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}</div>
+                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:${group.getCount()}</div>
+                                <div class="col" style="display: flex; justify-content: flex-end">
+                                    <div class="row" style="width: max-content">
+                                        <div class="col">
+                                            <a href="/profile/groups/${group.id}" class="fw-bold text-black button text-center" type="button" style="justify-content: right; width: 30px">...</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                        </#list>
-
-                    </div>
+                        </div>
+                    </#list>
                 </div>
             </div>
         </div>

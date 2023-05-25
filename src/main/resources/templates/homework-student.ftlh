@@ -279,18 +279,22 @@
             </div>
             <div class="row-12" style="overflow-y: auto; height: 90vh; white-space: nowrap">
 
-                <div class="row">
-                    <#list homeworkList as homework>
-                        <div class="col texts item">
-                            <div class="row">
-                                <div class="h4">${homework.subject.getTitle()}</div>
+                <#if homeworkList?size == 0>
+                    <h1 style="text-align: center">Заданий нет</h1>
+                <#else>
+                    <div class="row">
+                        <#list homeworkList as homework>
+                            <div class="col texts item">
+                                <div class="row">
+                                    <div class="h4">${homework.subject.getTitle()}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="text-wrap">${homework.description}</div>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="text-wrap">${homework.description}</div>
-                            </div>
-                        </div>
-                    </#list>
-                </div>
+                        </#list>
+                    </div>
+                </#if>
 
             </div>
         </div>

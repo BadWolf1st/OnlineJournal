@@ -122,7 +122,8 @@ public class ScoreController {
     @GetMapping("/admin/groups")
     public String viewGroups(@RequestParam(name = "idname", required = false) String name, Model model, Principal principal){
         model.addAttribute("groups", groupService.listGroups(name));
-        return "groups-admin";
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        return "groups-admin1";
     }
     @GetMapping("/admin/groups/{id}")
     public String editGroup(@RequestParam(name = "idname", required = false) String lastName, @PathVariable Long id, Model model, Principal principal){
@@ -138,6 +139,7 @@ public class ScoreController {
                     .collect(Collectors.toList());
         }
         model.addAttribute("users", sortedUsers);
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
         return "add-student-to-group";
     }
     @GetMapping("/admin/groups/{id}/delete/{userId}")

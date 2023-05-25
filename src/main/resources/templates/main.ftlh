@@ -340,7 +340,7 @@
                             </div>
                         </#if>
                     <#else>
-                        <h1 style="text-align: center">Нет оценок</h1>
+                        <!-- <h1 style="text-align: center">Нет оценок</h1> -->
                     </#list>
                     <#if hasScore = false>
                         <h1 style="text-align: center">Нет оценок</h1>
