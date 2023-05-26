@@ -10,6 +10,7 @@
     <style>
         .texts {
             font-weight: bold;
+            color: white;
         }
 
         .menuBar {
@@ -35,6 +36,9 @@
         }
 
         @media (prefers-color-scheme: light) {
+            .texts {
+                color: black;
+            }
             .menuBar {
                 background-color: #cbcbcb;
             }
@@ -207,8 +211,8 @@
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual">
-                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
+                        <div class="buttonVisual active">
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -221,8 +225,8 @@
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText this">
+                        <div class="buttonVisual">
+                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -255,8 +259,8 @@
             <div class="menuBar">
                 <form>
                     <div class="row" style="">
-                        <a href="/admin/groups" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
-                           style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
+                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
                         </a>
                         <div class="col" style="">
                             <div class="form-floating">
@@ -265,28 +269,50 @@
                                 <label for="id" class="">ФИО \ Т.н.</label>
                             </div>
                         </div>
-                        <a href="/admin/groups/${group.id}/add" type="button" class="btn fw-bold text-black button text-center"
-                           style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
+                        <a href="AdminAddStudent.html" type="button" class="btn fw-bold text-black button text-center"
+                                style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
                             <i class="bi bi-people-fill">+</i>
                         </a>
-                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-search"
-                                style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-search" id="search"
+                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
                         </button>
                     </div>
+                    <script>
+                        // получаем доступ к элементам формы и кнопке
+                        const searchForm = document.querySelector('form');
+                        const searchInput = document.querySelector('#id');
+                        const searchButton = document.querySelector('#search');
+
+                        // добавляем обработчик события на кнопку поиска
+                        searchButton.addEventListener('click', function(e) {
+                          e.preventDefault(); // отменяем действие по умолчанию
+                          const searchTerm = searchInput.value.toLowerCase(); // получаем введенный поисковый запрос и переводим в нижний регистр
+                          filterStudents(searchTerm); // вызываем функцию фильтрации студентов на странице
+                        });
+                        function filterStudents(searchTerm) {
+                          const items = document.querySelectorAll('.item'); // получаем все записи на странице
+                          items.forEach(function(item) { // перебираем все записи на странице
+                            const name = item.querySelector('.text-wrap').textContent.toLowerCase(); // получаем имя студента и переводим в нижний регистр
+                            if (name.includes(searchTerm)) { // если имя студента содержит поисковый запрос
+                              item.style.display = 'flex'; // отображаем запись
+                            } else {
+                              item.style.display = 'none'; // скрываем запись
+                            }
+                          });
+                        }
+
+                    </script>
                 </form>
             </div>
             <div class="col-">
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
                         <#list users as user>
-                            <div class="col " style="height: min-content">
-                                <div class="row item texts" style="display: flex; align-items: center">
-                                    <div class="col text-wrap"
-                                         style="width: min-content; margin-top: 4px">
-                                        <#if user.id == user.getGroup().getHeadman().id>
-                                            <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
-                                        </#if>
-                                        ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
+                        <#list user.getRoles() as role>
+                            <#if role != 'ROLE_CANCEL' || role != 'ROLE_GUEST'>
+                                <div class="row item texts">
+                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()}
+                                        ${user.getMiddleName()}
                                     </div>
                                     <div class="col text-wrap"
                                          style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
@@ -294,28 +320,25 @@
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">
                                             <div class="col">
-                                                <a href="/admin/groups/${user.getGroup().id}/headman/${user.id}" class="btn fw-bold text-black button text-center bi bi-star" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/admin/groups/${user.getGroup().id}/delete/${user.id}" class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">
-                                                </a>
+                                                <form action="/admin/groups/${group.id}/add/${user.id}" method="POST">
+                                                    <input type="hidden" name="userId" value="${user.getId()}" />
+                                                    <button type="submit" class="btn fw-bold text-black button text-center"
+                                                            style="justify-content: right; background-color: greenyellow; width: 30px">
+                                                        +
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                </form>
                                             </div>
                                             <div class="col">
                                                 <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
+                                                   style="justify-content: right; height: 30px; width: 30px">...
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-
+                            </#if>
                         </#list>
-
+                        </#list>
                     </div>
                 </div>
             </div>
