@@ -79,7 +79,7 @@ public class UserController {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("groups", groupService.listGroups(name));
-        return "groupsProfile";//доделать парашу, чтобы норм отображались 2 группы и более
+        return "groupsProfile";
     }
     @GetMapping("/profile/groups/{id}")
     public String GroupsUsersInfo(@PathVariable("id") Long id, Model model, Principal principal) {

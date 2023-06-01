@@ -4,6 +4,8 @@ package com.example.ediary.controllers;
 import com.example.ediary.models.Timetable;
 import com.example.ediary.models.User;
 import com.example.ediary.repositories.TimetableRepository;
+import com.example.ediary.services.GroupService;
+import com.example.ediary.services.ScoreService;
 import com.example.ediary.services.TimetableService;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ public class TimetableController {
     private final UserService userService;
     private final TimetableService timetableService;
     private final TimetableRepository timetableRepository;
+    private final GroupService groupService;
+    private final ScoreService scoreService;
     @GetMapping("/regtimetablestudent")
     public String regtimetable(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -102,4 +106,23 @@ public class TimetableController {
         timetableService.deleteTimetable(id);}
         return "redirect:/admin/timetable";
     }
+
+    @GetMapping("/tutor/groups")
+    public String tutorGroups(Principal principal, Model model, String name) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("groups", groupService.listGroups(name));
+        return "groupsteacher";
+    }
+
+    @GetMapping("/tutor/groups/{id}")
+    public String tutorGroups(@PathVariable Long id,Principal principal, Model model, String name) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("group", groupService.getGroupById(id));
+        model.addAttribute("users", userService.list());
+        model.addAttribute("scores", scoreService.listScores(null));
+        return "TableTeacher";
+    }
+
 }
