@@ -1,5 +1,5 @@
 <#import "blocks/template.ftlh" as t>
-<@t.template user>
+<@t.template>
     `<h1 style="text-align: center">Панель администратора</h1><hr>
     <table class="table table-hover table-dark">
         <tr>

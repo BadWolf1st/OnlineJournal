@@ -1,4 +1,4 @@
-<#macro template user>
+<#macro template>
     <!doctype html>
     <html lang="ru">
     <head>
@@ -12,27 +12,14 @@
               integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
               crossorigin="anonymous">
 
-        <title>BUYSELL</title>
+        <title>Мои оценки</title>
     </head>
     <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <a href="/">
-                <span class="navbar-brand mb-0 h1">BUYSELL</span>
+                <span class="navbar-brand mb-0 h1">Мои оценки</span>
             </a>
-            <#if user.email??>
-                <div class="dropdown text-end">
-                    <a href="/profile">
-                        <img src="/static/images/avatar.png" alt="mdo"
-                             width="32" height="32" class="rounded-circle">
-                    </a>
-                </div>
-            <#else>
-                <button class="btn btn-light my-2 my-sm-0" type="button"
-                        onclick="window.location.href = '/login'">
-                    Войти
-                </button>
-            </#if>
         </div>
     </nav>
     <div class="container mt-4">
