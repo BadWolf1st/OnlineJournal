@@ -12,9 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -87,5 +90,13 @@ public class UserController {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("group",groupService.getGroupById(id));
         return "profileGropsInfo";
+    }
+    @PostMapping("/profile/change/avatar")
+    public String changeAddress(@RequestParam("file") MultipartFile file,
+                                Principal principal, Model model) throws IOException {
+        User user = userService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        userService.changeAvatar(user, file);
+        return "redirect:/profile";
     }
 }

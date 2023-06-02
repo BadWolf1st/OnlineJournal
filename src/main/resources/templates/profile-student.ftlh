@@ -214,7 +214,7 @@
                 <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
+                                    <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -269,9 +269,29 @@
                 <div class="text-center"> Профиль пользователя ${user.getName()} </div>
             </div>
             <div class="col">
-                <div style="height: 200px;margin: 20px">
-                    <img alt="profile" src="../static/logo/Profile.png" style="height: 100%; object-fit: cover;">
-                </div>
+                <#if user.avatar??>
+                    <div style="height: 200px;margin: 20px">
+                        <img alt="profile" src="/images/${user.avatar.id}" style="height: 100%; object-fit: cover;">
+                    </div>
+                <#else>
+                    <div style="height: 200px;margin: 20px">
+                        <img alt="profile" src="../static/logo/Profile.png" style="height: 100%; object-fit: cover;">
+                    </div>
+                </#if>
+            </div>
+            <div class="col">
+                <form action="/profile/change/avatar" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="file">Аватар</label>
+                            <input required type="file" name="file" id="file">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить аватар</button>
+                    </div>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                </form>
             </div>
                 <div class="col">
             <div style="margin: 10px" class="row">
