@@ -320,10 +320,11 @@
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">
                                             <div class="col">
-                                                <form action="/admin/home/decline" method="post">
-                                                    <button type="submit" class="btn fw-bold text-black button text-center bi bi-person-fill-x"
-                                                            style="justify-content: right; height: 30px; width: 30px; background-color: red">
-                                                    </button>
+                                                <form action="/admin/groups/${group.id}/add/${user.id}" method="POST">
+                                                    <input type="hidden" name="userId" value="${user.getId()}" />
+                                                    <button type="submit" class="btn fw-bold text-black button text-center"
+                                                            style="justify-content: right; background-color: greenyellow; width: 30px">
+                                                        +
                                                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                                                 </form>
                                             </div>
@@ -332,12 +333,6 @@
                                                    style="justify-content: right; height: 30px; width: 30px">...
                                                 </a>
                                             </div>
-                                            <div class="col">
-                                                <a href="/admin/user/edit/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; height: 30px; width: 30px">✎
-                                                </a>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>

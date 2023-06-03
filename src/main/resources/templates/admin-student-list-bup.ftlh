@@ -307,43 +307,29 @@
             <div class="col-">
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
-                        <#list users as user>
-                        <#list user.getRoles() as role>
-                            <#if role != 'ROLE_CANCEL' || role != 'ROLE_GUEST'>
-                                <div class="row item texts">
-                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()}
-                                        ${user.getMiddleName()}
-                                    </div>
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
-                                    </div>
-                                    <div class="col" style="display: flex; justify-content: flex-end">
-                                        <div class="row" style="width: max-content">
-                                            <div class="col">
-                                                <form action="/admin/home/decline" method="post">
-                                                    <button type="submit" class="btn fw-bold text-black button text-center bi bi-person-fill-x"
-                                                            style="justify-content: right; height: 30px; width: 30px; background-color: red">
-                                                    </button>
-                                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                                </form>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; height: 30px; width: 30px">...
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/admin/user/edit/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; height: 30px; width: 30px">✎
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </#if>
-                        </#list>
-                        </#list>
+                        <table class="table table-hover table-dark">
+                            <tr>
+                                <th scope="col">Фио</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Номер телефона</th>
+                                <th scope="col">Роли</th>
+                                <th scope="col">Редактирование</th>
+                                <th scope="col">Подробная информация</th>
+                            </tr>
+                            <#list users as user>
+                                <tr>
+                                    <th>${user.getLastName()} ${user.getName()}
+                                        ${user.getMiddleName()}</th>
+                                    <th>${user.email}</th>
+                                    <th>${user.phoneNumber}</th>
+                                    <th><#list user.roles as role>${role}</#list></th>
+                                    <th><a href="/admin/user/edit/${user.id}">Редактировние</a></th>
+                                    <th><a href="/user/${user.id}">Подробная информация</a></th>
+                                </tr>
+                            <#else>
+                                <h3>Пользователей нет</h3>
+                            </#list>
+                        </table>
                     </div>
                 </div>
             </div>

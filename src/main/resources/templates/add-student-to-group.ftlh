@@ -265,7 +265,7 @@
                                 <label for="id" class="">ФИО \ Т.н.</label>
                             </div>
                         </div>
-                        <a href="/" type="button" class="btn fw-bold text-black button text-center"
+                        <a href="/admin/groups/${group.id}/add" type="button" class="btn fw-bold text-black button text-center"
                            style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
                             <i class="bi bi-people-fill">+</i>
                         </a>

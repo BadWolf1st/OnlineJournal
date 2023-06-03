@@ -140,6 +140,7 @@ public class ScoreController {
         }
         model.addAttribute("users", sortedUsers);
         model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        model.addAttribute("group", groupService.getGroupById(id));
         return "add-student-to-group";
     }
     @GetMapping("/admin/groups/{id}/delete/{userId}")
@@ -156,5 +157,19 @@ public class ScoreController {
         group.setHeadman(userService.getUserById(userId));
         groupService.updateGroup(group);
         return "redirect:/admin/groups/" + id;
+    }
+    @GetMapping("/admin/groups/{id}/add")
+    public String addToGroup(@PathVariable Long id, Model model, Principal principal){
+        model.addAttribute("users", userService.list());
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        model.addAttribute("group", groupService.getGroupById(id));
+        return "add-to-group";
+    }
+    @PostMapping("/admin/groups/{groupid}/add/{userid}")
+    public String acceptToGroup(@PathVariable Long groupid, @PathVariable Long userid, Model model, Principal principal){
+        User user = userService.getUserById(userid);
+        user.setGroup(groupService.getGroupById(groupid));
+        userService.updateUser(user);
+        return "redirect:/admin/groups/" + groupid + "/add";
     }
 }

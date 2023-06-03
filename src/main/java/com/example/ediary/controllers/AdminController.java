@@ -4,7 +4,6 @@ import com.example.ediary.models.User;
 import com.example.ediary.models.enums.Role;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.dom4j.rule.Mode;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,7 +20,7 @@ import java.util.Map;
 public class AdminController {
     private final UserService userService;
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/panel")
     public String admin(Model model, Principal principal) {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -39,7 +37,8 @@ public class AdminController {
     public String userEdit(@PathVariable("id") Long id, Model model, Principal principal) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        return "admin-edit-student";
+        model.addAttribute("roles", Role.values());
+        return "admin-user-edit";
     }
     @GetMapping("/admin/home")
     public String adminhome(User user, Model model, Principal principal) {
