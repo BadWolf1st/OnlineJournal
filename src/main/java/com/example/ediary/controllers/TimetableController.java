@@ -1,23 +1,27 @@
 package com.example.ediary.controllers;
 
 
+import com.example.ediary.models.Homework;
+import com.example.ediary.models.Score;
 import com.example.ediary.models.Timetable;
 import com.example.ediary.models.User;
+import com.example.ediary.models.enums.Role;
+import com.example.ediary.repositories.HomeworkRepository;
+import com.example.ediary.repositories.ScoreRepository;
 import com.example.ediary.repositories.TimetableRepository;
-import com.example.ediary.services.GroupService;
-import com.example.ediary.services.ScoreService;
-import com.example.ediary.services.TimetableService;
-import com.example.ediary.services.UserService;
+import com.example.ediary.services.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -26,8 +30,11 @@ public class TimetableController {
     private final UserService userService;
     private final TimetableService timetableService;
     private final TimetableRepository timetableRepository;
+    private final ScoreRepository scoreRepository;
     private final GroupService groupService;
     private final ScoreService scoreService;
+    private final HomeworkService homeworkService;
+    private final HomeworkRepository homeworkRepository;
     @GetMapping("/regtimetablestudent")
     public String regtimetable(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -69,7 +76,7 @@ public class TimetableController {
     public String regtimetablePost(Principal principal, Timetable timetable) {
         timetableService.saveTimeTable(principal, timetable);
         timetableRepository.save(timetable);
-        return "redirect:/login";
+        return "redirect:/";
     }
     @GetMapping("/admin/timetable")
     public String admintimetable(Principal principal, Model model) {
@@ -124,5 +131,41 @@ public class TimetableController {
         model.addAttribute("scores", scoreService.listScores(null));
         return "TableTeacher";
     }
+    @GetMapping("/tutor/groups/edit/{id}")
+    public String editTableStud(@PathVariable("id") Long id, Model model, Principal principal) {
+        Score score = scoreService.getScoreById(id);
+        model.addAttribute("score", score);
+        return "changetablestudent";
+    }
+    @PostMapping("/tutor/groups/edit/{id}/missing")
+    public String editMissing(@PathVariable("id") Long id, @RequestParam("missing") int missing, Model model){
+        Score score = scoreService.getScoreById(id);
+        score.setMissing(missing);
+        scoreService.updateScore(score);
+        return "redirect:/tutor/groups/edit/{id}";
+    }
+    @GetMapping("/tutor/groups/regscore")
+    public String regScore(Model model, Principal principal) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "scorecreate";
+    }
+    @PostMapping("/tutor/groups/regscorecreate")
+    public String regScoreCreate(Principal principal, Score score) {
+        scoreService.saveScore(principal, score);
+        scoreRepository.save(score);
+        return "redirect:/";
+    }
+    @GetMapping("/tutor/groups/homework")
+    public String homeworkForGroup(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "homeworkgroup";
+    }
 
+    @PostMapping("/tutor/groups/homeworkcreate")
+    public String homeworkForGroupCreate(Principal principal, @RequestParam("dueDate") @DateTimeFormat(pattern = "yyyy-MM-dd") String dueDate, Homework homework) {
+        homework.setDueDate(LocalDate.parse(dueDate));
+        homeworkService.saveHomework(homework);
+        homeworkRepository.save(homework);
+        return "redirect:/";
+    }
 }

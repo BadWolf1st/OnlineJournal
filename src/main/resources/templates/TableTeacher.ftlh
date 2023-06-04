@@ -240,40 +240,65 @@
                         <a href="/tutor/groups" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
                            style="justify-content: right; width: 30px; height: 30px">
                         </a>
-                        <div class="col text-center top-100" style="">
+                        <div class="col text-center top-100">
                             ${group.getName()}
                         </div>
+                        <button onclick="location.href='/tutor/groups/homework'" type="button" class="btn fw-bold text-black button text-center align-self-center"
+                                style="flex-grow: 1;">
+                            Задать домашнее задание
+                        </button>
                     </div>
                 </form>
             </div>
+
             <table class="table table-bordered" width="500">
                 <thead>
                 <tr>
                     <th scope="col">ФИО</th>
-                    <th scope="col">Пропуски</th>
-                    <th scope="col">Ответы</th>
-                    <th scope="col">КР</th>
-                    <th scope="col">ТК</th>
+                    <th scope="col">Кол-во пропусков</th>
+                    <th scope="col">Оценки за ответы</th>
                     <th scope="col">Итог</th>
                 </tr>
                 </thead>
                 <tbody>
                 <#list users as user>
+                    <#assign tableView = false>
                     <#if user.getGroup() == group>
-                <tr>
-                    <#list scores as score>
-                    <th scope="row">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</th>
-                    <td><#if user.getId() == score.getId()>${score.getMissing()}</#if> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    </#list>
-                </tr>
+                        <tr>
+                            <#list scores as score>
+                                <#if user.getId() == score.getUser().getId() && !tableView>
+                                    <#assign tableView = true>
+                                    <th scope="row">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}
+                                        <a href="/tutor/groups/edit/${user.getId()}" class="fw-bold text-black button text-center" type="button"
+                                           style="justify-content: right; height: 30px; width: 30px">✎
+                                        </a>
+                                    </th>
+                                    <td>${score.getMissing()}</td>
+                                    <td>
+                                        <#assign totalScore = 0>
+                                        <#assign scoreCount = 0>
+                                        <#list scores as s>
+                                            <#if user.getId() == s.getUser().getId()>
+                                                <#assign totalScore += s.getCount()>
+                                                <#assign scoreCount += 1>
+                                                ${s.getCount()}<#sep>,</#sep>
+                                            </#if>
+                                        </#list>
+                                    </td>
+                                    <td>
+                                        <#if scoreCount != 0>
+                                            ${totalScore / scoreCount}
+                                        </#if>
+                                    </td>
+                                </#if>
+                            </#list>
+                        </tr>
                     </#if>
                 </#list>
                 </tbody>
             </table>
+
+
         </div>
     </div>
 </div>

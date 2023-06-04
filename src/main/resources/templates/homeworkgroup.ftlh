@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,40 +48,28 @@
     <div class="row">
         <div class="empty"></div>
         <img src="../static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
-        <form action="/tutor/groups/regscorecreate" method="post">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="author" placeholder="author"><br>
-                <label for="floatingInput">Имя преподавателя</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="studentId" placeholder="studentId"><br>
-                <label for="floatingInput">ID студента</label>
-            </div>
-            <div class="form-floating mb-3">
-                <label for="type" style="margin-top: -15px">Тип работы</label>
-                <select id="type" required name="type" class="form-control">
-                    <option value="">Тип не выбран</option>
-
-                    <option value="Практическая работа">Практическая работа</option>
-                    <option value="Лабораторная работа">Лабораторная работа</option>
-                    <option value="Зачёт">Зачёт</option>
-                    <option value="Дифференцированный зачёт">Дифференцированный зачёт</option>
-                    <option value="Экзамен">Экзамен</option>
-
-                </select>
-            </div>
+        <form action="/tutor/groups/homeworkcreate/" method="post">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="title" placeholder="title"><br>
-                <label for="floatingInput">Название предмета</label>
+                <label for="floatingInput">Название дисциплины</label>
             </div>
-            <div class="form-floating  mb-3">
-                <input type="number" class="form-control" name="count" placeholder="count"><br>
-                <label for="floatingInput">Оценка</label>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="subject" placeholder="subject"><br>
+                <label for="floatingInput">ID дисциплины</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="description" placeholder="description"><br>
+                <label for="floatingInput">Описание домашнего задания</label>
+            </div>
+            <div class="form-floating mb-3">
+                <label for="datepicker">Выберите дату:</label>
+                <input type="date" name="dueDate" id="dueDate" class="form-control">
+
+
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
-
     </div>
 </div>
 

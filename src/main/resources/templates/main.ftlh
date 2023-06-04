@@ -307,8 +307,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">Ср.знач.</div>
-                                    <#assign middleCount = 0>
-                                    <#assign middleCountCounter = 0>
+                                    <#assign middleCount = 1>
+                                    <#assign middleCountCounter = 1>
                                     <#list scores as score>
                                         <#if (score.getStudentId() == user.getId()) && (score.getTitle() == subject.getTitle())>
                                             <#assign middleCount = middleCount + score.getCount()>

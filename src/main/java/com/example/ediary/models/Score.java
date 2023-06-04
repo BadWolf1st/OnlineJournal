@@ -30,9 +30,12 @@ public class Score {
     @JoinColumn
     private User user;
     private LocalDateTime dateOfCreated;
-    private String Missing;
+    private Integer Missing;
     private String termPaper;
-    private int currentControl;
+    private Integer currentControl;
     @PrePersist
     private void onCreate() { dateOfCreated = LocalDateTime.now(); }
+    private int getUserId(){
+        return getUserId();
+    }
 }

@@ -277,13 +277,12 @@
                     </div>
                 </form>
             </div>
-            <div class="row-12" style="overflow-y: auto; height: 90vh; white-space: nowrap">
-
+            <div class="row-12" style="overflow-y: auto; height: 90vh;">
                 <#if homeworkList?size == 0>
                     <h1 style="text-align: center">Заданий нет</h1>
                 <#else>
-                    <div class="row">
-                        <#list homeworkList as homework>
+                    <#list homeworkList as homework>
+                        <div class="row">
                             <div class="col texts item">
                                 <div class="row">
                                     <div class="h4">${homework.subject.getTitle()}</div>
@@ -292,10 +291,9 @@
                                     <div class="text-wrap">${homework.description}</div>
                                 </div>
                             </div>
-                        </#list>
-                    </div>
+                        </div>
+                    </#list>
                 </#if>
-
             </div>
         </div>
     </div>

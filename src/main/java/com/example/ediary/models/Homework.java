@@ -3,6 +3,7 @@ package com.example.ediary.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,6 +21,8 @@ public class Homework {
     private Long id;
 
     private String title;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
 
     private String description;
@@ -28,5 +31,12 @@ public class Homework {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
     // Конструкторы, геттеры и сеттеры
 }

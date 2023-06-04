@@ -32,6 +32,7 @@ public class HomeworkService{
                 .orElseThrow(() -> new RuntimeException("Домашнее задание не найдено"));
     }
 
+
     public Homework saveHomework(Homework homework) {
         return homeworkRepository.save(homework);
     }
@@ -48,4 +49,5 @@ public class HomeworkService{
     public List<Homework> findByDueDate(LocalDate dueDate){
         return homeworkRepository.findByDueDate(dueDate);
     }
+
 }

@@ -31,7 +31,7 @@ public class ScoreService {
         if (title != null) return subjectRepository.findByTitle(title);
         return subjectRepository.findAll();
     }
-    public void saveScore(Principal principal, Score score) throws IOException {
+    public void saveScore(Principal principal, Score score)  {
         score.setUser(getUserByPrincipal(principal));
         log.info("Saving new score. Title: {}; Author email: {}", score.getTitle(), score.getUser().getEmail());
         scoreRepository.save(score);
@@ -45,7 +45,6 @@ public class ScoreService {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
-
 
     public void deleteScore(User user, Long id) {
         Score score = scoreRepository.findById(id)
@@ -68,5 +67,9 @@ public class ScoreService {
     }
     public Subject getSubjectById(Long id) {
         return subjectRepository.findById(id).orElse(null);
+    }
+
+    public void updateScore(Score score){
+        scoreRepository.save(score);
     }
 }
