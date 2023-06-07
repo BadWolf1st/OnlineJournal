@@ -265,13 +265,13 @@
                         <div class="col" style="">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="id" name="idname"
-                                       placeholder="ФИО">
-                                <label for="id" class="">ФИО</label>
+                                       placeholder="Название предмета">
+                                <label for="id" class="">Название предмета</label>
                             </div>
                         </div>
-                        <a href="AdminAddStudent.html" type="button" class="btn fw-bold text-black button text-center"
+                        <a href="/admin/subject/create" type="button" class="btn fw-bold text-black button text-center"
                                 style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
-                            <i class="bi bi-people-fill">+</i>
+                            <i class="fas fa-times">+</i>
                         </a>
                         <button type="submit" class="btn fw-bold text-black button text-center bi bi-search" id="search"
                              style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
@@ -307,42 +307,32 @@
             <div class="col-">
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
-                        <#list users as user>
-                        <#list user.getRoles() as role>
-                            <#if role != 'ROLE_CANCEL' || role != 'ROLE_GUEST'>
+                        <#list subjects as subject>
                                 <div class="row item texts">
-                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()}
-                                        ${user.getMiddleName()}
+                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">${subject.title}
                                     </div>
                                     <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Группа: ${subject.groupName}
+                                    </div>
+                                    <div class="col text-wrap"
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Семестр: ${subject.term}
+                                    </div>
+                                    <div class="col text-wrap"
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Преподаватель: ${subject.teacher.getLastName()} ${subject.teacher.getFirstSymbol(subject.teacher.getName())}. ${subject.teacher.getFirstSymbol(subject.teacher.getMiddleName())}.
                                     </div>
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">
                                             <div class="col">
-                                                <form action="/admin/home/decline" method="post">
-                                                    <button type="submit" class="btn fw-bold text-black button text-center bi bi-person-fill-x"
-                                                            style="justify-content: right; height: 30px; width: 30px; background-color: red">
+                                                <form action="/admin/subject/${subject.id}/delete" method="post">
+                                                    <button type="submit" class="btn fw-bold text-black button text-center"
+                                                            style="justify-content: right; height: 30px; width: 30px; background-color: red">×
                                                     </button>
                                                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                                                 </form>
                                             </div>
-                                            <div class="col">
-                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; height: 30px; width: 30px">...
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/admin/user/edit/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; height: 30px; width: 30px">✎
-                                                </a>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
-                            </#if>
-                        </#list>
                         </#list>
                     </div>
                 </div>

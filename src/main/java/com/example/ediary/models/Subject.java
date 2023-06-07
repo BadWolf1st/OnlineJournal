@@ -24,6 +24,9 @@ public class Subject {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private User teacher;
     private LocalDateTime dateOfCreated;
 
     @PrePersist

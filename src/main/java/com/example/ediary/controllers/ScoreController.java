@@ -173,6 +173,7 @@ public class ScoreController {
     public String acceptToGroup(@PathVariable Long groupid, @PathVariable Long userid, Model model, Principal principal){
         User user = userService.getUserById(userid);
         user.setGroup(groupService.getGroupById(groupid));
+        user.setGroupName(groupService.getGroupById(groupid).getName());
         userService.updateUser(user);
         return "redirect:/admin/groups/" + groupid + "/add";
     }

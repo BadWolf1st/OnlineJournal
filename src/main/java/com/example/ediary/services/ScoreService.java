@@ -58,7 +58,22 @@ public class ScoreService {
             }
         } else {
             log.error("Score with id = {} is not found", id);
-        }    }
+        }
+    }
+    public void deleteSubject(User user, Long id) {
+        Subject subject = subjectRepository.findById(id)
+                .orElse(null);
+        if (subject != null) {
+            if (subject.getUser().getId().equals(user.getId())) {
+                subjectRepository.delete(subject);
+                log.info("Subject with id = {} was deleted", id);
+            } else {
+                log.error("User: {} haven't this subject with id = {}", user.getEmail(), id);
+            }
+        } else {
+            log.error("Subject with id = {} is not found", id);
+        }
+    }
     public List<Score> getScoresByTypes(List<String> types) {
         return scoreRepository.findByTypeIn(types);
     }

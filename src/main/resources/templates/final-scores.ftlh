@@ -267,6 +267,7 @@
 
                 <div class="col texts item">
                     <#list subjects as subject>
+                        <#if (subject.getType() == "Зачёт") || (subject.getType() == "Дифференцированный зачёт") || (subject.getType() == "Экзамен")>
                         <#if user.groupName == subject.groupName && subject.term == selectedTerm>
                             <div class="col texts item">
                                 <div class="row">
@@ -284,13 +285,20 @@
                                     <div class="">${subject.getType()}</div>
                                 </div>
                                 <div class="row evaluation NR" style="margin-left: 1px">
-                                        <#if subject.getCount() != 0>
-                                           ${subject.getCount()}
-                                         <#else>
-                                             НА
+                                    <#list scores as score>
+                                        <#if (score.getStudentId() == user.getId()) && ((score.getType() == "Зачёт") || (score.getType() == "Дифференцированный зачёт") || (score.getType() == "Экзамен"))
+                                        && (score.getTitle() == subject.getTitle())>
+                                            <#if score.getCount() != 0>
+                                                <div class="">${score.getCount()}</div>
+                                            <#else>
+                                                <div class="">НА</div>
+                                            </#if>
+                                            <#break>
                                         </#if>
+                                    </#list>
                                 </div>
                             </div>
+                        </#if>
                         </#if>
                     <#else>
                         <h1 style="text-align: center">Нет оценок</h1>
