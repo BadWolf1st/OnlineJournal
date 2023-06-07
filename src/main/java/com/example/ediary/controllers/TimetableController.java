@@ -1,13 +1,11 @@
 package com.example.ediary.controllers;
 
 
-import com.example.ediary.models.Homework;
-import com.example.ediary.models.Score;
-import com.example.ediary.models.Timetable;
-import com.example.ediary.models.User;
+import com.example.ediary.models.*;
 import com.example.ediary.models.enums.Role;
 import com.example.ediary.repositories.HomeworkRepository;
 import com.example.ediary.repositories.ScoreRepository;
+import com.example.ediary.repositories.SubjectRepository;
 import com.example.ediary.repositories.TimetableRepository;
 import com.example.ediary.services.*;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +33,7 @@ public class TimetableController {
     private final ScoreService scoreService;
     private final HomeworkService homeworkService;
     private final HomeworkRepository homeworkRepository;
+    private final SubjectRepository subjectRepository;
     @GetMapping("/regtimetablestudent")
     public String regtimetable(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -158,14 +157,20 @@ public class TimetableController {
     @GetMapping("/tutor/groups/homework")
     public String homeworkForGroup(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("subjects", subjectRepository.findAll());
         return "homeworkgroup";
     }
 
     @PostMapping("/tutor/groups/homeworkcreate")
-    public String homeworkForGroupCreate(Principal principal, @RequestParam("dueDate") @DateTimeFormat(pattern = "yyyy-MM-dd") String dueDate, Homework homework) {
-        homework.setDueDate(LocalDate.parse(dueDate));
-        homeworkService.saveHomework(homework);
-        homeworkRepository.save(homework);
+    public String homeworkForGroupCreate(@RequestParam(name = "subjectId", required = false) Long id, Principal principal, @RequestParam("dueDate") @DateTimeFormat(pattern = "yyyy-MM-dd") String dueDate, Homework homework, Subject subject) {
+        if (id != null) {
+            homework.setDueDate(LocalDate.parse(dueDate));
+            subject = scoreService.getSubjectById(id);
+            homework.setSubject(subject);
+            homework.setTitle(subject.getTitle());
+            homeworkService.saveHomework(homework);
+            homeworkRepository.save(homework);
+        }
         return "redirect:/";
     }
 }

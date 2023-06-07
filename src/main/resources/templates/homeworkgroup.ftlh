@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Bootstrap testing</title>
@@ -43,29 +43,33 @@
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="../static/js/DarkChanger.js"></script>
-<div class="container container6">
-
-    <div class="row">
-        <div class="empty"></div>
-        <img src="../static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
-        <form action="/tutor/groups/homeworkcreate/" method="post">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="title" placeholder="title"><br>
-                <label for="floatingInput">Название дисциплины</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="subject" placeholder="subject"><br>
-                <label for="floatingInput">ID дисциплины</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="description" placeholder="description"><br>
-                <label for="floatingInput">Описание домашнего задания</label>
-            </div>
-            <div class="form-floating mb-3">
-                <label for="datepicker">Выберите дату:</label>
-                <input type="date" name="dueDate" id="dueDate" class="form-control">
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <form action="/tutor/groups/homeworkcreate" method="post">
+            <div class="col">
+                <#list subjects as subject>
+                    <ul id="list">
+                        <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
+                            <div class="timetable fw-bold">
+                                <input type="radio" class="input-radio" name="subjectId" value="${subject.getId()}">
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-8">${subject.getTitle()}</div>
+                                    <div class="col-md-8">${subject.getId()}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </#list>
 
 
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="description" placeholder="description"><br>
+                    <label for="floatingInput">Описание домашнего задания</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <label for="datepicker">Выберите дату:</label>
+                    <input type="date" name="dueDate" id="dueDate" class="form-control">
+                </div>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" class="btn btn-primary">Сохранить</button>
