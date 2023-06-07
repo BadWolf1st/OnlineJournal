@@ -20,14 +20,18 @@
             margin: 10px;
         }
 
+        .button {
+            padding: 4px;
+            border-radius: 10px;
+            background-color: #9F9F9F;
+            alignment: right;
+        }
+
         .item {
             padding: 20px; /* Поля вокруг текста */
             border-radius: 15px; /* Уголки */
             background-color: #29292C;
             margin: 10px;
-            max-width: 289px;
-            max-height: 200px;
-            width: 289px;
         }
 
         @media (prefers-color-scheme: light) {
@@ -90,11 +94,6 @@
 
         .evaluation.NR {
             background: #9F9F9F;
-        }
-
-        .row > * {
-            padding-right: auto;
-            padding-left: auto;
         }
 
         .circleIcon {
@@ -167,6 +166,7 @@
             border-radius: 10px;
             padding: 10px;
         }
+
         .profileButton.active {
             color: black;
             background: rgb(215, 167, 0);
@@ -178,26 +178,6 @@
                 color: black;
                 background-color: #cbcbcb;
             }
-        }
-
-        .CenterThis {
-            position: sticky;
-            top: 50%;
-            left: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        /* Rectangle 58 */
-        .Profile {
-            position: absolute;
-            width: 290px;
-            height: 345px;
-            left: 20px;
-            top: 137px;
-
-            background: url(image.png);
-            border-radius: 365px;
         }
 
     </style>
@@ -214,13 +194,13 @@
                 <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                    <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                        <div class="buttonVisual active" id="Home">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -228,25 +208,38 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/profile/users"  class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
                         </div>
                     </li>
                     <li>
+                        <div  class="buttonVisual">
+                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
+                        </div>
+                    </li>
+                    <li>
                         <div class="buttonVisual">
-                            <a href="/profile/groups" class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
                         </div>
                     </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
+                        </div>
+                    </li>
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton active"
+                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
                         <div class="circleIcon text-white userColor">
                             <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
                         </div>
@@ -266,77 +259,62 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <div class="text-center"> Профиль пользователя ${user.getName()} </div>
+                <div class="text-center">Заявки</div>
             </div>
-            <div class="col">
-                <#if user.avatar??>
-                    <div style="height: 200px;margin: 20px">
-                        <img alt="profile" src="/images/${user.avatar.id}" style="height: 100%; object-fit: cover;">
-                    </div>
-                <#else>
-                    <div style="height: 200px;margin: 20px">
-                        <img alt="profile" src="../static/logo/Profile.png" style="height: 100%; object-fit: cover;">
-                    </div>
-                </#if>
-            </div>
-            <div class="col">
-                <form action="/profile/change/avatar" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="file">Аватар</label>
-                            <input required type="file" name="file" id="file">
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить аватар</button>
-                    </div>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                </form>
-            </div>
-                <div class="col">
-                    <div style="margin: 10px" class="row">
-                        <div class="col-md-3">ID пользователя</div>
-                        <div class="col-md-3">${user.id}</div>
-                    </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">ФИО</div>
-                <div class="col-md-3">${user.getLastName()} ${user.getName()} ${user.getMiddleName()}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Табельный номер</div>
-                <div class="col-md-3">${user.tableNumber}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Пол</div>
-                <div class="col-md-3">${user.gender}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Дата рождения</div>
-                <div class="col-md-3">${user.getDate()}</div>
-            </div>
-            <div style="margin: 10px" class="row">
-                <div class="col-md-3">Возраст</div>
-                <div class="col-md-3">${user.age}</div>
-            </div>
-                    <div style="margin: 10px" class="row">
-                        <div class="col-md-3">Группа</div>
-                        <div class="col-md-3">${user.getGroupName()}</div>
-                    </div>
-                    <div style="margin: 10px" class="row">
-                        <div class="col-md-3">Роль</div>
-                        <#if user.getRole() == 'ROLE_ADMIN'>
-                            <div class="col-md-3">Администратор</div>
-                        <#elseif user.getRole() == 'ROLE_CANCEL'>
-                            <div class="col-md-3">Отменённый пользователь</div>
-                        <#elseif user.getRole() == 'ROLE_USER'>
-                            <div class="col-md-3">Студент</div>
-                        <#elseif user.getRole() == 'ROLE_TEACHER'>
-                            <div class="col-md-3">Преподаватель</div>
+            <div class="col-">
+                <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
+                    <div class="col " style="height: min-content">
+                        <#assign hasScore = false>
+                        <#list users as user>
+                            <#list user.getRoles() as role>
+                                <#if role == 'ROLE_GUEST'>
+                                    <#assign hasScore = true>
+                                    <div class="row item">
+                                        <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
+                                        <div class="col" style="display: flex; justify-content: flex-end">
+                                            <div class="row" style="width: max-content">
+                                                <div class="col">
+                                                    <form action="/admin/home/accept" method="POST">
+                                                        <input type="hidden" name="userId" value="${user.getId()}" />
+                                                        <button type="submit" class="fw-bold text-black button text-center"
+                                                                style="justify-content: right; background-color: greenyellow; width: 30px">
+                                                            ✓
+                                                        </button>
+                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                    </form>
+                                                </div>
+                                                <div class="col">
+                                                    <form action="/admin/home/decline" method="POST">
+                                                        <input type="hidden" name="userId" value="${user.getId()}" />
+                                                        <button type="submit" class="fw-bold text-black button text-center"
+                                                                style="justify-content: right;background-color: red; width: 30px">
+                                                            ✕
+                                                        </button>
+                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                    </form>
+                                                </div>
+                                                <div class="col">
+                                                    <form action="/user/${user.getId()}" method="GET">
+                                                        <button type="submit" class="fw-bold text-black button text-center"
+                                                                style="justify-content: right; width: 30px">
+                                                            ...
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </#if>
+                            </#list>
+                        </#list>
+                        <#if hasScore = false>
+                            <h1 style="text-align: center">Новых пользователей нет</h1>
                         </#if>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+</div>
 </body>
 </html>

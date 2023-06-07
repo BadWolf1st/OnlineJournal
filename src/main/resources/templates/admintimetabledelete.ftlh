@@ -219,7 +219,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div class="buttonVisual" id="Home">
-                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                            <a href="/admin/home" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -227,7 +227,7 @@
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/userlist" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -235,16 +235,22 @@
                     </li>
                     <li>
                         <div  class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                            <a href="admin/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
                 </ul>

@@ -211,8 +211,8 @@
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText this">
+                        <div class="buttonVisual">
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -230,6 +230,12 @@
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual active">
+                            <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText this">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
                 </ul>

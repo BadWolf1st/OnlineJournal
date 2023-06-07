@@ -228,6 +228,12 @@
                             </a>
                         </div>
                     </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
+                        </div>
+                    </li>
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
