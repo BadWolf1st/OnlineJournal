@@ -43,22 +43,25 @@ public class UserController {
                           Model model) {
         User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
+        model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
         return "profile-student";
     }
 
     @GetMapping("/registration")
     public String registration(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("groups", groupService.listGroups(null));
         return "reg";
     }
 
 
     @PostMapping("/registration")
-    public String createUser(User user, Model model) {
+    public String createUser(@RequestParam("groupId") Long id, User user, Model model) {
         if (!userService.createUser(user)) {
             model.addAttribute("errorMessage", "Пользователь с email: " + user.getEmail() + " уже существует");
             return "registration";
         }
+        user.setGroup(groupService.getGroupById(id));
         return "redirect:/login";
     }
 

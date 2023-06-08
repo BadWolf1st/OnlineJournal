@@ -4,6 +4,7 @@ import com.example.ediary.models.Score;
 import com.example.ediary.models.Subject;
 import com.example.ediary.models.User;
 import com.example.ediary.models.enums.Role;
+import com.example.ediary.services.GroupService;
 import com.example.ediary.services.ScoreService;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class AdminController {
     private final UserService userService;
     private final ScoreService scoreService;
+    private final GroupService groupService;
 
     @GetMapping("/admin/panel")
     public String admin(Model model, Principal principal) {
@@ -129,8 +131,9 @@ public class AdminController {
         return "subject-create";
     }
     @PostMapping("/admin/subject/create")
-    public String createSubject(@RequestParam("teacherId") Long id, Subject subject, Principal principal) throws IOException {
+    public String createSubject(@RequestParam("teacherId") Long id, @RequestParam("groupId") Long groupId, Subject subject, Principal principal) throws IOException {
         subject.setTeacher(userService.getUserById(id));
+        subject.setGroup(groupService.getGroupById(groupId));
         scoreService.saveSubject(principal, subject);
         return "redirect:/admin/subject";
     }

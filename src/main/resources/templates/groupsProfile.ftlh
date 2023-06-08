@@ -270,7 +270,14 @@
                             <div class="row item texts" style="display: flex; align-items: center">
                                 <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}</div>
                                 <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}</div>
-                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:${group.getCount()}</div>
+                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:
+                                    <#assign realcount = 0>
+                                    <#list users as user>
+                                        <#if user.group == group>
+                                            <#assign realcount = realcount + 1>
+                                        </#if>
+                                    </#list>
+                                    ${realcount} из ${group.getCount()}</div>
                                 <div class="col" style="display: flex; justify-content: flex-end">
                                     <div class="row" style="width: max-content">
                                         <div class="col">

@@ -17,7 +17,6 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String groupName;
     private String type;
     private Integer term;
     private Integer count;
@@ -27,6 +26,9 @@ public class Subject {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User teacher;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private Group1 group;
     private LocalDateTime dateOfCreated;
 
     @PrePersist
@@ -46,14 +48,6 @@ public class Subject {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
     }
 
     public String getType() {

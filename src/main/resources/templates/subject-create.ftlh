@@ -58,10 +58,14 @@
                 <input type="number" class="form-control" name="teacherId" placeholder="teacherId"><br>
                 <label for="floatingInput">ID преподавателя</label>
             </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="groupName" placeholder="groupName"><br>
-                <label for="floatingInput">Название группы</label>
-            </div>
+            <label for="groupId">Группа</label>
+            <select id="groupId" required name="groupId" class="form-control">
+                <option value="">Группа не выбрана</option>
+                <#list groups as group>
+                    <option value=${group.id}>${group.name}</option>
+                </#list>
+            </select>
+    </div>
             <div class="form-floating mb-3">
                 <input type="number" class="form-control" name="term" placeholder="term"><br>
                 <label for="floatingInput">Номер семестра</label>

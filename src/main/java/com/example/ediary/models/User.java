@@ -19,7 +19,6 @@ public class User implements UserDetails {
     private String name;
     private String lastName;
     private String middleName;
-    private String groupName;
     private String faculty;
     private String date;
     private Long tableNumber;
@@ -193,14 +192,6 @@ public class User implements UserDetails {
 
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
     }
 
     public String getFaculty() {

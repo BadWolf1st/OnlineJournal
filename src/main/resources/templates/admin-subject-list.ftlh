@@ -318,7 +318,7 @@
                                     <div class="col text-wrap" style="width: min-content; margin-top: 4px">${subject.title}
                                     </div>
                                     <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Группа: ${subject.groupName}
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Группа: ${subject.group.getName()}
                                     </div>
                                     <div class="col text-wrap"
                                          style="display: flex; justify-content: flex-start; margin-top: 4px">Семестр: ${subject.term}

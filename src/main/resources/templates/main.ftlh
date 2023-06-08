@@ -288,8 +288,7 @@
                 <div class="row row-cols-auto" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <#assign hasScore = false>
                     <#list subjects as subject>
-                        <#if (subject.getType() != "Зачёт") || (subject.getType() != "Дифференцированный зачёт") || (subject.getType() != "Экзамен")>
-                        <#if user.groupName == subject.groupName && subject.term == selectedTerm>
+                        <#if user.group == subject.group && subject.term == selectedTerm>
                             <#assign hasScore = true>
                             <div class="col container texts item">
                                 <div class="row">${subject.title}</div>
@@ -308,44 +307,56 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">Ср.знач.</div>
-                                    <#assign middleCount = 1>
-                                    <#assign middleCountCounter = 1>
+                                    <#assign middleCount = 0>
+                                    <#assign middleCountCounter = 0>
                                     <#list scores as score>
                                         <#if (score.getStudentId() == user.getId()) && (score.getTitle() == subject.getTitle())>
                                             <#assign middleCount = middleCount + score.getCount()>
                                             <#assign middleCountCounter = middleCountCounter + 1>
                                         </#if>
                                     </#list>
-                                    <div class="col-6">${middleCount / middleCountCounter}</div>
+                                    <#if (middleCount == 0) || (middleCountCounter == 0)>
+                                        <div class="col-6">Нет</div>
+                                    <#else>
+                                        <div class="col-6">${middleCount / middleCountCounter}</div>
+                                    </#if>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">Преп.:</div>
+                                    <!--
                                     <#list scores as score>
                                         <#if (score.getStudentId() == user.getId()) && (score.getTitle() == subject.getTitle())>
                                             <div class="col-6">${score.getAuthor()}</div>
                                             <#break>
                                         </#if>
+                                    <#else>
+                                        <div class="col-6">${subject.teacher.getLastName()} ${subject.teacher.getFirstSymbol(subject.teacher.getName())} ${subject.teacher.getFirstSymbol(subject.teacher.getMiddleName())}</div>
                                     </#list>
+                                    -->
+                                    <div class="col-6">${subject.teacher.getLastName()} ${subject.teacher.getFirstSymbol(subject.teacher.getName())}. ${subject.teacher.getFirstSymbol(subject.teacher.getMiddleName())}.</div>
                                 </div>
                                 <div class="row">${subject.getType()}</div>
                                 <div class="row">
                                     <div class="col-6">Итоговая</div>
+                                    <#assign finalcount = 0>
                                     <div class="row evaluation NR" style="margin-left: 1px">
                                         <#list scores as score>
                                             <#if (score.getStudentId() == user.getId()) && ((score.getType() == "Зачёт") || (score.getType() == "Дифференцированный зачёт") || (score.getType() == "Экзамен"))
                                             && (score.getTitle() == subject.getTitle())>
                                                 <#if score.getCount() != 0>
-                                                    <div class="">${score.getCount()}</div>
-                                                <#else>
-                                                    <div class="">НА</div>
+                                                <#assign finalcount = score.getCount()>
                                                 </#if>
                                                 <#break>
                                             </#if>
                                         </#list>
+                                        <#if finalcount == 0>
+                                            Нет
+                                        <#else>
+                                            ${finalcount}
+                                        </#if>
                                     </div>
                                 </div>
                             </div>
-                        </#if>
                         </#if>
                     <#else>
                         <!-- <h1 style="text-align: center">Нет оценок</h1> -->
