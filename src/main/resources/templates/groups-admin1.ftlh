@@ -272,7 +272,8 @@
               <i class="bi bi-search"></i>
             </button>
             <button type="submit" class="btn fw-bold text-black button text-center"
-                    style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
+                    style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px"
+                    formaction="/admin/groups/add">
               <i class="bi bi-people-fill">+</i>
             </button>
           </div>
@@ -286,9 +287,14 @@
               <div class="row item texts" style="display: flex; align-items: center">
                 <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}
                 </div>
-                <div class="col text-wrap"
-                     style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}
+                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">
+                  <#if group.getHeadman()??>
+                    Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}
+                  <#else>
+                    Староста не назначен
+                  </#if>
                 </div>
+
                 <div class="col text-wrap"
                      style="display: flex; justify-content: flex-start; margin-top: 4px">Кол-во студентов: ${group.getCount()}
                 </div>
@@ -297,6 +303,11 @@
                     <div class="col">
                       <a href="/admin/groups/${group.id}" class="fw-bold text-black button text-center" type="button"
                          style="justify-content: right; width: 30px">...
+                      </a>
+                    </div>
+                    <div class="col">
+                      <a href="/admin/groups/edit/${group.id}" class="fw-bold text-black button text-center" type="button"
+                         style="justify-content: right; height: 30px; width: 30px">✎
                       </a>
                     </div>
                   </div>

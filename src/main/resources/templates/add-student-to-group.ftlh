@@ -286,44 +286,45 @@
                         <#list users as user>
                             <div class="col " style="height: min-content">
                                 <div class="row item texts" style="display: flex; align-items: center">
-                                    <div class="col text-wrap"
-                                         style="width: min-content; margin-top: 4px">
-                                        <#if user.id == user.getGroup().getHeadman().id>
-                                            <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
+                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">
+                                        <#if user.getGroup().getHeadman()??>
+                                            <#if user.id == user.getGroup().getHeadman().id>
+                                                <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
+                                            </#if>
                                         </#if>
                                         ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
                                     </div>
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Табельный номер: ${user.tableNumber}
+                                    <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">
+                                        Табельный номер: ${user.tableNumber}
                                     </div>
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">
                                             <div class="col">
-                                                <a href="/admin/groups/${user.getGroup().id}/headman/${user.id}" class="btn fw-bold text-black button text-center bi bi-star" type="button"
+                                                <a href="/admin/groups/${user.getGroup().id}/headman/${user.id}"
+                                                   class="btn fw-bold text-black button text-center bi bi-star" type="button"
                                                    style="justify-content: right; width: 30px; height: 30px">
                                                 </a>
                                             </div>
                                             <div class="col">
-                                                <a href="/admin/groups/${user.getGroup().id}/delete/${user.id}" class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
+                                                <a href="/admin/groups/${user.getGroup().id}/delete/${user.id}"
+                                                   class="btn fw-bold text-black button text-center bi bi-x-lg" type="button"
                                                    style="justify-content: right; width: 30px; height: 30px">
                                                 </a>
                                             </div>
                                             <div class="col">
-                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; width: 30px; height: 30px">...
+                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center"
+                                                   type="button" style="justify-content: right; width: 30px; height: 30px">...
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                         </#list>
-
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

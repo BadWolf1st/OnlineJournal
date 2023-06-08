@@ -103,7 +103,7 @@
         }
 
         .timetable {
-            color: white; /* Цвет текста */
+            color: black; /* Цвет текста */
             padding: 10px; /* Поля вокруг текста */
             border-radius: 10px; /* Уголки */
             background-color: #29292C;
@@ -247,14 +247,14 @@
                         <#assign hasScore = true>
                         <div class="timetable fw-bold">
                             <div class="row" style="margin: 10px;">
-                                <div class="col-md-8">${timetable.getLesson_number()}</div>
-                                <div class="col-md-8">${timetable.getType_of_lesson()}</div>
-                                <div class="col-md-8">${timetable.getClassroom_number()}</div>
+                                <div class="col-md-8">${"Номер занятия: " + timetable.getLesson_number()}</div>
+                                <div class="col-md-8">${"Тип занятия: " + timetable.getType_of_lesson()}</div>
+                                <div class="col-md-8">${"Номер аудитории: " + timetable.getClassroom_number()}</div>
                             </div>
                             <div class="row" style="margin: 10px">
-                                <div class="col-md-8">${timetable.getTime()}</div>
-                                <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
-                                <div class="col-md-8">${timetable.getGroup_name()}</div>
+                                <div class="col-md-8">${"Время занятия: " + timetable.getTime()}</div>
+                                <div class="col-md-8 text-wrap">${"Наименование предмета " + timetable.getName_lesson()}</div>
+                                <div class="col-md-8">${"Имя преподавателя " + timetable.getName_teacher()}</div>
                             </div>
                         </div>
                     </#if>

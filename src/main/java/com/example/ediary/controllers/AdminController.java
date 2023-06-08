@@ -1,7 +1,12 @@
 package com.example.ediary.controllers;
 
+import com.example.ediary.models.Group1;
+import com.example.ediary.models.Timetable;
 import com.example.ediary.models.User;
 import com.example.ediary.models.enums.Role;
+import com.example.ediary.repositories.GroupRepository;
+import com.example.ediary.services.GroupService;
+import com.example.ediary.services.ScoreService;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,13 +17,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
     private final UserService userService;
+    private final GroupService groupService;
+    private final ScoreService scoreService;
+    private final GroupRepository groupRepository;
 
     @GetMapping("/admin/panel")
     public String admin(Model model, Principal principal) {
@@ -100,5 +111,98 @@ public class AdminController {
         userService.updateUser(user);
         return "redirect:/admin/user/edit/{id}";
     }
+    @GetMapping("/admin/groups")
+    public String viewGroups(@RequestParam(name = "idname", required = false) String name, Model model, Principal principal){
+        model.addAttribute("groups", groupService.listGroups(name));
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        return "groups-admin1";
+    }
+    @GetMapping("/admin/groups/add")
+    public String addGroups(Principal principal, Model model){
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        return "reggroup";
+    }
+    @PostMapping("/admin/groups/ad")
+    public String addGroupsPost(Principal principal, Group1 group1) throws IOException {
+        groupService.saveGroup(principal,group1);
+        groupRepository.save(group1);
+        return "redirect:/admin/groups";
+    }
+    @GetMapping("/admin/groups/edit/{id}")
+    public String editGroups(@PathVariable("id") Long id,Principal principal, Model model){
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        model.addAttribute("group", groupService.getGroupById(id));
+        return "editgroup";
+    }
+    @PostMapping("/admin/groups/edit/{id}/groupName")
+    public String editGroupsName(@PathVariable("id") Long id, @RequestParam("name") String groupName, Principal principal) {
+        Group1 group1 = groupService.getGroupById(id);
+        group1.setName(groupName);
+        groupService.updateGroup(group1);
+        return "redirect:/admin/groups";
+    }
 
+    @PostMapping("/admin/groups/edit/{id}/count")
+    public String editGroupsCount(@PathVariable("id") Long id, @RequestParam("count") Integer count, Principal principal) {
+        Group1 group1 = groupService.getGroupById(id);
+        group1.setCount(count);
+        groupService.updateGroup(group1);
+        return "redirect:/admin/groups";
+    }
+
+    @PostMapping("/admin/groups/add")
+    public String saveGroupsPost(Principal principal, Group1 group1) throws IOException {
+        groupService.saveGroup(principal,group1);
+        groupRepository.save(group1);
+        return "redirect:/admin/groups";
+    }
+
+    @GetMapping("/admin/groups/{id}")
+    public String editGroup(@RequestParam(name = "idname", required = false) String lastName, @PathVariable Long id, Model model, Principal principal){
+        List<User> users = groupService.getUsersByGroup(groupService.getGroupById(id).getName());
+        List<User> sortedUsers;
+        if (lastName == null) {
+            // Выводим весь список
+            sortedUsers = users;
+        } else {
+            // Выводим только тех пользователей, у которых lastName равно заданному значению
+            sortedUsers = users.stream()
+                    .filter(user -> user.getLastName() != null && user.getLastName().equals(lastName))
+                    .collect(Collectors.toList());
+        }
+        model.addAttribute("users", sortedUsers);
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        model.addAttribute("group", groupService.getGroupById(id));
+        return "add-student-to-group";
+    }
+    @GetMapping("/admin/groups/{id}/delete/{userId}")
+    public String deleteUserFromGroup(@PathVariable Long id, @PathVariable Long userId, Model model, Principal principal){
+        User user = userService.getUserById(userId);
+        user.setGroupName(null);
+        user.setGroup(null);
+        userService.updateUser(user);
+        return "redirect:/admin/groups/" + id;
+    }
+    @GetMapping("/admin/groups/{id}/headman/{userId}")
+    public String headmanUserFromGroup(@PathVariable Long id, @PathVariable Long userId, Model model, Principal principal){
+        Group1 group = groupService.getGroupById(id);
+        group.setHeadman(userService.getUserById(userId));
+        groupService.updateGroup(group);
+        return "redirect:/admin/groups/" + id;
+    }
+    @GetMapping("/admin/groups/{id}/add")
+    public String addToGroup(@PathVariable Long id, Model model, Principal principal){
+        model.addAttribute("users", userService.list());
+        model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        model.addAttribute("group", groupService.getGroupById(id));
+        return "add-to-group";
+    }
+    @PostMapping("/admin/groups/{groupid}/add/{userid}")
+    public String acceptToGroup(@PathVariable Long groupid, @PathVariable Long userid, Model model, Principal principal){
+        User user = userService.getUserById(userid);
+        user.setGroup(groupService.getGroupById(groupid));
+        user.setGroupName(groupService.getGroupById(groupid).getName());
+        userService.updateUser(user);
+        return "redirect:/admin/groups/" + groupid + "/add";
+    }
 }

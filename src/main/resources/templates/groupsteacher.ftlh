@@ -255,7 +255,13 @@
                         <div class="col-" style="height: min-content">
                             <div class="row item texts" style="display: flex; align-items: center">
                                 <div class="col text-wrap" style="width: min-content; margin-top: 4px">${group.getName()}</div>
-                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}</div>
+                                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">
+                                    <#if group.getHeadman()??>
+                                        Староста: ${group.getHeadman().getLastName()} ${group.getHeadman().getName()} ${group.getHeadman().getMiddleName()}
+                                    <#else>
+                                        Староста не назначен
+                                    </#if>
+                                </div>
                                 <div class="col" style="display: flex; justify-content: flex-end">
                                     <div class="row" style="width: max-content">
                                         <div class="col">
@@ -268,6 +274,7 @@
                     </#list>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

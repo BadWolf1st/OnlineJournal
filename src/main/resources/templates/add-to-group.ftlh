@@ -264,7 +264,7 @@
             <div class="menuBar">
                 <form>
                     <div class="row" style="">
-                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
+                        <a href="/admin/groups/${group.id}" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
                              style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
                         </a>
                         <div class="col" style="">
@@ -313,38 +313,36 @@
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
                         <#list users as user>
-                        <#list user.getRoles() as role>
-                            <#if role != 'ROLE_CANCEL' || role != 'ROLE_GUEST' >
-                                <div class="row item texts">
-                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()}
-                                        ${user.getMiddleName()}
-                                    </div>
-                                    <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Табельный номер: ${user.tableNumber}
-                                    </div>
-                                    <div class="col" style="display: flex; justify-content: flex-end">
-                                        <div class="row" style="width: max-content">
-                                            <div class="col">
-                                                <form action="/admin/groups/${group.id}/add/${user.id}" method="POST">
-                                                    <input type="hidden" name="userId" value="${user.getId()}" />
-                                                    <input type="hidden" name="groupid" value="${group.id}" />
-                                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                                    <button type="submit" class="btn fw-bold text-black button text-center"
-                                                            style="justify-content: right; background-color: greenyellow; width: 30px">
-                                                        +
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <div class="col">
-                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                                   style="justify-content: right; height: 30px; width: 30px">...
-                                                </a>
+                            <#list user.getRoles() as role>
+                                <#if role != 'ROLE_CANCEL' || role != 'ROLE_GUEST'>
+                                    <div class="row item texts">
+                                        <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()}
+                                            ${user.getMiddleName()}
+                                        </div>
+                                        <div class="col text-wrap"
+                                             style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
+                                        </div>
+                                        <div class="col" style="display: flex; justify-content: flex-end">
+                                            <div class="row" style="width: max-content">
+                                                <div class="col">
+                                                    <form action="/admin/groups/${group.id}/add/${user.id}" method="POST">
+                                                        <input type="hidden" name="userId" value="${user.getId()}" />
+                                                        <button type="submit" class="btn fw-bold text-black button text-center"
+                                                                style="justify-content: right; background-color: greenyellow; width: 30px">
+                                                            +
+                                                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                    </form>
+                                                </div>
+                                                <div class="col">
+                                                    <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
+                                                       style="justify-content: right; height: 30px; width: 30px">...
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </#if>
-                        </#list>
+                                </#if>
+                            </#list>
                         </#list>
                     </div>
                 </div>
