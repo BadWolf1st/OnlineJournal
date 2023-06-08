@@ -65,7 +65,7 @@ public class ScoreService {
                 .orElse(null);
         if (subject != null) {
             if (subject.getUser().getId().equals(user.getId())) {
-                subjectRepository.delete(subject);
+                subjectRepository.deleteSubjectWithRelatedEntities(subject);
                 log.info("Subject with id = {} was deleted", id);
             } else {
                 log.error("User: {} haven't this subject with id = {}", user.getEmail(), id);
