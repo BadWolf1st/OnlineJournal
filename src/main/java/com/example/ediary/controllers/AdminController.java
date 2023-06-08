@@ -146,6 +146,7 @@ public class AdminController {
     public String viewGroups(@RequestParam(name = "idname", required = false) String name, Model model, Principal principal){
         model.addAttribute("groups", groupService.listGroups(name));
         model.addAttribute("user", scoreService.getUserByPrincipal(principal));
+        model.addAttribute("users", userService.list());
         return "groups-admin1";
     }
     @GetMapping("/admin/groups/add")
@@ -209,7 +210,6 @@ public class AdminController {
     @GetMapping("/admin/groups/{id}/delete/{userId}")
     public String deleteUserFromGroup(@PathVariable Long id, @PathVariable Long userId, Model model, Principal principal){
         User user = userService.getUserById(userId);
-        user.setGroupName(null);
         user.setGroup(null);
         userService.updateUser(user);
         return "redirect:/admin/groups/" + id;
@@ -232,7 +232,6 @@ public class AdminController {
     public String acceptToGroup(@PathVariable Long groupid, @PathVariable Long userid, Model model, Principal principal){
         User user = userService.getUserById(userid);
         user.setGroup(groupService.getGroupById(groupid));
-        user.setGroupName(groupService.getGroupById(groupid).getName());
         userService.updateUser(user);
         return "redirect:/admin/groups/" + groupid + "/add";
     }
