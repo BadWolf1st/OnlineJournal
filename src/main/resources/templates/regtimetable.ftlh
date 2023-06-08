@@ -89,9 +89,9 @@
                 <label for="floatingInput">Название группы</label>
             </div>
             <div class="form-floating  mb-3">
-                <label for="weekday" style="margin-top: -15px">Тип занятия</label>
+                <label for="weekday" style="margin-top: -15px">День недели</label>
                 <select id="weekday" required name="weekday" class="form-control">
-                    <option value="">Тип не выбран</option>
+                    <option value="">День не выбран</option>
 
                     <option value="Понедельник">Понедельник</option>
                     <option value="Вторник">Вторник</option>
@@ -103,9 +103,9 @@
                 </select>
             </div>
             <div class="form-floating  mb-3">
-                <label for="week_number" style="margin-top: -15px">Тип занятия</label>
+                <label for="week_number" style="margin-top: -15px">Номер недели</label>
                 <select id="week_number" required name="week_number" class="form-control">
-                    <option value="">Тип не выбран</option>
+                    <option value="">Номер не выбран</option>
 
                     <option value="1">I Неделя</option>
                     <option value="2">II Неделя</option>

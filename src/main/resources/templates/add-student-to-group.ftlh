@@ -194,15 +194,14 @@
                 <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="/static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
-                                <i class="fs-4 bi-house"></i>
-                                <span class="ms-1 d-none d-sm-inline">Главная</span>
+                        <div  class="buttonVisual" id="Home">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
@@ -222,10 +221,16 @@
                     </li>
                     <li>
                         <div class="buttonVisual active">
-                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText this">
+                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
                 </ul>
@@ -289,7 +294,7 @@
                                         ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
                                     </div>
                                     <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Табельный номер: ${user.tableNumber}
                                     </div>
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">

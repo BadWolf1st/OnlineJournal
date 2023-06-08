@@ -90,7 +90,7 @@ public class TimetableController {
         model.addAttribute("selectedWeekday", id);
         model.addAttribute("selectedWeek", id2);
         model.addAttribute("selectedGroup", id3);
-        return "AdminTimetable2(2)";
+        return "AdminTimetable2(3)";
     }
     @GetMapping("/scorecreate")
     public String regtimetable123(Principal principal, Model model) {

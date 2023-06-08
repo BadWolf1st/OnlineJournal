@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/registration", "/static/**", "/logout").permitAll()
                 .antMatchers("/waitroom").access("hasAnyRole('ROLE_GUEST', 'ROLE_CANCEL')")
-                .antMatchers("/product/**", "/images/**", "/user/**", "/my/**", "/score/**", "/homeworks","/homeworks/**","/timetablestudent","/regtimetablestudent", "/timet/**","/timetabletutor", "/timetut/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_TEACHER')")
+                .antMatchers("/product/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_TEACHER')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -34,7 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
     }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)

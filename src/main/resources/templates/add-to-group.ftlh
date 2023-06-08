@@ -198,21 +198,20 @@
                 <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="/static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
-                                <i class="fs-4 bi-house"></i>
-                                <span class="ms-1 d-none d-sm-inline">Главная</span>
+                        <div  class="buttonVisual" id="Home">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText this">
+                        <div class="buttonVisual">
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -225,11 +224,17 @@
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual">
+                        <div class="buttonVisual active">
                             <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
                 </ul>
@@ -309,23 +314,25 @@
                     <div class="col " style="height: min-content">
                         <#list users as user>
                         <#list user.getRoles() as role>
-                            <#if role != 'ROLE_CANCEL' || role != 'ROLE_GUEST'>
+                            <#if role != 'ROLE_CANCEL' || role != 'ROLE_GUEST' >
                                 <div class="row item texts">
                                     <div class="col text-wrap" style="width: min-content; margin-top: 4px">${user.getLastName()} ${user.getName()}
                                         ${user.getMiddleName()}
                                     </div>
                                     <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Табельный номер: ${user.tableNumber}
                                     </div>
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">
                                             <div class="col">
                                                 <form action="/admin/groups/${group.id}/add/${user.id}" method="POST">
                                                     <input type="hidden" name="userId" value="${user.getId()}" />
+                                                    <input type="hidden" name="groupid" value="${group.id}" />
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
                                                     <button type="submit" class="btn fw-bold text-black button text-center"
                                                             style="justify-content: right; background-color: greenyellow; width: 30px">
                                                         +
-                                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                    </button>
                                                 </form>
                                             </div>
                                             <div class="col">

@@ -100,4 +100,5 @@ public class AdminController {
         userService.updateUser(user);
         return "redirect:/admin/user/edit/{id}";
     }
+
 }

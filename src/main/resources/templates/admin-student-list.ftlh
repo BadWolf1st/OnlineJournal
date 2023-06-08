@@ -203,16 +203,15 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
-                                <i class="fs-4 bi-house"></i>
-                                <span class="ms-1 d-none d-sm-inline">Главная</span>
+                        <div  class="buttonVisual" id="Home">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual active">
-                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText this">
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -230,6 +229,12 @@
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
                 </ul>
@@ -269,10 +274,6 @@
                                 <label for="id" class="">ФИО \ Т.н.</label>
                             </div>
                         </div>
-                        <a href="AdminAddStudent.html" type="button" class="btn fw-bold text-black button text-center"
-                                style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
-                            <i class="bi bi-people-fill">+</i>
-                        </a>
                         <button type="submit" class="btn fw-bold text-black button text-center bi bi-search" id="search"
                              style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
                         </button>
@@ -315,12 +316,13 @@
                                         ${user.getMiddleName()}
                                     </div>
                                     <div class="col text-wrap"
-                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.:${user.tableNumber}
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Табельный номер: ${user.tableNumber}
                                     </div>
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <div class="row" style="width: max-content">
                                             <div class="col">
                                                 <form action="/admin/home/decline" method="post">
+                                                    <input type="hidden" name="userId" value="${user.getId()}" />
                                                     <button type="submit" class="btn fw-bold text-black button text-center bi bi-person-fill-x"
                                                             style="justify-content: right; height: 30px; width: 30px; background-color: red">
                                                     </button>

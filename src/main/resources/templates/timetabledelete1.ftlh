@@ -11,18 +11,7 @@
         .texts {
             font-weight: bold;
         }
-        .custom-list {
-            margin-bottom: 10px;
-        }
-        .timetable-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-        .timetable-item {
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
+
         .menuBar {
             color: white; /* Цвет текста */
             padding: 10px; /* Поля вокруг текста */
@@ -215,42 +204,43 @@
 <script async src="../static/js/DarkChanger.js"></script>
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <form action="/deleteTimetable" method="post">
-            <div class="col">
-                <#assign hasScore = false>
-                <#list timetables?sort_by('lesson_number') as timetable>
-                    <#if id3 == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
-                        <#assign hasScore = true>
-                        <ul id="list" class="custom-list">
-                            <div class="col-" style="padding: 100px; height: 900px; white-space: nowrap">
-                                <div class="timetable-grid">
-                                    <div class="timetable-item">
-                                        <input type="checkbox" class="input-checkbox" name="timetableId" value="${timetable.getId()}">
-                                        <div class="row" style="margin-bottom: 10px;">
-                                            <div class="col-md-8">${timetable.getLesson_number()}</div>
-                                            <div class="col-md-8">${timetable.getType_of_lesson()}</div>
-                                            <div class="col-md-8">${timetable.getClassroom_number()}</div>
-                                            <div class="col-md-8">${timetable.getId()}</div>
-                                        </div>
-                                        <div class="row" style="margin-bottom: 10px">
-                                            <div class="col-md-8">${timetable.getTime()}</div>
-                                            <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
-                                            <div class="col-md-8">${timetable.getName_teacher()}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ul>
-                    </#if>
-                </#list>
-                <#if hasScore = false>
-                    <h1 style="text-align: center">Нет занятий</h1>
-                </#if>
-            </div>
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit" class="btn btn-primary">Удалить</button>
-        </form>
-    </div>
+        <div class="col">
+            <form action="/deleteTimetable" method="post">
+            <#assign hasScore = false>
+            <#list timetables?sort_by('lesson_number') as timetable>
+              <#if id3 == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
+                <#assign hasScore = true>
+                  <ul id="list">
+                  <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
+                      <div class="timetable fw-bold">
+                          <input type="checkbox" class="input-checkbox" name="timetableId" value="${timetable.getId()}">
+                                  <div class="row" style="margin: 10px;">
+                                      <div class="col-md-8">${timetable.getLesson_number()}</div>
+                                      <div class="col-md-8">${timetable.getType_of_lesson()}</div>
+                                      <div class="col-md-8">${timetable.getClassroom_number()}</div>
+                                      <div class="col-md-8">${timetable.getId()}</div>
+                              </div>
+                                  <div class="row" style="margin: 10px">
+                                      <div class="col-md-8">${timetable.getTime()}</div>
+                                      <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
+                                      <div class="col-md-8">${timetable.getName_teacher()}</div>
+                              </div>
+                      </div>
+
+                  </div>
+                  </ul>
+              </#if>
+            </#list>
+            <#if hasScore = false>
+                <h1 style="text-align: center">Нет занятий</h1>
+            </#if>
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <div class="d-flex justify-content-center">
+    <button type="submit" class="btn fw-bold text-black button text-center" style="background-color: red; height: 40px; width: 130px; margin: 5px">Удалить</button>
+        </div>
+    </form>
+        </div>
+</div>
 </div>
 </body>
 </html>

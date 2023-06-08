@@ -120,33 +120,64 @@
   <div class="row flex-nowrap">
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
       <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-        <a href="homeStudent" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <span class="fs-5 d-none d-sm-inline"><img src="../../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки"></span>
+        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <span class="fs-5 d-none d-sm-inline"><img src="/static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки"></span>
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li>
-            <div  class="buttonVisual active" id="Home">
-              <a href="homeStudent" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+            <div  class="buttonVisual" id="Home">
+              <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
               </a>
             </div>
           </li>
-
+          <li>
+            <div class="buttonVisual active">
+              <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
+                <i class="fs-4 bi bi-person-circle"></i>
+                <span class="ms-1 d-none d-sm-inline">Пользователи</span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div  class="buttonVisual">
+              <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
+                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
+            </div>
+          </li>
+          <li>
+            <div class="buttonVisual">
+              <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
+                <i class="fs-4 bi bi-people-fill"></i>
+                <span class="ms-1 d-none d-sm-inline">Группы</span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div  class="buttonVisual">
+              <a href="/"  class="nav-link px-0 align-middle buttonText">
+                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
+            </div>
+          </li>
         </ul>
         <hr>
         <div class="dropdown pb-4">
-          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
+             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
             <div class="circleIcon text-white userColor">
-              <div class="container6">Г</div>
+              <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
             </div>
-            <span class="d-none d-sm-inline mx-1 ">Гость</span>
+            <span class="d-none d-sm-inline mx-1 ">${user.getLastName()}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="#">Профиль</a></li>
+            <li><a class="dropdown-item" href="/profile">Профиль</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="/logout" style="color: #d62929">Выйти из аккаунта</a></li>
+            <li>
+              <a class="dropdown-item" href="/logout" style="color: #d62929">Выйти из аккаунта</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -161,7 +192,7 @@
         </#list>
         <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit" class="btn btn-dark">Сохранить</button>
+        <button type="submit" class="btn btn-gray">Сохранить</button>
       </form>
       <hr>
       <form action="/admin/user/edit/${user.id}/name" method="post" enctype="multipart/form-data">
@@ -171,7 +202,7 @@
                  id="fullNameInput" name="fullNameInput">
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить</button>
+        <button type="submit" style="width: 100%" class="btn btn-secondary">Изменить</button>
       </form>
       <form action="/admin/user/edit/${user.id}}/tableNumber" method="post" enctype="multipart/form-data">
         <div class="form-row align-items-center mb-4">
@@ -180,7 +211,7 @@
                  id="NumberInput" name="NumberInput">
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить</button>
+        <button type="submit" style="width: 100%" class="btn btn-secondary">Изменить</button>
       </form>
       <form action="/admin/user/edit/${user.id}/gender" method="post" enctype="multipart/form-data">
         <div class="form-row align-items-center mb-4">
@@ -189,7 +220,7 @@
                  id="GenderInput" name="GenderInput">
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить</button>
+        <button type="submit" style="width: 100%" class="btn btn-secondary">Изменить</button>
       </form>
       <form action="/admin/user/edit/${user.id}/date" method="post" enctype="multipart/form-data">
         <div class="form-row align-items-center mb-4">
@@ -198,7 +229,7 @@
                  id="DateInput" name="DateInput">
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить</button>
+        <button type="submit" style="width: 100%" class="btn btn-secondary">Изменить</button>
       </form>
       <form action="/admin/user/edit/${user.id}/age" method="post" enctype="multipart/form-data">
         <div class="form-row align-items-center mb-4">
@@ -207,7 +238,7 @@
                  id="AgeInput" name="AgeInput">
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить</button>
+        <button type="submit" style="width: 100%" class="btn btn-secondary">Изменить</button>
       </form>
     </div>
   </div>

@@ -210,24 +210,23 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="homeAdmin"
+                <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="/static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual" id="Home">
-                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
-                                <i class="fs-4 bi-house"></i>
-                                <span class="ms-1 d-none d-sm-inline">Главная</span>
+                        <div  class="buttonVisual" id="Home">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
@@ -235,16 +234,22 @@
                     </li>
                     <li>
                         <div  class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
+                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div  class="buttonVisual">
+                            <a href="/"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
                 </ul>
@@ -276,19 +281,19 @@
                 <#list timetables?sort_by('lesson_number') as timetable>
                     <#if id3 == timetable.group_name && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
                         <#assign hasTimetable = true>
-                        <ul id="list">
+                        <ul id="list"  style="margin-bottom: -700px;" >
                             <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
                                 <div class="timetable fw-bold">
                                     <input type="checkbox" class="input-checkbox" name="timetableId" value="${timetable.getId()}">
                                     <div class="row" style="margin: 10px;">
-                                        <div class="col-md-8">${timetable.getLesson_number()}</div>
-                                        <div class="col-md-8">${timetable.getType_of_lesson()}</div>
-                                        <div class="col-md-8">${timetable.getClassroom_number()}</div>
+                                        <div class="col-md-8">${"Номер занятия: " + timetable.getLesson_number()}</div>
+                                        <div class="col-md-8">${"Тип занятия: " + timetable.getType_of_lesson()}</div>
+                                        <div class="col-md-8">${"Номер аудитории: " + timetable.getClassroom_number()}</div>
                                     </div>
                                     <div class="row" style="margin: 10px">
-                                        <div class="col-md-8">${timetable.getTime()}</div>
-                                        <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
-                                        <div class="col-md-8">${timetable.getName_teacher()}</div>
+                                        <div class="col-md-8">${"Время занятия: " + timetable.getTime()}</div>
+                                        <div class="col-md-8 text-wrap">${"Наименование предмета " + timetable.getName_lesson()}</div>
+                                        <div class="col-md-8">${"Имя преподавателя " + timetable.getName_teacher()}</div>
                                     </div>
                                 </div>
                             </div>
