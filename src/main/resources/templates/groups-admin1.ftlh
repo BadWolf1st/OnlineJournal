@@ -294,13 +294,13 @@
                     Староста не назначен
                   </#if>
                 </div>
-                <div class="col text-wrap"
-                     style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:
+                <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">
+                  Кол.студ.:
                   <#assign realcount = 0>
                   <#list users as user>
-                      <#if user.group == group>
-                        <#assign realcount = realcount + 1>
-                      </#if>
+                    <#if user.group?exists && user.group == group>
+                      <#assign realcount = realcount + 1>
+                    </#if>
                   </#list>
                   ${realcount} из ${group.getCount()}
                 </div>

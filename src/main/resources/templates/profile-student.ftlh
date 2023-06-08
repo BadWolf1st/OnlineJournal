@@ -322,8 +322,15 @@
             </div>
                     <div style="margin: 10px" class="row">
                         <div class="col-md-3">Группа</div>
-                        <div class="col-md-3">${user.group.getName()}</div>
+                        <div class="col-md-3">
+                            <#if user.group?has_content>
+                                ${user.group.getName()}
+                            <#else>
+                                Без группы
+                            </#if>
+                        </div>
                     </div>
+
                     <div style="margin: 10px" class="row">
                         <div class="col-md-3">Роль</div>
                         <#if user.getRole() == 'ROLE_ADMIN'>

@@ -195,7 +195,7 @@
                 <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="/static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -262,34 +262,34 @@
             <div class="col-">
                 <div class="col" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <#list users as user>
-                         <#if user.getGroup() == group>
-                        <div class="col " style="height: min-content">
-                            <div class="row item texts" style="display: flex; align-items: center">
-                                <div class="col text-wrap"
-                                     style="width: min-content; margin-top: 4px">
-                                    <#if user.id == user.getGroup().getHeadman().id>
-                                        <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
-                                    </#if>
-                                    ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
-                                </div>
-                                <div class="col text-wrap"
-                                     style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.: ${user.tableNumber}
-                                </div>
-                                <div class="col" style="display: flex; justify-content: flex-end">
-                                    <div class="row" style="width: max-content">
-                                        <div class="col">
-                                            <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                               style="justify-content: right; width: 30px; height: 30px">...
-                                            </a>
+                        <#if user.group?exists && user.getGroup() == group>
+                            <div class="col " style="height: min-content">
+                                <div class="row item texts" style="display: flex; align-items: center">
+                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">
+                                        <#if user.id == user.getGroup().getHeadman().id>
+                                            <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
+                                        </#if>
+                                        ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
+                                    </div>
+                                    <div class="col text-wrap" style="display: flex; justify-content: flex-start; margin-top: 4px">
+                                        Табельный номер: ${user.tableNumber}
+                                    </div>
+                                    <div class="col" style="display: flex; justify-content: flex-end">
+                                        <div class="row" style="width: max-content">
+                                            <div class="col">
+                                                <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
+                                                   style="justify-content: right; width: 30px; height: 30px">...
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                         </#if>
+                        </#if>
                     </#list>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

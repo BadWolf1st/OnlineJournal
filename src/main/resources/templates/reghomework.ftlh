@@ -48,13 +48,31 @@
     <div class="row">
         <div class="empty"></div>
         <img src="/static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
-        <form action="/tutor/groups/deletscore" method="get">
+        <form action="/tutor/groups/homeworkcreate" method="post">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <label for="subjectId" style="margin-top: -15px">Название предмета</label>
+                    <select id="subjectId" required name="subjectId" class="form-control">
+                        <option value="">Название не выбрано</option>
+                        <#if subjects?exists>
+                            <#list subjects as subject>
+                                    <option value="${subject.getId()}">Предмет: ${subject.getTitle()}</option>
+                            </#list>
+                        </#if>
+                    </select>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="description" placeholder="description"><br>
+                    <label for="floatingInput">Описание домашнего задания</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <label for="datepicker" style="margin-top: -10px;">Выберите дату:</label>
+                    <input type="date" name="dueDate" id="dueDate" class="form-control">
+                </div>
+            </div>
+
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit" class="btn btn-primary">Удалить оценку</button>
-        </form>
-        <form action="/tutor/groups/regscore" method="get">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit" class="btn btn-primary">Создать новую оценку</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
     </div>
 </div>

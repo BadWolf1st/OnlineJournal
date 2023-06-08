@@ -131,10 +131,8 @@ public class TimetableController {
         model.addAttribute("scores", scoreService.listScores(null));
         return "TableTeacher";
     }
-    @GetMapping("/tutor/groups/edit/{id}")
-    public String editTableStud(@PathVariable("id") Long id, Model model, Principal principal) {
-        Score score = scoreService.getScoreById(id);
-        model.addAttribute("score", score);
+    @GetMapping("/tutor/groups/edit")
+    public String editTableStud( Model model, Principal principal) {
         return "changetablestudent";
     }
     @PostMapping("/tutor/groups/edit/{id}/missing")
@@ -147,6 +145,8 @@ public class TimetableController {
     @GetMapping("/tutor/groups/regscore")
     public String regScore(Model model, Principal principal) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("users", userService.list());
+        model.addAttribute("subjects", subjectRepository.findAll());
         return "scorecreate";
     }
     @PostMapping("/tutor/groups/regscorecreate")
@@ -157,11 +157,22 @@ public class TimetableController {
         //scoreRepository.save(score);
         return "redirect:/";
     }
+    @GetMapping("/tutor/groups/deletscore")
+    public String deleteScore(Model model, Principal principal) {
+        model.addAttribute("scores", scoreService.list());
+        return "scoredelete";
+    }
+    @PostMapping("/tutor/groups/deletscore")
+    public String deleteScore(@RequestParam("scoreId") Long scoreId, Model model, Principal principal) {
+        scoreService.deleteScore(userService.getUserByPrincipal(principal), scoreId);
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "redirect:/";
+    }
     @GetMapping("/tutor/groups/homework")
     public String homeworkForGroup(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("subjects", subjectRepository.findAll());
-        return "homeworkgroup";
+        return "reghomework";
     }
 
     @PostMapping("/tutor/groups/homeworkcreate")

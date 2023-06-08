@@ -48,15 +48,24 @@
 
     <div class="row">
         <div class="empty"></div>
-        <img src="../static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
+        <img src="/static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
         <form action="/tutor/groups/regscorecreate" method="post">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="author" placeholder="author"><br>
+                <input type="text" class="form-control" name="author" placeholder="author" value="${user.getLastName()} ${user.getName()} ${user.getMiddleName()} "><br>
                 <label for="floatingInput">Имя преподавателя</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="studentId" placeholder="studentId"><br>
-                <label for="floatingInput">ID студента</label>
+                <label for="studentId" style="margin-top: -15px">Имя студента</label>
+                <select id="studentId" required name="studentId" class="form-control">
+                    <option value="">Имя не выбрано</option>
+                    <#if users?exists>
+                        <#list users as user>
+                            <#if user.getRole() == 'ROLE_USER'>
+                                <option value=${user.getId()}>Фамилия: ${user.getLastName()} Группа: ${user.getGroup().getName()}</option>
+                            </#if>
+                        </#list>
+                    </#if>
+                </select>
             </div>
             <div class="form-floating mb-3">
                 <label for="type" style="margin-top: -15px">Тип работы</label>
@@ -74,10 +83,12 @@
             <div class="form-floating mb-3">
                 <label for="subjectId" style="margin-top: -15px">Название предмета</label>
                 <select id="subjectId" required name="subjectId" class="form-control">
-                    <option value="">Тип не выбран</option>
-                    <#list subjects as subject>
-                        <option value=${subject.id}>${subject.title}. ${subject.term} семестр. ${subject.type}. ${subject.groupName}</option>
-                    </#list>
+                    <option value="">Название не выбрано</option>
+                    <#if subjects?exists>
+                        <#list subjects as subject>
+                            <option value=${subject.id}>${subject.title}. ${subject.term} семестр. ${subject.type}. ${subject.getGroup().getName()}</option>
+                        </#list>
+                    </#if>
                 </select>
             </div>
             <div class="form-floating  mb-3">

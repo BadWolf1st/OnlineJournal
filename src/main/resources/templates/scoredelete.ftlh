@@ -35,6 +35,7 @@
             wight: 50px;
             height: 100px;
         }
+
         button.btn-primary {
             margin-bottom: 20px;
         }
@@ -48,14 +49,22 @@
     <div class="row">
         <div class="empty"></div>
         <img src="/static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
-        <form action="/tutor/groups/deletscore" method="get">
+        <form action="/tutor/groups/deletscore" method="post">
+            <div class="form-floating mb-3">
+                <label for="scoreId" style="margin-top: -15px">Название предмета</label>
+                <select id="scoreId" required name="scoreId" class="form-control">
+                    <option value="">Тип не выбран</option>
+                    <#if scores?exists>
+                        <#list scores as score>
+                            <option value=${score.getId()}>ID студента: ${score.getStudentId()}. Оценка по дисциплине ${score.getTitle()}: ${score.getCount()}. За: ${score.getType()}</option>
+                        </#list>
+                    </#if>
+                </select>
+            </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit" class="btn btn-primary">Удалить оценку</button>
+            <button type="submit" class="btn btn-primary">Удалить</button>
         </form>
-        <form action="/tutor/groups/regscore" method="get">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit" class="btn btn-primary">Создать новую оценку</button>
-        </form>
+
     </div>
 </div>
 

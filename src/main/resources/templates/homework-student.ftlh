@@ -282,19 +282,22 @@
                     <h1 style="text-align: center">Заданий нет</h1>
                 <#else>
                     <#list homeworkList as homework>
-                        <div class="row">
-                            <div class="col texts item">
-                                <div class="row">
-                                    <div class="h4">${homework.subject.getTitle()}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="text-wrap">${homework.description}</div>
+                        <#if homework.subject.getGroup().getId() == user.getGroup().getId()>
+                            <div class="row">
+                                <div class="col texts item">
+                                    <div class="row">
+                                        <div class="h4">${homework.subject.getTitle()}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="text-wrap">${homework.description}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </#if>
                     </#list>
                 </#if>
             </div>
+
         </div>
     </div>
 </div>

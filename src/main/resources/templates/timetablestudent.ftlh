@@ -267,18 +267,18 @@
             <div class="col-" style="padding: 0; overflow-y: auto; height: 90vh; white-space: nowrap">
                 <#assign hasScore = false>
                 <#list timetables?sort_by('lesson_number') as timetable>
-                    <#if user.groupName == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
+                    <#if user.getGroup().getName() == timetable.group_name  && timetable.week_number == selectedWeek && timetable.weekday == selectedWeekday>
                         <#assign hasScore = true>
                         <div class="timetable fw-bold">
                             <div class="row" style="margin: 10px;">
-                                <div class="col-md-8">${timetable.getLesson_number()}</div>
-                                <div class="col-md-8">${timetable.getType_of_lesson()}</div>
-                                <div class="col-md-8">${timetable.getClassroom_number()}</div>
+                                <div class="col-md-8">${"Номер занятия: " + timetable.getLesson_number()}</div>
+                                <div class="col-md-8">${"Тип занятия: " + timetable.getType_of_lesson()}</div>
+                                <div class="col-md-8">${"Номер аудитории: " + timetable.getClassroom_number()}</div>
                             </div>
                             <div class="row" style="margin: 10px">
-                                <div class="col-md-8">${timetable.getTime()}</div>
-                                <div class="col-md-8 text-wrap">${timetable.getName_lesson()}</div>
-                                <div class="col-md-8">${timetable.getName_teacher()}</div>
+                                <div class="col-md-8">${"Время занятия: " + timetable.getTime()}</div>
+                                <div class="col-md-8 text-wrap">${"Наименование предмета " + timetable.getName_lesson()}</div>
+                                <div class="col-md-8">${"Имя преподавателя " + timetable.getName_teacher()}</div>
                             </div>
                         </div>
                     </#if>

@@ -133,6 +133,7 @@ public class AdminController {
     @GetMapping("/admin/subject/create")
     public String fillSubject(Model model, Principal principal){
         model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("groups", groupService.listGroups(null));
         return "subject-create";
     }
     @PostMapping("/admin/subject/create")

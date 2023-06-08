@@ -229,7 +229,7 @@
           </li>
           <li>
             <div  class="buttonVisual active">
-              <a href="/" class="nav-link px-0 align-middle buttonText this">
+              <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText this">
                 <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
             </div>
           </li>
@@ -243,16 +243,15 @@
           </li>
           <li>
             <div  class="buttonVisual">
-              <a href="/"  class="nav-link px-0 align-middle buttonText">
+              <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText">
                 <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
             </div>
           </li>
         </ul>
         <hr>
         <div class="dropdown pb-4">
-          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton "
-             id="dropdownUser1"  aria-expanded="false">
-
+          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle profileButton"
+             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="circleIcon text-white userColor">
               <div class="container6">${user.getFirstSymbol(user.getLastName())}${user.getFirstSymbol(user.getName())}</div>
             </div>

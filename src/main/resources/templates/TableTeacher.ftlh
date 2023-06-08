@@ -255,46 +255,57 @@
                 <thead>
                 <tr>
                     <th scope="col">ФИО</th>
-                    <th scope="col">Кол-во пропусков</th>
-                    <th scope="col">Оценки за ответы</th>
-                    <th scope="col">Итог</th>
+                    <th scope="col">Общие оценки</th>
+                    <th scope="col">Средний балл</th>
                 </tr>
                 </thead>
                 <tbody>
                 <#list users as user>
                     <#assign tableView = false>
-                    <#if user.getGroup() == group>
+                    <#if user.group?exists && user.getGroup() == group>
                         <tr>
-                            <#list scores as score>
-                                <#if user.getId() == score.getUser().getId() && !tableView>
-                                    <#assign tableView = true>
-                                    <th scope="row">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}
-                                        <a href="/tutor/groups/edit/${user.getId()}" class="fw-bold text-black button text-center" type="button"
-                                           style="justify-content: right; height: 30px; width: 30px">✎
-                                        </a>
-                                    </th>
-                                    <td>${score.getMissing()}</td>
-                                    <td>
-                                        <#assign totalScore = 0>
-                                        <#assign scoreCount = 0>
-                                        <#list scores as s>
-                                            <#if user.getId() == s.getUser().getId()>
-                                                <#assign totalScore += s.getCount()>
-                                                <#assign scoreCount += 1>
-                                                ${s.getCount()}<#sep>,</#sep>
+                            <#if scores?has_content>
+                                <#list scores as score>
+                                    <#if user.getId() == score.getStudentId() && !tableView>
+                                        <#assign tableView = true>
+                                        <th scope="row">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}
+                                            <a href="/tutor/groups/edit" class="fw-bold text-black button text-center" type="button"
+                                               style="justify-content: right; height: 30px; width: 30px">✎
+                                            </a>
+                                        </th>
+                                        <td>
+                                            <#assign totalScore = 0>
+                                            <#assign scoreCount = 0>
+                                            <#list scores as s>
+                                                <#if user.getId() == score.getStudentId()>
+                                                    <#assign totalScore += s.getCount()>
+                                                    <#assign scoreCount += 1>
+                                                    ${s.getCount()}<#sep>,</#sep>
+                                                </#if>
+                                            </#list>
+                                        </td>
+                                        <td>
+                                            <#if scoreCount != 0>
+                                                ${totalScore / scoreCount}
                                             </#if>
-                                        </#list>
-                                    </td>
-                                    <td>
-                                        <#if scoreCount != 0>
-                                            ${totalScore / scoreCount}
-                                        </#if>
-                                    </td>
-                                </#if>
-                            </#list>
+                                        </td>
+                                    </#if>
+                                </#list>
+                            <#else>
+                                <th scope="row">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}
+                                    <a href="/tutor/groups/edit" class="fw-bold text-black button text-center" type="button"
+                                       style="justify-content: right; height: 30px; width: 30px">✎
+                                    </a>
+                                </th>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </#if>
                         </tr>
                     </#if>
                 </#list>
+
+
                 </tbody>
             </table>
 

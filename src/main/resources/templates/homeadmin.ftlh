@@ -13,7 +13,8 @@
         }
 
         .menuBar {
-            color: white; /* Цвет текста */
+            font-weight: bold;
+            color: black; /* Цвет текста */
             padding: 10px; /* Поля вокруг текста */
             border-radius: 20px; /* Уголки */
             background-color: #29292C;
@@ -270,7 +271,7 @@
                                 <#if role == 'ROLE_GUEST'>
                                     <#assign hasScore = true>
                                     <div class="row item">
-                                        <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
+                                        <div class="col text-wrap fw-bold">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
                                         <div class="col" style="display: flex; justify-content: flex-end">
                                             <div class="row" style="width: max-content">
                                                 <div class="col">

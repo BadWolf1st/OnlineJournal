@@ -45,30 +45,30 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="../static/js/DarkChanger.js"></script>
 <div class="container container6">
-
     <div class="row">
         <div class="empty"></div>
-        <img src="../static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
+        <img src="/static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
         <form action="/admin/subject/create" method="post">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="title" placeholder="title"><br>
-                <label for="floatingInput">Название предмета</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="title">
+                <label for="title">Название предмета</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="teacherId" placeholder="teacherId"><br>
-                <label for="floatingInput">ID преподавателя</label>
+                <input type="number" class="form-control" name="teacherId" id="teacherId" placeholder="teacherId">
+                <label for="teacherId">ID преподавателя</label>
             </div>
-            <label for="groupId">Группа</label>
-            <select id="groupId" required name="groupId" class="form-control">
-                <option value="">Группа не выбрана</option>
-                <#list groups as group>
-                    <option value=${group.id}>${group.name}</option>
-                </#list>
-            </select>
-    </div>
             <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="term" placeholder="term"><br>
-                <label for="floatingInput">Номер семестра</label>
+                <label for="groupId" style="margin-top: -15px">Группа</label>
+                <select id="groupId" required name="groupId" class="form-control">
+                    <option value="">Группа не выбрана</option>
+                    <#list groups as group>
+                        <option value="${group.id}">${group.name}</option>
+                    </#list>
+                </select>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="term" id="term" placeholder="term">
+                <label for="term">Номер семестра</label>
             </div>
             <div class="form-floating mb-3">
                 <label for="type" style="margin-top: -15px">Тип сдачи предмета</label>
@@ -82,9 +82,9 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
-
     </div>
 </div>
+
 
 </body>
 </html>

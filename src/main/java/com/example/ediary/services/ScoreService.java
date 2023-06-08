@@ -56,8 +56,6 @@ public class ScoreService {
             } else {
                 log.error("User: {} haven't this score with id = {}", user.getEmail(), id);
             }
-        } else {
-            log.error("Score with id = {} is not found", id);
         }
     }
     public void deleteSubject(User user, Long id) {
@@ -86,5 +84,8 @@ public class ScoreService {
 
     public void updateScore(Score score){
         scoreRepository.save(score);
+    }
+    public List<Score> list() {
+        return scoreRepository.findAll();
     }
 }

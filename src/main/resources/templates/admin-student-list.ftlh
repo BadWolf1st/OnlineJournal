@@ -274,10 +274,6 @@
                                 <label for="id" class="">ФИО</label>
                             </div>
                         </div>
-                        <a href="AdminAddStudent.html" type="button" class="btn fw-bold text-black button text-center"
-                                style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
-                            <i class="bi bi-people-fill">+</i>
-                        </a>
                         <button type="submit" class="btn fw-bold text-black button text-center bi bi-search" id="search"
                              style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
                         </button>
