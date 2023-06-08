@@ -49,40 +49,35 @@
     <div class="row">
         <div class="empty"></div>
         <img src="../static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
-        <form action="/tutor/groups/regscorecreate" method="post">
+        <form action="/admin/subject/create" method="post">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="author" placeholder="author"><br>
-                <label for="floatingInput">Имя преподавателя</label>
+                <input type="text" class="form-control" name="title" placeholder="title"><br>
+                <label for="floatingInput">Название предмета</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="studentId" placeholder="studentId"><br>
-                <label for="floatingInput">ID студента</label>
+                <input type="number" class="form-control" name="teacherId" placeholder="teacherId"><br>
+                <label for="floatingInput">ID преподавателя</label>
+            </div>
+            <label for="groupId">Группа</label>
+            <select id="groupId" required name="groupId" class="form-control">
+                <option value="">Группа не выбрана</option>
+                <#list groups as group>
+                    <option value=${group.id}>${group.name}</option>
+                </#list>
+            </select>
+    </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" name="term" placeholder="term"><br>
+                <label for="floatingInput">Номер семестра</label>
             </div>
             <div class="form-floating mb-3">
-                <label for="type" style="margin-top: -15px">Тип работы</label>
+                <label for="type" style="margin-top: -15px">Тип сдачи предмета</label>
                 <select id="type" required name="type" class="form-control">
                     <option value="">Тип не выбран</option>
-
-                    <option value="Практическая работа">Практическая работа</option>
-                    <option value="Лабораторная работа">Лабораторная работа</option>
                     <option value="Зачёт">Зачёт</option>
                     <option value="Дифференцированный зачёт">Дифференцированный зачёт</option>
                     <option value="Экзамен">Экзамен</option>
-
                 </select>
-            </div>
-            <div class="form-floating mb-3">
-                <label for="subjectId" style="margin-top: -15px">Название предмета</label>
-                <select id="subjectId" required name="subjectId" class="form-control">
-                    <option value="">Тип не выбран</option>
-                    <#list subjects as subject>
-                        <option value=${subject.id}>${subject.title}. ${subject.term} семестр. ${subject.type}. ${subject.groupName}</option>
-                    </#list>
-                </select>
-            </div>
-            <div class="form-floating  mb-3">
-                <input type="number" class="form-control" name="count" placeholder="count"><br>
-                <label for="floatingInput">Оценка</label>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit" class="btn btn-primary">Сохранить</button>

@@ -229,7 +229,7 @@
           </li>
           <li>
             <div  class="buttonVisual">
-              <a href="/"  class="nav-link px-0 align-middle buttonText">
+              <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText">
                 <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
             </div>
           </li>
@@ -294,9 +294,15 @@
                     Староста не назначен
                   </#if>
                 </div>
-
                 <div class="col text-wrap"
-                     style="display: flex; justify-content: flex-start; margin-top: 4px">Кол-во студентов: ${group.getCount()}
+                     style="display: flex; justify-content: flex-start; margin-top: 4px">Кол.студ.:
+                  <#assign realcount = 0>
+                  <#list users as user>
+                      <#if user.group == group>
+                        <#assign realcount = realcount + 1>
+                      </#if>
+                  </#list>
+                  ${realcount} из ${group.getCount()}
                 </div>
                 <div class="col" style="display: flex; justify-content: flex-end">
                   <div class="row" style="width: max-content">

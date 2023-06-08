@@ -32,7 +32,7 @@ public class UserService {
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(Role.ROLE_GUEST);
-        user.setGroup(groupService.getGroupByName(user.getGroupName()));
+        //user.setGroup(groupService.getGroupByName(user.getGroupName()));
         log.info("Saving new User with email: {}", email);
         userRepository.save(user);
         return true;

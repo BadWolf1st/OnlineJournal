@@ -257,8 +257,8 @@
                                 <div class="row">
                                     <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
                                     <div class="col-sm-6">
-                                        <#if user.getGroupName()?has_content >
-                                            <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.getGroupName()}</span>
+                                        <#if user.getGroup()?has_content >
+                                            <span class="fw-bold">Группа: </span><span class="badge bg-secondary">${user.group.getName()}</span>
                                         <#else>
                                             <span class="fw-bold">Группа: </span><span class="badge bg-secondary">Без группы</span>
                                         </#if>

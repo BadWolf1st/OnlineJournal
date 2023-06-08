@@ -233,7 +233,7 @@
                     </li>
                     <li>
                         <div  class="buttonVisual">
-                            <a href="/"  class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
@@ -270,10 +270,14 @@
                         <div class="col" style="">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="id" name="idname"
-                                       placeholder="ФИО \ Т.н.">
-                                <label for="id" class="">ФИО \ Т.н.</label>
+                                       placeholder="ФИО">
+                                <label for="id" class="">ФИО</label>
                             </div>
                         </div>
+                        <a href="AdminAddStudent.html" type="button" class="btn fw-bold text-black button text-center"
+                                style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
+                            <i class="bi bi-people-fill">+</i>
+                        </a>
                         <button type="submit" class="btn fw-bold text-black button text-center bi bi-search" id="search"
                              style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
                         </button>

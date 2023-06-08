@@ -279,21 +279,27 @@
                     </div>
                 </#if>
             </div>
-            <div class="col">
-                <form action="/profile/change/avatar" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="file">Аватар</label>
-                            <input required type="file" name="file" id="file">
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" style="width: 100%" class="btn btn-dark">Изменить аватар</button>
-                    </div>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                </form>
-            </div>
+            <#if user == userByPrincipal>
                 <div class="col">
+                    <form action="/profile/change/avatar" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="file">Аватар</label>
+                                <input required type="file" name="file" id="file">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" style="width: 100%" class="btn btn-dark">Изменить аватар</button>
+                        </div>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    </form>
+                </div>
+            </#if>
+                <div class="col">
+                    <div style="margin: 10px" class="row">
+                        <div class="col-md-3">ID пользователя</div>
+                        <div class="col-md-3">${user.id}</div>
+                    </div>
             <div style="margin: 10px" class="row">
                 <div class="col-md-3">ФИО</div>
                 <div class="col-md-3">${user.getLastName()} ${user.getName()} ${user.getMiddleName()}</div>
@@ -316,7 +322,7 @@
             </div>
                     <div style="margin: 10px" class="row">
                         <div class="col-md-3">Группа</div>
-                        <div class="col-md-3">${user.getGroupName()}</div>
+                        <div class="col-md-3">${user.group.getName()}</div>
                     </div>
                     <div style="margin: 10px" class="row">
                         <div class="col-md-3">Роль</div>

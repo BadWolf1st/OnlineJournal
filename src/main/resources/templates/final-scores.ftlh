@@ -267,30 +267,47 @@
 
                 <div class="col texts item">
                     <#list subjects as subject>
-                        <#if user.groupName == subject.groupName && subject.term == selectedTerm>
+                        <#if (subject.getType() == "Зачёт") || (subject.getType() == "Дифференцированный зачёт") || (subject.getType() == "Экзамен")>
+                        <#if user.group == subject.group && subject.term == selectedTerm>
                             <div class="col texts item">
                                 <div class="row">
                                     <div class="h4">${subject.getTitle()}</div>
                                 </div>
                                 <div class="row">
+                                    <!--
                                     <#list scores as score>
                                         <#if (score.getStudentId() == user.getId()) && (score.getTitle() == subject.getTitle())>
                                             <div class="">${score.getAuthor()}</div>
                                             <#break>
                                         </#if>
+                                    <#else>
+                                        <div class="col-6">${subject.teacher.getLastName()} ${subject.teacher.getFirstSymbol(subject.teacher.getName())} ${subject.teacher.getFirstSymbol(subject.teacher.getMiddleName())}</div>
                                     </#list>
+                                    -->
+                                    <div class="col-6">${subject.teacher.getLastName()} ${subject.teacher.getFirstSymbol(subject.teacher.getName())}. ${subject.teacher.getFirstSymbol(subject.teacher.getMiddleName())}.</div>
                                 </div>
                                 <div class="row">
                                     <div class="">${subject.getType()}</div>
                                 </div>
                                 <div class="row evaluation NR" style="margin-left: 1px">
-                                        <#if subject.getCount() != 0>
-                                           ${subject.getCount()}
-                                         <#else>
-                                             НА
+                                    <#assign finalcount = 0>
+                                    <#list scores as score>
+                                        <#if (score.getStudentId() == user.getId()) && ((score.getType() == "Зачёт") || (score.getType() == "Дифференцированный зачёт") || (score.getType() == "Экзамен"))
+                                        && (score.getTitle() == subject.getTitle())>
+                                            <#if score.getCount() != 0>
+                                                <#assign finalcount = score.getCount()>
+                                            </#if>
+                                            <#break>
                                         </#if>
+                                    </#list>
+                                    <#if finalcount == 0>
+                                        <div class="">Нет</div>
+                                    <#else>
+                                        <div class="">${finalcount}</div>
+                                    </#if>
                                 </div>
                             </div>
+                        </#if>
                         </#if>
                     <#else>
                         <h1 style="text-align: center">Нет оценок</h1>

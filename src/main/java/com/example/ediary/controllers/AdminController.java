@@ -1,7 +1,8 @@
 package com.example.ediary.controllers;
 
 import com.example.ediary.models.Group1;
-import com.example.ediary.models.Timetable;
+import com.example.ediary.models.Score;
+import com.example.ediary.models.Subject;
 import com.example.ediary.models.User;
 import com.example.ediary.models.enums.Role;
 import com.example.ediary.repositories.GroupRepository;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -27,8 +29,8 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
     private final UserService userService;
-    private final GroupService groupService;
     private final ScoreService scoreService;
+    private final GroupService groupService;
     private final GroupRepository groupRepository;
 
     @GetMapping("/admin/panel")
@@ -50,6 +52,11 @@ public class AdminController {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
         return "admin-user-edit";
+    }
+    @PostMapping("/admin/user/edit")
+    public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
+        userService.changeUserRoles(user, form);
+        return "redirect:/admin/user/edit/" + user.getId();
     }
     @GetMapping("/admin/home")
     public String adminhome(User user, Model model, Principal principal) {
@@ -110,6 +117,30 @@ public class AdminController {
         user.setAge(age);
         userService.updateUser(user);
         return "redirect:/admin/user/edit/{id}";
+    }
+    @GetMapping("/admin/subject")
+    public String subjectList(Model model, Principal principal){
+        model.addAttribute("subjects", scoreService.listSubjects(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "admin-subject-list";
+    }
+    @PostMapping("/admin/subject/{id}/delete")
+    public String deleteSubject(@PathVariable("id") Long id, Model model, Principal principal){
+        scoreService.deleteSubject(userService.getUserByPrincipal(principal), id);
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "redirect:/admin/subject";
+    }
+    @GetMapping("/admin/subject/create")
+    public String fillSubject(Model model, Principal principal){
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "subject-create";
+    }
+    @PostMapping("/admin/subject/create")
+    public String createSubject(@RequestParam("teacherId") Long id, @RequestParam("groupId") Long groupId, Subject subject, Principal principal) throws IOException {
+        subject.setTeacher(userService.getUserById(id));
+        subject.setGroup(groupService.getGroupById(groupId));
+        scoreService.saveSubject(principal, subject);
+        return "redirect:/admin/subject";
     }
     @GetMapping("/admin/groups")
     public String viewGroups(@RequestParam(name = "idname", required = false) String name, Model model, Principal principal){

@@ -10,6 +10,7 @@
     <style>
         .texts {
             font-weight: bold;
+            color: white;
         }
 
         .menuBar {
@@ -35,6 +36,9 @@
         }
 
         @media (prefers-color-scheme: light) {
+            .texts {
+                color: black;
+            }
             .menuBar {
                 background-color: #cbcbcb;
             }
@@ -199,8 +203,8 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div class="buttonVisual active" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                        <div class="buttonVisual" id="Home">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
@@ -229,8 +233,8 @@
                         </div>
                     </li>
                     <li>
-                        <div  class="buttonVisual">
-                            <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText">
+                        <div  class="buttonVisual active">
+                            <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
@@ -259,57 +263,83 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <div class="text-center">Заявки</div>
+                <form>
+                    <div class="row" style="">
+                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
+                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                        </a>
+                        <div class="col" style="">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="id" name="idname"
+                                       placeholder="Название предмета">
+                                <label for="id" class="">Название предмета</label>
+                            </div>
+                        </div>
+                        <a href="/admin/subject/create" type="button" class="btn fw-bold text-black button text-center"
+                                style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
+                            <i class="fas fa-times">+</i>
+                        </a>
+                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-search" id="search"
+                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                        </button>
+                    </div>
+                    <script>
+                        // получаем доступ к элементам формы и кнопке
+                        const searchForm = document.querySelector('form');
+                        const searchInput = document.querySelector('#id');
+                        const searchButton = document.querySelector('#search');
+
+                        // добавляем обработчик события на кнопку поиска
+                        searchButton.addEventListener('click', function(e) {
+                          e.preventDefault(); // отменяем действие по умолчанию
+                          const searchTerm = searchInput.value.toLowerCase(); // получаем введенный поисковый запрос и переводим в нижний регистр
+                          filterStudents(searchTerm); // вызываем функцию фильтрации студентов на странице
+                        });
+                        function filterStudents(searchTerm) {
+                          const items = document.querySelectorAll('.item'); // получаем все записи на странице
+                          items.forEach(function(item) { // перебираем все записи на странице
+                            const name = item.querySelector('.text-wrap').textContent.toLowerCase(); // получаем имя студента и переводим в нижний регистр
+                            if (name.includes(searchTerm)) { // если имя студента содержит поисковый запрос
+                              item.style.display = 'flex'; // отображаем запись
+                            } else {
+                              item.style.display = 'none'; // скрываем запись
+                            }
+                          });
+                        }
+
+                    </script>
+                </form>
             </div>
             <div class="col-">
                 <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
                     <div class="col " style="height: min-content">
-                        <#assign hasScore = false>
-                        <#list users as user>
-                            <#list user.getRoles() as role>
-                                <#if role == 'ROLE_GUEST'>
-                                    <#assign hasScore = true>
-                                    <div class="row item">
-                                        <div class="col text-wrap">${user.getName()} ${user.getLastName()} ${user.getMiddleName()}</div>
-                                        <div class="col" style="display: flex; justify-content: flex-end">
-                                            <div class="row" style="width: max-content">
-                                                <div class="col">
-                                                    <form action="/admin/home/accept" method="POST">
-                                                        <input type="hidden" name="userId" value="${user.getId()}" />
-                                                        <button type="submit" class="fw-bold text-black button text-center"
-                                                                style="justify-content: right; background-color: greenyellow; width: 30px">
-                                                            ✓
-                                                        </button>
-                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                                    </form>
-                                                </div>
-                                                <div class="col">
-                                                    <form action="/admin/home/decline" method="POST">
-                                                        <input type="hidden" name="userId" value="${user.getId()}" />
-                                                        <button type="submit" class="fw-bold text-black button text-center"
-                                                                style="justify-content: right;background-color: red; width: 30px">
-                                                            ✕
-                                                        </button>
-                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                                    </form>
-                                                </div>
-                                                <div class="col">
-                                                    <form action="/user/${user.getId()}" method="GET">
-                                                        <button type="submit" class="fw-bold text-black button text-center"
-                                                                style="justify-content: right; width: 30px">
-                                                            ...
-                                                        </button>
-                                                    </form>
-                                                </div>
+                        <#list subjects as subject>
+                                <div class="row item texts">
+                                    <div class="col text-wrap" style="width: min-content; margin-top: 4px">${subject.title}
+                                    </div>
+                                    <div class="col text-wrap"
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Группа: ${subject.group.getName()}
+                                    </div>
+                                    <div class="col text-wrap"
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Семестр: ${subject.term}
+                                    </div>
+                                    <div class="col text-wrap"
+                                         style="display: flex; justify-content: flex-start; margin-top: 4px">Преподаватель: ${subject.teacher.getLastName()} ${subject.teacher.getFirstSymbol(subject.teacher.getName())}. ${subject.teacher.getFirstSymbol(subject.teacher.getMiddleName())}.
+                                    </div>
+                                    <div class="col" style="display: flex; justify-content: flex-end">
+                                        <div class="row" style="width: max-content">
+                                            <div class="col">
+                                                <form action="/admin/subject/${subject.id}/delete" method="post">
+                                                    <button type="submit" class="btn fw-bold text-black button text-center"
+                                                            style="justify-content: right; height: 30px; width: 30px; background-color: red">×
+                                                    </button>
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                </#if>
-                            </#list>
+                                </div>
                         </#list>
-                        <#if hasScore = false>
-                            <h1 style="text-align: center">Новых пользователей нет</h1>
-                        </#if>
                     </div>
                 </div>
             </div>

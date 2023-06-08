@@ -80,9 +80,14 @@
 
                 </select>
             </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="groupName" required name="groupName" placeholder="ААА-000">
-                <label for="floatingInput">Группа</label>
+            <div class="form-group">
+                <label for="groupId">Группа</label>
+                <select id="groupId" required name="groupId" class="form-control">
+                    <option value="">Группа не выбрана</option>
+                    <#list groups as group>
+                        <option value=${group.id}>${group.name}</option>
+                    </#list>
+                </select>
             </div>
             <div class="form-floating mb-3">
                 <input type="number" class="form-control" id="tableNumber" required name="tableNumber" placeholder="tableNumber">

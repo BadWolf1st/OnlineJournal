@@ -95,6 +95,7 @@ public class TimetableController {
     @GetMapping("/scorecreate")
     public String regtimetable123(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("subjects", scoreService.listSubjects(null));
         return "scorecreate";
     }
     @GetMapping("/admintimedel/{id}/{id2}/{id3}")
@@ -149,9 +150,11 @@ public class TimetableController {
         return "scorecreate";
     }
     @PostMapping("/tutor/groups/regscorecreate")
-    public String regScoreCreate(Principal principal, Score score) {
+    public String regScoreCreate(@RequestParam(name = "subjectId", required = false) Long id, Principal principal, Score score) {
+        score.setSubject(scoreService.getSubjectById(id));
+        score.setTitle(scoreService.getSubjectById(id).getTitle());
         scoreService.saveScore(principal, score);
-        scoreRepository.save(score);
+        //scoreRepository.save(score);
         return "redirect:/";
     }
     @GetMapping("/tutor/groups/homework")

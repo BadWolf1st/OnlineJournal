@@ -210,17 +210,18 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/"
+                <a href="homeAdmin"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="/static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <div  class="buttonVisual" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
+                        <div class="buttonVisual" id="Home">
+                            <a href="/admin/home" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                                <i class="fs-4 bi-house"></i>
+                                <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
@@ -234,13 +235,13 @@
                     </li>
                     <li>
                         <div  class="buttonVisual active">
-                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
+                            <a href="admin/groups" class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi bi-people-fill"></i>
                                 <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
@@ -248,7 +249,7 @@
                     </li>
                     <li>
                         <div  class="buttonVisual">
-                            <a href="/"  class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/subject"  class="nav-link px-0 align-middle buttonText">
                                 <i class="fs-4 bi-subtract"></i> <span class="ms-1 d-none d-sm-inline">Предметы</span></a>
                         </div>
                     </li>
