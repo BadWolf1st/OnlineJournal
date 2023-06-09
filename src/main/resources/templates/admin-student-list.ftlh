@@ -204,14 +204,14 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div  class="buttonVisual" id="Home">
-                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual active">
-                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText this">
                                 <i class="fs-4 bi bi-person-circle"></i>
                                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>

@@ -4,6 +4,7 @@ import com.example.ediary.models.User;
 import com.example.ediary.services.GroupService;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -38,6 +39,7 @@ public class UserController {
         }
         return "redirect:/login";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/profile")
     public String profile(Principal principal,
                           Model model) {
@@ -59,27 +61,26 @@ public class UserController {
     public String createUser(@RequestParam("groupId") Long id, User user, Model model) {
         if (!userService.createUser(user)) {
             model.addAttribute("errorMessage", "Пользователь с email: " + user.getEmail() + " уже существует");
-            return "registration";
+            return "reg";
         }
         user.setGroup(groupService.getGroupById(id));
         return "redirect:/login";
     }
-
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
         model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
-        model.addAttribute("products", user.getProducts());
         return "profile-student";
     }
-
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/profile/users")
     public String allUsers(User user, Model model, Principal principal) {
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "users(2)";
     }
-
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/profile/groups")
     public String GroupsUsers(Model model, Principal principal, String name) {
         model.addAttribute("users", userService.list());
@@ -87,6 +88,7 @@ public class UserController {
         model.addAttribute("groups", groupService.listGroups(name));
         return "groupsProfile";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/profile/groups/{id}")
     public String GroupsUsersInfo(@PathVariable("id") Long id, Model model, Principal principal) {
         model.addAttribute("users", userService.list());
@@ -94,6 +96,7 @@ public class UserController {
         model.addAttribute("group",groupService.getGroupById(id));
         return "profileGropsInfo";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @PostMapping("/profile/change/avatar")
     public String changeAddress(@RequestParam("file") MultipartFile file,
                                 Principal principal, Model model) throws IOException {

@@ -1,13 +1,12 @@
 package com.example.ediary.controllers;
 
-import com.example.ediary.models.Group1;
-import com.example.ediary.models.Score;
-import com.example.ediary.models.Subject;
-import com.example.ediary.models.User;
+import com.example.ediary.models.*;
 import com.example.ediary.models.enums.Role;
 import com.example.ediary.repositories.GroupRepository;
+import com.example.ediary.repositories.TimetableRepository;
 import com.example.ediary.services.GroupService;
 import com.example.ediary.services.ScoreService;
+import com.example.ediary.services.TimetableService;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,7 +31,8 @@ public class AdminController {
     private final ScoreService scoreService;
     private final GroupService groupService;
     private final GroupRepository groupRepository;
-
+    private final TimetableService timetableService;
+    private final TimetableRepository timetableRepository;
     @GetMapping("/admin/panel")
     public String admin(Model model, Principal principal) {
         model.addAttribute("users", userService.list());
@@ -235,5 +235,47 @@ public class AdminController {
         user.setGroup(groupService.getGroupById(groupid));
         userService.updateUser(user);
         return "redirect:/admin/groups/" + groupid + "/add";
+    }
+    @PostMapping("/regtimetablestudent")
+    public String regtimetablePost(Principal principal, Timetable timetable) {
+        timetableService.saveTimeTable(principal, timetable);
+        timetableRepository.save(timetable);
+        return "redirect:/";
+    }
+    @GetMapping("/admin/timetable")
+    public String admintimetable(Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "redirect:/admintime/Monday/1/non";
+    }
+    @GetMapping("/admintime/{id}/{id2}/{id3}")
+    public String timetableAdmin(@PathVariable String id,@PathVariable Long id2,@PathVariable String id3, Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("selectedWeekday", id);
+        model.addAttribute("selectedWeek", id2);
+        model.addAttribute("selectedGroup", id3);
+        return "AdminTimetable2(3)";
+    }
+    @GetMapping("/scorecreate")
+    public String regtimetable123(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("subjects", scoreService.listSubjects(null));
+        return "scorecreate";
+    }
+    @GetMapping("/admintimedel/{id}/{id2}/{id3}")
+    public String timetableAdminDelete(@PathVariable String id,@PathVariable Long id2,@PathVariable String id3, Principal principal, Model model) {
+        model.addAttribute("timetables", timetableService.listTimetable(null));
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("selectedWeekday", id);
+        model.addAttribute("selectedWeek", id2);
+        model.addAttribute("selectedGroup", id3);
+        return "admintimetabledelete";
+    }
+    @PostMapping("/deleteTimetable")
+    public String deleteTimetable(@RequestParam(name = "timetableId", required = false) List<Long> id){
+        if(id != null){
+            timetableService.deleteTimetable(id);}
+        return "redirect:/admin/timetable";
     }
 }

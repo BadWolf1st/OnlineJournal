@@ -1,7 +1,5 @@
 package com.example.ediary.repositories;
 
-import com.example.ediary.models.Homework;
-import com.example.ediary.models.Product;
 import com.example.ediary.models.Score;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

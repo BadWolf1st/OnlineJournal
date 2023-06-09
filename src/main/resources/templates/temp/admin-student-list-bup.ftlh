@@ -10,6 +10,7 @@
     <style>
         .texts {
             font-weight: bold;
+            color: white;
         }
 
         .menuBar {
@@ -24,8 +25,7 @@
             padding: 4px;
             border-radius: 10px;
             background-color: #9F9F9F;
-            width: fit-content;
-            margin-top: 5px;
+            alignment: right;
         }
 
         .item {
@@ -36,16 +36,15 @@
         }
 
         @media (prefers-color-scheme: light) {
+            .texts {
+                color: black;
+            }
             .menuBar {
                 background-color: #cbcbcb;
             }
 
             .item {
                 background-color: #cbcbcb;
-            }
-
-            .button {
-                background-color: #6e6e6e;
             }
         }
 
@@ -101,11 +100,6 @@
             background: #9F9F9F;
         }
 
-        .row > * {
-            padding-right: auto;
-            padding-left: auto;
-        }
-
         .circleIcon {
             width: 40px;
             height: 40px;
@@ -120,6 +114,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #161719;
+            }
         }
 
         .invert {
@@ -184,14 +184,6 @@
             }
         }
 
-        .CenterThis {
-            position: sticky;
-            top: 50%;
-            left: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
     </style>
 </head>
 <body>
@@ -199,7 +191,6 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 <script async src="../../static/js/DarkChanger.js"></script>
-
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
@@ -207,7 +198,7 @@
                 <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="../../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -221,25 +212,23 @@
                     </li>
                     <li>
                         <div class="buttonVisual active">
-                            <a href="/homeworks"  class="nav-link px-0 align-middle buttonText this">
-                                <i class="fs-4 bi-pencil-square"></i>
-                                <span class="ms-1 d-none d-sm-inline">Домашние задания</span>
+                            <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText this">
+                                <i class="fs-4 bi bi-person-circle"></i>
+                                <span class="ms-1 d-none d-sm-inline">Пользователи</span>
                             </a>
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual">
-                            <a href="/timetablestudent" class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi-clock"></i>
-                                <span class="ms-1 d-none d-sm-inline">Расписание</span>
-                            </a>
+                        <div  class="buttonVisual">
+                            <a href="/admin/timetable" class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
                         </div>
                     </li>
                     <li>
                         <div class="buttonVisual">
-                            <a href="/finalscore/1"  class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi-star"></i>
-                                <span class="ms-1 d-none d-sm-inline">Итоговые оценки</span>
+                            <a href="/admin/groups" class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi bi-people-fill"></i>
+                                <span class="ms-1 d-none d-sm-inline">Группы</span>
                             </a>
                         </div>
                     </li>
@@ -268,36 +257,82 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <form method="post" action="/homeworks">
-                    <div class="form-group">
-                        <label for="datepicker">Выберите дату:</label>
-                        <input type="date" name="dueDate" id="dueDate" class="form-control">
-                        <input type="hidden" value="${_csrf.token}" name="_csrf">
-                        <button type="submit" class="btn btn-primary">Открыть</button>
+                <form>
+                    <div class="row" style="">
+                        <a href="#" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
+                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                        </a>
+                        <div class="col" style="">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="id" name="idname"
+                                       placeholder="ФИО \ Т.н.">
+                                <label for="id" class="">ФИО \ Т.н.</label>
+                            </div>
+                        </div>
+                        <a href="AdminAddStudent.html" type="button" class="btn fw-bold text-black button text-center"
+                                style="justify-content: right; width: 45px; height: 30px; background-color: greenyellow; margin-top: 12px">
+                            <i class="bi bi-people-fill">+</i>
+                        </a>
+                        <button type="submit" class="btn fw-bold text-black button text-center bi bi-search" id="search"
+                             style="justify-content: right; width: 30px; height: 30px; margin: 15px 10px">
+                        </button>
                     </div>
+                    <script>
+                        // получаем доступ к элементам формы и кнопке
+                        const searchForm = document.querySelector('form');
+                        const searchInput = document.querySelector('#id');
+                        const searchButton = document.querySelector('#search');
+
+                        // добавляем обработчик события на кнопку поиска
+                        searchButton.addEventListener('click', function(e) {
+                          e.preventDefault(); // отменяем действие по умолчанию
+                          const searchTerm = searchInput.value.toLowerCase(); // получаем введенный поисковый запрос и переводим в нижний регистр
+                          filterStudents(searchTerm); // вызываем функцию фильтрации студентов на странице
+                        });
+                        function filterStudents(searchTerm) {
+                          const items = document.querySelectorAll('.item'); // получаем все записи на странице
+                          items.forEach(function(item) { // перебираем все записи на странице
+                            const name = item.querySelector('.text-wrap').textContent.toLowerCase(); // получаем имя студента и переводим в нижний регистр
+                            if (name.includes(searchTerm)) { // если имя студента содержит поисковый запрос
+                              item.style.display = 'flex'; // отображаем запись
+                            } else {
+                              item.style.display = 'none'; // скрываем запись
+                            }
+                          });
+                        }
+
+                    </script>
                 </form>
             </div>
-            <div class="row-12" style="overflow-y: auto; height: 90vh;">
-                <#if homeworkList?size == 0>
-                    <h1 style="text-align: center">Заданий нет</h1>
-                <#else>
-                    <#list homeworkList as homework>
-                        <#if homework.subject.getGroup().getId() == user.getGroup().getId()>
-                            <div class="row">
-                                <div class="col texts item">
-                                    <div class="row">
-                                        <div class="h4">${homework.subject.getTitle()}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="text-wrap">${homework.description}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </#if>
-                    </#list>
-                </#if>
+            <div class="col-">
+                <div class="row" style="overflow-y: auto; height: 90vh; white-space: nowrap">
+                    <div class="col " style="height: min-content">
+                        <table class="table table-hover table-dark">
+                            <tr>
+                                <th scope="col">Фио</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Номер телефона</th>
+                                <th scope="col">Роли</th>
+                                <th scope="col">Редактирование</th>
+                                <th scope="col">Подробная информация</th>
+                            </tr>
+                            <#list users as user>
+                                <tr>
+                                    <th>${user.getLastName()} ${user.getName()}
+                                        ${user.getMiddleName()}</th>
+                                    <th>${user.email}</th>
+                                    <th>${user.phoneNumber}</th>
+                                    <th><#list user.roles as role>${role}</#list></th>
+                                    <th><a href="/admin/user/edit/${user.id}">Редактировние</a></th>
+                                    <th><a href="/user/${user.id}">Подробная информация</a></th>
+                                </tr>
+                            <#else>
+                                <h3>Пользователей нет</h3>
+                            </#list>
+                        </table>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

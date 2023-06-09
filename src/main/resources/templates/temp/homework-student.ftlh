@@ -19,27 +19,13 @@
             background-color: #29292C;
             margin: 10px;
         }
-        .timetable {
-            color: white; /* Цвет текста */
-            padding: 10px; /* Поля вокруг текста */
-            border-radius: 10px; /* Уголки */
-            background-color: #29292C;
-            margin: 10px;
-            display: flex;
-
-        }
-        @media (prefers-color-scheme: light) {
-            .timetable {
-            color: black;
-            background-color: #cbcbcb;
-            }
-        }
 
         .button {
             padding: 4px;
             border-radius: 10px;
             background-color: #9F9F9F;
-            alignment: right;
+            width: fit-content;
+            margin-top: 5px;
         }
 
         .item {
@@ -56,6 +42,10 @@
 
             .item {
                 background-color: #cbcbcb;
+            }
+
+            .button {
+                background-color: #6e6e6e;
             }
         }
 
@@ -111,6 +101,11 @@
             background: #9F9F9F;
         }
 
+        .row > * {
+            padding-right: auto;
+            padding-left: auto;
+        }
+
         .circleIcon {
             width: 40px;
             height: 40px;
@@ -125,12 +120,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #161719;
-            }
         }
 
         .invert {
@@ -195,51 +184,62 @@
             }
         }
 
+        .CenterThis {
+            position: sticky;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-<script async src="../static/js/DarkChanger.js"></script>
+<script async src="../../static/js/DarkChanger.js"></script>
+
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="homeAdmin"
+                <a href="/"
                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">
-                                <img src="../static/logo/LabelAdminLogo.svg" class="img-fluid invert" alt="Мои оценки">
+                                <img src="../../static/logo/LabelLabel.svg" class="img-fluid invert" alt="Мои оценки">
                             </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
                         <div class="buttonVisual" id="Home">
-                            <a href="homeAdmin" id="HomeText" class="nav-link align-middle px-0 buttonText">
+                            <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                                 <i class="fs-4 bi-house"></i>
                                 <span class="ms-1 d-none d-sm-inline">Главная</span>
                             </a>
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual">
-                            <a href="/hi" data-bs-toggle="collapse" class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi bi-person-circle"></i>
-                                <span class="ms-1 d-none d-sm-inline">Пользователи</span>
+                        <div class="buttonVisual active">
+                            <a href="/homeworks"  class="nav-link px-0 align-middle buttonText this">
+                                <i class="fs-4 bi-pencil-square"></i>
+                                <span class="ms-1 d-none d-sm-inline">Домашние задания</span>
                             </a>
                         </div>
                     </li>
                     <li>
-                        <div  class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText">
-                                <i class="fs-4 bi-clock"></i> <span class="ms-1 d-none d-sm-inline">Расписание</span></a>
+                        <div class="buttonVisual">
+                            <a href="/timetablestudent" class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-clock"></i>
+                                <span class="ms-1 d-none d-sm-inline">Расписание</span>
+                            </a>
                         </div>
                     </li>
                     <li>
-                        <div class="buttonVisual active">
-                            <a href="#" class="nav-link px-0 align-middle buttonText this">
-                                <i class="fs-4 bi bi-people-fill"></i>
-                                <span class="ms-1 d-none d-sm-inline">Группы</span>
+                        <div class="buttonVisual">
+                            <a href="/finalscore/1"  class="nav-link px-0 align-middle buttonText">
+                                <i class="fs-4 bi-star"></i>
+                                <span class="ms-1 d-none d-sm-inline">Итоговые оценки</span>
                             </a>
                         </div>
                     </li>
@@ -268,50 +268,38 @@
         </div>
         <div class="col">
             <div class="menuBar">
-                <form>
-                    <div class="row" style="display: flex; align-items: center; margin: 0 2px;">
-                        <a href="/profile/groups" class="fw-bold text-black button text-center bi bi-chevron-left" type="button"
-                           style="justify-content: right; width: 30px; height: 30px">
-                        </a>
-                        <div class="col text-center top-100" style="">
-                            ${group.getName()}
-                        </div>
+                <form method="post" action="/homeworks">
+                    <div class="form-group">
+                        <label for="datepicker">Выберите дату:</label>
+                        <input type="date" name="dueDate" id="dueDate" class="form-control">
+                        <input type="hidden" value="${_csrf.token}" name="_csrf">
+                        <button type="submit" class="btn btn-primary">Открыть</button>
                     </div>
                 </form>
             </div>
-            <div class="col-">
-                <div class="col" style="overflow-y: auto; height: 90vh; white-space: nowrap">
-                    <#list users as user>
-                    <#if user.getGroup() == group>
-                    <div class="col " style="height: min-content">
-                        <div class="row item texts" style="display: flex; align-items: center">
-                            <div class="col text-wrap"
-                                 style="width: min-content; margin-top: 4px">
-                                <#if user.id == user.getGroup().getHeadman().id>
-                                <i class="bi bi-star-fill" style="color: #FFA800; padding-right: 5px"></i>
-                            </#if>
-                            ${user.getLastName()} ${user.getName()} ${user.getMiddleName()}
-                        </div>
-                        <div class="col text-wrap"
-                             style="display: flex; justify-content: flex-start; margin-top: 4px">Т.н.: ${user.tableNumber}
-                        </div>
-                        <div class="col" style="display: flex; justify-content: flex-end">
-                            <div class="row" style="width: max-content">
-                                <div class="col">
-                                    <a href="/user/${user.id}" class="fw-bold text-black button text-center" type="button"
-                                       style="justify-content: right; width: 30px; height: 30px">...
-                                    </a>
+            <div class="row-12" style="overflow-y: auto; height: 90vh;">
+                <#if homeworkList?size == 0>
+                    <h1 style="text-align: center">Заданий нет</h1>
+                <#else>
+                    <#list homeworkList as homework>
+                        <#if homework.subject.getGroup().getId() == user.getGroup().getId()>
+                            <div class="row">
+                                <div class="col texts item">
+                                    <div class="row">
+                                        <div class="h4">${homework.subject.getTitle()}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="text-wrap">${homework.description}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </#if>
-        </#list>
+                        </#if>
+                    </#list>
+                </#if>
+            </div>
+
+        </div>
     </div>
-</div>
-</div>
-</div>
 </div>
 </body>
 </html>

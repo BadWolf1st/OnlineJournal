@@ -42,12 +42,12 @@
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<script src="../static/js/DarkChanger.js"></script>
+<script src="../../static/js/DarkChanger.js"></script>
 <div class="container container6">
 
     <div class="row">
         <div class="empty"></div>
-        <img src="../static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
+        <img src="../../static/logo/LabelLabel.svg" class="img-fluid logo invert" alt="Мои оценки">
         <form action="/regtimetablestudent" method="post">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="classroom_number" placeholder="Classroom_number"><br>

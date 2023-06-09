@@ -42,10 +42,6 @@ public class User implements UserDetails {
     public Role getRole(){
         return roles.stream().findFirst().get();
     }
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
-    mappedBy = "user")
-    private List<Product> products = new ArrayList<>();
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private Group1 group;
@@ -55,11 +51,6 @@ public class User implements UserDetails {
     }
     public Group1 getGroup(){
         return this.group;
-    }
-
-    public void addProductToUser(Product product) {
-        product.setUser(this);
-        products.add(product);
     }
     public Character getFirstSymbol(String text){
         return text.charAt(0);
@@ -85,15 +76,6 @@ public class User implements UserDetails {
     public void setAvatar(Image avatar) {
         this.avatar = avatar;
     }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public Long getId() {
         return id;
     }

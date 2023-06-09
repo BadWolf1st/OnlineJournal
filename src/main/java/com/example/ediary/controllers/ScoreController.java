@@ -1,6 +1,5 @@
 package com.example.ediary.controllers;
 
-import com.example.ediary.models.Group1;
 import com.example.ediary.models.Homework;
 import com.example.ediary.models.Score;
 import com.example.ediary.models.User;
@@ -10,12 +9,11 @@ import com.example.ediary.services.ScoreService;
 import com.example.ediary.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -54,6 +52,7 @@ public class ScoreController {
         }
         return "main";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/term/{id}")
     public String scoresWithTerm(@PathVariable Long id, @RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
         model.addAttribute("subjects", scoreService.listSubjects(null));
@@ -74,22 +73,26 @@ public class ScoreController {
         model.addAttribute("user", scoreService.getUserByPrincipal(principal));
         return "guest";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @PostMapping("/score/create")
     public String createScore(Principal principal, Score score) throws IOException {
         scoreService.saveScore(principal, score);
         return "redirect:/";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/score")
     public String formScore(Principal principal, Model model){
         User user = scoreService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
         return "score";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/finalscore")
     public String redirectFinalScore(@PathVariable Long id, Principal principal, Model model){
         model.addAttribute("user", scoreService.getUserByPrincipal(principal));
         return "redirect:/finalscore/1";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/finalscore/{id}")
     public String finalScore(@PathVariable Long id, Principal principal, Model model){
         model.addAttribute("subjects", scoreService.listSubjects(null));
@@ -98,12 +101,14 @@ public class ScoreController {
         model.addAttribute("selectedTerm", id);
         return "final-scores";
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @GetMapping("/homeworks")
     public String redirectToHomeworks(){
         LocalDate currentDate = LocalDate.now();
         String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         return "redirect:/homeworks/" + formattedDate;
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
 
     @RequestMapping(value = "/homeworks/{dueDate}", method = RequestMethod.GET)
     public ModelAndView homeworks(@PathVariable("dueDate") @DateTimeFormat(pattern="dd-MM-yyyy") LocalDate dueDate, Principal principal, Model model) {
@@ -119,6 +124,7 @@ public class ScoreController {
         modelAndView.addObject("homeworkList", filteredList);
         return modelAndView;
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_TEACHER', 'ROLE_ADMIN')")
     @RequestMapping(value = "/homeworks", method = RequestMethod.POST)
     public String redirectToHomeworksWithDate(@RequestParam("dueDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate dueDate){
         return "redirect:/homeworks/" + dueDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));

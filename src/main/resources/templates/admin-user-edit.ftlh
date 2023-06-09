@@ -113,7 +113,7 @@
 <body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<script async src="../../static/js/DarkChanger.js"></script>
+<script async src="../static/js/DarkChanger.js"></script>
 <script src="../../static/js/activeButtonMenuChanger.js"></script>
 
 <div class="container-fluid">
@@ -126,14 +126,14 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li>
             <div  class="buttonVisual" id="Home">
-              <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText this">
+              <a href="/" id="HomeText" class="nav-link align-middle px-0 buttonText">
                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Главная</span>
               </a>
             </div>
           </li>
           <li>
             <div class="buttonVisual active">
-              <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText">
+              <a href="/admin/userlist"  class="nav-link px-0 align-middle buttonText this">
                 <i class="fs-4 bi bi-person-circle"></i>
                 <span class="ms-1 d-none d-sm-inline">Пользователи</span>
               </a>
@@ -183,6 +183,10 @@
       </div>
     </div>
     <div class="vr" style="padding-right: 0; padding-left: 0"></div>
+    <div class="col mt-3">
+      <div class="menuBar">
+        <div class="text-center">Изменение пользователя</div>
+      </div>
     <div class="col">
       <form action="/admin/user/edit" method="post">
         <#list roles as role>
@@ -240,6 +244,7 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button type="submit" style="width: 100%" class="btn btn-secondary">Изменить</button>
       </form>
+    </div>
     </div>
   </div>
 </div>

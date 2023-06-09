@@ -1,18 +1,15 @@
 package com.example.ediary.services;
 
 import com.example.ediary.models.*;
-import com.example.ediary.repositories.ProductRepository;
 import com.example.ediary.repositories.ScoreRepository;
 import com.example.ediary.repositories.SubjectRepository;
 import com.example.ediary.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
